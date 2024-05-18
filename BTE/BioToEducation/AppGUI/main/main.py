@@ -39,7 +39,7 @@ if __name__ == "__main__":
         ) 
         
         iconRna = ft.ElevatedButton(
-            "Transcrição", icon = "protein", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
+            "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -54,9 +54,9 @@ if __name__ == "__main__":
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 }
-            ), adaptive = True, width = 160,
+            ), adaptive = True, width = 160
         )
-        
+
         
         colunaSuperior = ft.Column(
             [
@@ -70,15 +70,14 @@ if __name__ == "__main__":
         
         colunaDoMeio = ft.Column(
             [
-                iconHome, iconDna, iconRna, iconComparacao
+                iconHome, iconDna, iconRna, iconComparacao, 
+        
             ],
             alignment= ft.MainAxisAlignment.START,
             horizontal_alignment = ft.CrossAxisAlignment.CENTER,
             expand = True,
             spacing = 20,
         
-
-            
         )
         layout = ft.Row(
                 [
@@ -116,4 +115,4 @@ if __name__ == "__main__":
         page.add(layout)
         
 
-ft.app(target=main, assets_dir="../assets/icons")
+ft.app(target=main, assets_dir="../assets")
