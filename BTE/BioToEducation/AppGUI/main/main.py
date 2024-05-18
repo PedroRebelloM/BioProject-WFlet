@@ -24,7 +24,7 @@ if __name__ == "__main__":
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 }
-            ), adaptive = True, width = 140,
+            ), adaptive = True, width = 160,
         )
         
         iconDna = ft.ElevatedButton(
@@ -34,7 +34,7 @@ if __name__ == "__main__":
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                     
                 } 
-            ), adaptive = True, width = 140,
+            ), adaptive = True, width = 160,
 
         ) 
         
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                         
                 }
-            ), adaptive = True, width = 140,
+            ), adaptive = True, width = 160,
         )
         
         iconComparacao = ft.ElevatedButton(
@@ -54,7 +54,7 @@ if __name__ == "__main__":
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 }
-            ), adaptive = True, width = 140,
+            ), adaptive = True, width = 160,
         )
         
         
@@ -86,7 +86,7 @@ if __name__ == "__main__":
                     ft.Container(
                         bgcolor= "#A1FF0A",
                         expand=False,
-                        width=160,
+                        width=180,
                         border = ft.border.all(0.5, ft.colors.BLACK),
                         border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
                         content = ft.Column(
