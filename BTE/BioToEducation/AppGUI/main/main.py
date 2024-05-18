@@ -17,12 +17,44 @@ if __name__ == "__main__":
                 
                 )
         
-        iconHome = ft.IconButton(
-                icon = ft.icons.HOME, on_click=None, data=0,
-                icon_color = "black",
-                icon_size = 40,
-                tooltip = "Home"
-                
+        
+        iconHome = ft.ElevatedButton(
+            "Home", icon = "home", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ), adaptive = True, width = 140,
+        )
+        
+        iconDna = ft.ElevatedButton(
+            "Tradução", icon = "translate", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                    
+                } 
+            ), adaptive = True, width = 140,
+
+        ) 
+        
+        iconRna = ft.ElevatedButton(
+            "Transcrição", icon = "protein", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                        
+                }
+            ), adaptive = True, width = 140,
+        )
+        
+        iconComparacao = ft.ElevatedButton(
+            "Comparação", icon = "percent", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ), adaptive = True, width = 140,
         )
         
         
@@ -31,16 +63,21 @@ if __name__ == "__main__":
                 img
             ],
             alignment = ft.MainAxisAlignment.START,
-            horizontal_alignment= ft.CrossAxisAlignment.START
+            horizontal_alignment= ft.CrossAxisAlignment.START,
+
             
         )
         
         colunaDoMeio = ft.Column(
             [
-                iconHome
+                iconHome, iconDna, iconRna, iconComparacao
             ],
-            alignment= ft.MainAxisAlignment.CENTER,
-            horizontal_alignment = ft.CrossAxisAlignment.CENTER
+            alignment= ft.MainAxisAlignment.START,
+            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
+            expand = True,
+            spacing = 20,
+        
+
             
         )
         layout = ft.Row(
@@ -49,14 +86,15 @@ if __name__ == "__main__":
                     ft.Container(
                         bgcolor= "#A1FF0A",
                         expand=False,
-                        width=140,
+                        width=160,
                         border = ft.border.all(0.5, ft.colors.BLACK),
                         border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
                         content = ft.Column(
                             [
                                colunaSuperior, colunaDoMeio
                             ],
-                            horizontal_alignment = ft.CrossAxisAlignment.CENTER
+                            horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
+                            
                           
                         )
                     )                 
@@ -72,9 +110,10 @@ if __name__ == "__main__":
                 ],
                 spacing=0,
                 expand=True,
+
             )
 
-        page.add(layout, iconHome)
+        page.add(layout)
         
 
 ft.app(target=main, assets_dir="../assets/icons")
