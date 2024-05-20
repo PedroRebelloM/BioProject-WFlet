@@ -87,7 +87,7 @@ def CriarLayout(page: ft.page):
             bgcolor = "white",
             border = ft.border.all(1, "black"), 
             border_radius = ft.border_radius.all(20), 
-          
+            alignment=ft.alignment.center
         )
         
         #  container texto B
@@ -97,21 +97,61 @@ def CriarLayout(page: ft.page):
             bgcolor = "white",
             border = ft.border.all(1, "black"), 
             border_radius = ft.border_radius.all(20),
-          
+            alignment=ft.alignment.center
         )
         
-        containerDoisGenes = ft.Container(
-            content = ft.Column(
-                [
-                    ft.Text("Meus Genes", color = "black", size = 14,),
-                    containerA, containerB               
-                ],  alignment=ft.MainAxisAlignment.START,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                    spacing=20,
-                    
+        # Texto Sequenciamento 
+        sequenciamento = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black", )
+        
+        containerTextoSequenciamento = ft.Container(
+            content = sequenciamento, 
+            margin = ft.margin.only(left = 25)
+        )
+        
+        # Container abaixo do texto Sequenciamento
+        containerSequenciamento = ft.Container(
+            width = 1000,
+            height = 380, 
+            bgcolor = "#B5E995",
+            border = ft.border.all(1, "black"), 
+            border_radius = ft.border_radius.all(20),
+            margin = ft.margin.only(left = 20),
+            alignment=ft.alignment.center, 
+           
+        )
+        
+
+        
+        botaoAtualizar = ft.ElevatedButton(
+            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
+             adaptive = True, width = 200, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK)
+                }
             ),
-            width = 1200 * (3/4), 
-            
+        ) 
+        
+        containerDoisGenes = ft.Container(
+            content = ft.Row(
+                [
+                ft.Column (
+                    [
+                    ft.Text("Meus Genes", color = "black", size = 14, weight = ft.FontWeight.W_600 ),
+                    containerA, containerB,            
+                ],  
+                    alignment=ft.MainAxisAlignment.START,
+                    horizontal_alignment=ft.CrossAxisAlignment.START,
+                    spacing=10,
+                ),
+                    botaoAtualizar,
+            ],
+                alignment=ft.MainAxisAlignment.START,
+                
+               
+        
+            ), width = 1200 * (3/4),
+               alignment = ft.alignment.center,
         )
         
         #Container dos Meus Genes
@@ -126,7 +166,7 @@ def CriarLayout(page: ft.page):
                 [
                     containerDoisGenes,
                 ], alignment= ft.MainAxisAlignment.START,
-                    horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
+                    horizontal_alignment = ft.CrossAxisAlignment.START, 
             )
         )
         
@@ -142,7 +182,7 @@ def CriarLayout(page: ft.page):
                         border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
                         content = ft.Column(
                             [
-                               colunaSuperior, colunaDoMeio
+                               colunaSuperior, colunaDoMeio, 
                             ],
                             horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
                             
@@ -158,8 +198,8 @@ def CriarLayout(page: ft.page):
                         border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                         content = ft.Column(
                             [
-                                containerMeusGenes
-                            ],
+                                containerMeusGenes,  containerTextoSequenciamento, containerSequenciamento
+                            ]
                         )
                     ),
                     
