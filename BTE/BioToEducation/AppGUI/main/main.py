@@ -1,118 +1,14 @@
 import flet as ft
 from flet import View, Page, AppBar, ElevatedButton, Text
 from flet import RouteChangeEvent, ViewPopEvent, CrossAxisAlignment, MainAxisAlignment
-
-if __name__ == "__main__":
+from layout import CriarLayout
     
-    def main(page: ft.Page) -> None:
+def main(page: ft.Page) -> None:
         page.title = 'BTE - Biology To Education'
-        
-        #Logo BTE
-        img = ft.Image(
-                src = r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\AppGUI\assets\icons\Logo.png",
-                width= 200,
-                height= 200,
-                fit = ft.ImageFit.CONTAIN,
-                filter_quality="HIGH",
-                
-                )
-        
-        
-        iconHome = ft.ElevatedButton(
-            "Home", icon = "home", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
-                }
-            ), adaptive = True, width = 160,
-        )
-        
-        iconDna = ft.ElevatedButton(
-            "Tradução", icon = "translate", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
-                    
-                } 
-            ), adaptive = True, width = 160,
-
-        ) 
-        
-        iconRna = ft.ElevatedButton(
-            "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
-                        
-                }
-            ), adaptive = True, width = 160,
-        )
-        
-        iconComparacao = ft.ElevatedButton(
-            "Comparação", icon = "percent", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
-                }
-            ), adaptive = True, width = 160
-        )
-
-        
-        colunaSuperior = ft.Column(
-            [
-                img
-            ],
-            alignment = ft.MainAxisAlignment.START,
-            horizontal_alignment= ft.CrossAxisAlignment.START,
-
-            
-        )
-        
-        colunaDoMeio = ft.Column(
-            [
-                iconHome, iconDna, iconRna, iconComparacao, 
-        
-            ],
-            alignment= ft.MainAxisAlignment.START,
-            horizontal_alignment = ft.CrossAxisAlignment.CENTER,
-            expand = True,
-            spacing = 20,
-        
-        )
-        layout = ft.Row(
-                [
-                    ft.VerticalDivider(),
-                    ft.Container(
-                        bgcolor= "#A1FF0A",
-                        expand=False,
-                        width=180,
-                        border = ft.border.all(0.5, ft.colors.BLACK),
-                        border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
-                        content = ft.Column(
-                            [
-                               colunaSuperior, colunaDoMeio
-                            ],
-                            horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
-                            
-                          
-                        )
-                    )                 
-                    ,
-                    ft.Container(
-                        bgcolor= "#FFFFFF",
-                        alignment=ft.alignment.center,
-                        expand=True,
-                        border = ft.border.all(0.5, ft.colors.BLACK),
-                        border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20)
-                    ),
-                    
-                ],
-                spacing=0,
-                expand=True,
-
-            )
-
+        layout = CriarLayout(page)
         page.add(layout)
-        
-
-ft.app(target=main, assets_dir="../assets")
+        page.window_min_width = 300
+        page.window_max_width = 1200
+      
+if __name__ == "__main__":  
+    ft.app(target=main, assets_dir="../assets")
