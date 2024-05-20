@@ -81,24 +81,28 @@ def CriarLayout(page: ft.page):
         )
         
          # container texto A
-        containerA = ft.Container(
-            width = 400,
-            height = 45, 
-            bgcolor = "white",
-            border = ft.border.all(1, "black"), 
-            border_radius = ft.border_radius.all(20), 
-            alignment=ft.alignment.center
+        containerA = ft.ElevatedButton(
+            "Texto 1",  bgcolor = "white", color = "black", 
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                        
+                }
+            ), adaptive = True, width = 400,
         )
         
         #  container texto B
-        containerB = ft.Container(
-            width = 400,
-            height = 45, 
-            bgcolor = "white",
-            border = ft.border.all(1, "black"), 
-            border_radius = ft.border_radius.all(20),
-            alignment=ft.alignment.center
+        containerB = ft.ElevatedButton(
+           "Texto 2",  bgcolor = "white", color = "black", 
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                        
+                }
+            ), adaptive = True, width = 400, 
         )
+            
+      
         
         # Texto Sequenciamento 
         sequenciamento = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black", )
@@ -120,31 +124,32 @@ def CriarLayout(page: ft.page):
            
         )
         
-
-        
-        botaoAtualizar = ft.ElevatedButton(
-            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
-             adaptive = True, width = 200, height = 30,
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK)
-                }
-            ),
-        ) 
+        containerBotaoAtualizar = ft.Container(
+          ft.ElevatedButton(
+                "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
+                adaptive = True, width = 200, height = 30,
+                style = ft.ButtonStyle(
+                    side = {
+                        ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                    }
+                ),
+            ), 
+        )
         
         containerDoisGenes = ft.Container(
+            margin = ft.margin.only(top = 15),
             content = ft.Row(
                 [
                 ft.Column (
                     [
-                    ft.Text("Meus Genes", color = "black", size = 14, weight = ft.FontWeight.W_600 ),
-                    containerA, containerB,            
+                    ft.Text("Meus Genes", color = "black", size = 14, weight = ft.FontWeight.W_600, italic = True ),
+                    containerA, containerB, containerBotaoAtualizar   
                 ],  
-                    alignment=ft.MainAxisAlignment.START,
-                    horizontal_alignment=ft.CrossAxisAlignment.START,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     spacing=10,
+                    
                 ),
-                    botaoAtualizar,
             ],
                 alignment=ft.MainAxisAlignment.START,
                 
