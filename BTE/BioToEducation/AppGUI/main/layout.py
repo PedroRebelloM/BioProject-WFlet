@@ -88,7 +88,7 @@ def CriarLayout(page: ft.page):
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                         
                 }
-            ), adaptive = True, width = 400,
+            ), adaptive = True, width = 400, height = 30
         )
         
         #  container texto B
@@ -99,7 +99,7 @@ def CriarLayout(page: ft.page):
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                         
                 }
-            ), adaptive = True, width = 400, 
+            ), adaptive = True, width = 400, height = 30
         )
             
       
@@ -124,7 +124,7 @@ def CriarLayout(page: ft.page):
            
         )
         
-        containerBotaoAtualizar = ft.Container(
+        BotaoAtualizar = ft.Container(
           ft.ElevatedButton(
                 "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
                 adaptive = True, width = 200, height = 30,
@@ -133,30 +133,38 @@ def CriarLayout(page: ft.page):
                         ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                     }
                 ),
-            ), 
+            ),
+               
+              
         )
         
         containerDoisGenes = ft.Container(
-            margin = ft.margin.only(top = 15),
-            content = ft.Row(
-                [
-                ft.Column (
+            content=ft.Column(
+            [
+                ft.Text("Meus Genes", color="black", size=14, weight=ft.FontWeight.W_600, text_align="CENTER"),
+                ft.Row(
                     [
-                    ft.Text("Meus Genes", color = "black", size = 14, weight = ft.FontWeight.W_600, italic = True ),
-                    containerA, containerB, containerBotaoAtualizar   
-                ],  
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                    spacing=10,
-                    
+                        ft.Column(
+                            [
+                                containerA, containerB
+                                ],
+                            alignment=ft.MainAxisAlignment.START,
+                            horizontal_alignment=ft.CrossAxisAlignment.START,
+                            spacing=10,
+                        ),
+                        ft.Container(
+                            content= BotaoAtualizar,
+                            alignment=ft.alignment.center,
+                        ),
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
             ],
-                alignment=ft.MainAxisAlignment.START,
-                
-               
-        
-            ), width = 1200 * (3/4),
-               alignment = ft.alignment.center,
+            alignment=ft.MainAxisAlignment.START,
+            horizontal_alignment=ft.CrossAxisAlignment.START,
+        ),
+              
         )
         
         #Container dos Meus Genes
@@ -170,7 +178,7 @@ def CriarLayout(page: ft.page):
             content = ft.Column(
                 [
                     containerDoisGenes,
-                ], alignment= ft.MainAxisAlignment.START,
+                ], alignment= ft.MainAxisAlignment.CENTER,
                     horizontal_alignment = ft.CrossAxisAlignment.START, 
             )
         )
