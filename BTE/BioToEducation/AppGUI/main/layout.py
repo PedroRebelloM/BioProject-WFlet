@@ -1,4 +1,5 @@
 import flet as ft
+import funcoes 
 
 
 def CriarLayout(page: ft.page):
@@ -18,7 +19,7 @@ def CriarLayout(page: ft.page):
         )
         
         # Sequencia dos ícones
-        iconHome = ft.ElevatedButton(
+        botaoHome = ft.ElevatedButton(
             "Home", icon = "home", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
             style = ft.ButtonStyle(
                 side = {
@@ -27,8 +28,8 @@ def CriarLayout(page: ft.page):
             ), adaptive = True, width = 160,
         )
         
-        iconDna = ft.ElevatedButton(
-            "Tradução", icon = "translate", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+        botaoDna = ft.ElevatedButton(
+            "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -38,8 +39,8 @@ def CriarLayout(page: ft.page):
 
         ) 
         
-        iconRna = ft.ElevatedButton(
-            "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
+        botaoRna = ft.ElevatedButton(
+            "Tradução", icon = "translate", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -48,7 +49,7 @@ def CriarLayout(page: ft.page):
             ), adaptive = True, width = 160,
         )
         
-        iconComparacao = ft.ElevatedButton(
+        botaoComparacao = ft.ElevatedButton(
             "Comparação", icon = "percent", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
             style = ft.ButtonStyle(
                 side = {
@@ -70,7 +71,7 @@ def CriarLayout(page: ft.page):
         
         colunaDoMeio = ft.Column(
             [
-                iconHome, iconDna, iconRna, iconComparacao, 
+                botaoHome, botaoDna, botaoRna, botaoComparacao, 
         
             ],
             alignment= ft.MainAxisAlignment.START,

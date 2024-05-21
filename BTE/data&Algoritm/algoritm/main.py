@@ -2,8 +2,8 @@ from Bio import SeqIO
 
 #setando caminho do arquivo
 
-caminhoDoArquivo = 'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein\ncbi_dataset\data'
-caminhoSegundoArquivo = 'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein\ncbi_dataset\data'
+caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorNecrosis\ncbi_dataset\data\gene.fna'
+caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein\ncbi_dataset\data\gene2.fna'
 
 #realizando leitura do arquivo fna
 nucleotideo = []
@@ -18,7 +18,7 @@ with open(caminhoSegundoArquivo, 'r') as dna2:
         
 # Método responsável pela transcrição
 def transcricao(nucleotideo):
-    genomaTranscrito = []
+    genomaTraduzido = []
     transcricaoSeq = []
     for seq in sequencia: # Inteirando sobre o arquivo fasta
         for nucleotideo in seq:# Inteirando no método transcrição # n²
@@ -30,11 +30,11 @@ def transcricao(nucleotideo):
                 transcricaoSeq.append('C')
             elif nucleotideo == 'C':
                 transcricaoSeq.append('G')
-    genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
-        
-    print(genomaTranscrito)
+    genomaTraduzido.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     
-rnaMensageiro = []  
+    return genomaTraduzido
+    
+rnaMensageiro = transcricao(nucleotideo) 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
     sinteseProteica = []
@@ -126,8 +126,8 @@ def comparador(nucleotideo, nucleotideoDois):
     print(f'{porcentagem:.2f}')
                 
     
-comparador(nucleotideo, nucleotideoDois)
-
+transcricao(nucleotideo)
+traducao(rnaMensageiro)
 
 
 
