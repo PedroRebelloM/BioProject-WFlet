@@ -1,12 +1,17 @@
 import flet as ft
+import os
 import funcoes 
 
 
 def CriarLayout(page: ft.page):
-
     
-    #Cores
-        corOpacaGenes = ft.colors.with_opacity(0.35, "C9E995"),
+    #Nome das pastas
+    
+        nomeGene1 = os.path.basename(r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorNecrosis")
+        nomeGene2 = os.path.basename(r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein")
+
+
+
     
     #Logo BTE
         img = ft.Image(
@@ -83,7 +88,7 @@ def CriarLayout(page: ft.page):
         
          # container texto A
         containerA = ft.ElevatedButton(
-            "Texto 1",  bgcolor = "white", color = "black", 
+            text = nomeGene1,  bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -94,7 +99,7 @@ def CriarLayout(page: ft.page):
         
         #  container texto B
         containerB = ft.ElevatedButton(
-           "Texto 2",  bgcolor = "white", color = "black", 
+           text = nomeGene2,  bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -122,8 +127,11 @@ def CriarLayout(page: ft.page):
             border_radius = ft.border_radius.all(20),
             margin = ft.margin.only(left = 20),
             alignment=ft.alignment.center, 
+            #content = 
            
-        )
+        ),
+        
+        
         
         BotaoAtualizar = ft.Container(
           ft.ElevatedButton(

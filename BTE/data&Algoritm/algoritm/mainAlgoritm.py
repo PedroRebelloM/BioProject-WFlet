@@ -1,4 +1,5 @@
 from Bio import SeqIO
+import os
 
 #setando caminho do arquivo
 
@@ -14,8 +15,8 @@ with open(caminhoDoArquivo, 'r') as dna:
 nucleotideoDois = []
 with open(caminhoSegundoArquivo, 'r') as dna2:
     for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
-        nucleotideoDois.append(str(sequenciaDois.seq))
-        
+        nucleotideoDois.append(str(sequenciaDois.seq))      
+         
 # Método responsável pela transcrição
 def transcricao(nucleotideo):
     genomaTraduzido = []
@@ -126,9 +127,8 @@ def comparador(nucleotideo, nucleotideoDois):
     print(f'{porcentagem:.2f}')
                 
     
-transcricao(nucleotideo)
-traducao(rnaMensageiro)
-
+#transcricao(nucleotideo)
+#traducao(rnaMensageiro)
 
 
                 
