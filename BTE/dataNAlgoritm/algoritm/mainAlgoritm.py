@@ -1,5 +1,4 @@
 from Bio import SeqIO
-import os
 
 #setando caminho do arquivo
 

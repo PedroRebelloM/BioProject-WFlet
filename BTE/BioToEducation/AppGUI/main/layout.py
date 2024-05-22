@@ -1,7 +1,9 @@
 import flet as ft
 import os
+import sys
 import funcoes 
-import sys 
+import fix
+
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
@@ -14,14 +16,6 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 
 
 def CriarLayout(page: ft.page):
-    
-    #Nome das pastas
-    
-        nomeGene1 = os.path.basename(r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorNecrosis")
-        nomeGene2 = os.path.basename(r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein")
-
-
-
     
     #Logo BTE
         img = ft.Image(
@@ -98,7 +92,7 @@ def CriarLayout(page: ft.page):
         
          # container texto A
         containerA = ft.ElevatedButton(
-            text = nomeGene1,  bgcolor = "white", color = "black", 
+            text = fix.nomeGene1,  bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -109,7 +103,7 @@ def CriarLayout(page: ft.page):
         
         #  container texto B
         containerB = ft.ElevatedButton(
-           text = nomeGene2,  bgcolor = "white", color = "black", 
+           text = fix.nomeGene2,  bgcolor = "white", color = "black", 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -137,11 +131,9 @@ def CriarLayout(page: ft.page):
             border_radius = ft.border_radius.all(20),
             margin = ft.margin.only(left = 20),
             alignment=ft.alignment.center, 
-            on_click=lambda e: funcoes.atualizarContainer()
+            on_click=lambda e: contentSequenciamento()
            
         )
-        
-        
         
         BotaoAtualizar = ft.Container(
           ft.ElevatedButton(
