@@ -3,8 +3,8 @@ import os
 
 #setando caminho do arquivo
 
-caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorNecrosis\ncbi_dataset\data\gene.fna'
-caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\data&Algoritm\data\tumorProtein\ncbi_dataset\data\gene2.fna'
+caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\gene.fna'
+caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\gene2.fna'
 
 #realizando leitura do arquivo fna
 nucleotideo = []

@@ -1,7 +1,16 @@
 import flet as ft
-from flet import View, Page, AppBar, ElevatedButton, Text
-from flet import RouteChangeEvent, ViewPopEvent, CrossAxisAlignment, MainAxisAlignment
 from layout import CriarLayout
+import sys
+import os
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+
+if root_dir not in sys.path:
+    sys.path.append(root_dir)
+
+# Agora você pode importar o módulo
+from dataNAlgoritm.algoritm import mainAlgoritm
 
     
 def main(page: ft.Page) -> None:

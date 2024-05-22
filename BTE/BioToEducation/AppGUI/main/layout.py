@@ -3,6 +3,7 @@ import os
 import funcoes 
 
 
+
 def CriarLayout(page: ft.page):
     
     #Nome das pastas
@@ -129,7 +130,7 @@ def CriarLayout(page: ft.page):
             alignment=ft.alignment.center, 
             #content = 
            
-        ),
+        )
         
         
         
@@ -150,7 +151,7 @@ def CriarLayout(page: ft.page):
         containerDoisGenes = ft.Container(
             content=ft.Column(
             [
-                ft.Text("Meus Genes", color="black", size=14, weight=ft.FontWeight.W_600, text_align="CENTER"),
+                ft.Text("Meus Genes", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
                 ft.Row(
                     [
                         ft.Column(
