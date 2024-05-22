@@ -8,14 +8,16 @@ caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgor
 
 #realizando leitura do arquivo fna
 nucleotideo = []
+seQ = ""
 with open(caminhoDoArquivo, 'r') as dna:
     for sequencia in SeqIO.parse(dna, 'fasta'):
         nucleotideo.append(str(sequencia.seq))
+        seQ = str(sequencia.seq)
 
 nucleotideoDois = []
 with open(caminhoSegundoArquivo, 'r') as dna2:
     for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
-        nucleotideoDois.append(str(sequenciaDois.seq))      
+        nucleotideoDois.append(str(sequenciaDois.seq))     
          
 # Método responsável pela transcrição
 def transcricao(nucleotideo):

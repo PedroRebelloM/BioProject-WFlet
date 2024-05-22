@@ -1,6 +1,15 @@
 import flet as ft
 import os
 import funcoes 
+import sys 
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+
+if root_dir not in sys.path:
+    sys.path.append(root_dir)
+    
+from dataNAlgoritm.algoritm import mainAlgoritm
 
 
 
@@ -128,7 +137,7 @@ def CriarLayout(page: ft.page):
             border_radius = ft.border_radius.all(20),
             margin = ft.margin.only(left = 20),
             alignment=ft.alignment.center, 
-            #content = 
+            on_click=lambda e: funcoes.atualizarContainer()
            
         )
         
