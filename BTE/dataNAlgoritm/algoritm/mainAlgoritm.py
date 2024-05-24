@@ -7,16 +7,17 @@ caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgor
 
 #realizando leitura do arquivo fna
 nucleotideo = []
-seQ = ""
 with open(caminhoDoArquivo, 'r') as dna:
     for sequencia in SeqIO.parse(dna, 'fasta'):
         nucleotideo.append(str(sequencia.seq))
         seQ = str(sequencia.seq)
 
+
 nucleotideoDois = []
 with open(caminhoSegundoArquivo, 'r') as dna2:
     for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
-        nucleotideoDois.append(str(sequenciaDois.seq))     
+        nucleotideoDois.append(str(sequenciaDois.seq))
+        seQ2 = str(sequenciaDois.seq)
          
 # Método responsável pela transcrição
 def transcricao(nucleotideo):
@@ -37,6 +38,8 @@ def transcricao(nucleotideo):
     return genomaTraduzido
     
 rnaMensageiro = transcricao(nucleotideo) 
+
+
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
     sinteseProteica = []
@@ -128,11 +131,13 @@ def comparador(nucleotideo, nucleotideoDois):
     print(f'{porcentagem:.2f}')
                 
     
-#transcricao(nucleotideo)
-#traducao(rnaMensageiro)
+# Funções para o layout.py
 
+def returnSequencia():
+    return seQ
 
-                
+def returnSequencia2():
+    return seQ2
         
     
                     
