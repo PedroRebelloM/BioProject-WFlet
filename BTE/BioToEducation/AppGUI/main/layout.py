@@ -17,7 +17,25 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 
 def CriarLayout(page: ft.page):
     
-    
+    #Tema aplicativo 
+    page.theme = ft.Theme(
+        scrollbar_theme=ft.ScrollbarTheme(
+            track_color={
+                ft.MaterialState.HOVERED: ft.colors.TRANSPARENT,
+                ft.MaterialState.DEFAULT: ft.colors.TRANSPARENT,
+            },
+            track_visibility=False,
+            track_border_color=ft.colors.TRANSPARENT,
+            thumb_visibility=True,
+            thumb_color={
+                ft.MaterialState.HOVERED: ft.colors.BLACK54,
+                ft.MaterialState.DEFAULT: ft.colors.BLACK54,
+            },
+            thickness=10,
+            radius=5,
+            
+        )
+    )   
     
     #Logo BTE
     img = ft.Image(
@@ -102,8 +120,8 @@ def CriarLayout(page: ft.page):
     
     linha = ft.Column(
         [
-            ft.Text("", color = 'black')
-        ], scroll = ft.ScrollMode.ALWAYS, 
+            ft.Text("", color = 'black', width= 900)
+        ], scroll = ft.ScrollMode.ALWAYS,
     ) 
     
     # Container abaixo do texto Sequenciamento
@@ -128,7 +146,7 @@ def CriarLayout(page: ft.page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.adicionarTexto(linha), 
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoA(linha), 
     )
     
     #Botao B
@@ -139,7 +157,7 @@ def CriarLayout(page: ft.page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.adicionarTexto2(linha), 
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoB(linha), 
     )
         
     

@@ -139,7 +139,6 @@ def returnSequencia():
 def returnSequencia2():
     return seQ2
         
-    
                     
 
 #transcricao(nucleotideo)
