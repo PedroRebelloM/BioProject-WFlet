@@ -28,8 +28,8 @@ def CriarLayout(page: ft.page):
             track_border_color=ft.colors.TRANSPARENT,
             thumb_visibility=True,
             thumb_color={
-                ft.MaterialState.HOVERED: ft.colors.BLACK54,
-                ft.MaterialState.DEFAULT: ft.colors.BLACK54,
+                ft.MaterialState.HOVERED: ft.colors.BLACK12,
+                ft.MaterialState.DEFAULT: ft.colors.BLACK12,
             },
             thickness=10,
             radius=5,
