@@ -22,12 +22,12 @@ def botaoA(linha: ft.Column):
     
 def botaoB(linha: ft.Column):
     texto = mainAlgoritm.returnSequencia2()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal")
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
     linha.controls.clear()
     linha.controls.append(novoTexto)
     linha.update()
     return linha
-    
+
 
 
 
