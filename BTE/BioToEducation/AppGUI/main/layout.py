@@ -1,4 +1,5 @@
 import flet as ft
+import transcricao
 import assets
 import os
 import sys
@@ -46,22 +47,22 @@ def CriarLayout(page: ft.page):
     
     # Sequencia dos ícones
     botaoHome = ft.ElevatedButton(
-        "Home", icon = "home", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+        "Home", icon = "home", icon_color = "black", on_click = lambda _: funcoes.Home(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
             }
-        ), adaptive = True, width = 160,
+        ), adaptive = True, width = 160, 
     )
     
     botaoDna = ft.ElevatedButton(
-        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = None, bgcolor = "white", color = "black",
+        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 
             } 
-        ), adaptive = True, width = 160,
+        ), adaptive = True, width = 160, 
 
     ) 
     
@@ -133,6 +134,7 @@ def CriarLayout(page: ft.page):
         content = linha,
         data = '',
         padding = 25,
+        
     )
     
     #Botao A
@@ -168,8 +170,7 @@ def CriarLayout(page: ft.page):
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 }
             ),
-        ),
-            
+        ),           
             
     )
     
