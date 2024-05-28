@@ -8,9 +8,6 @@ import fix
 # Pasta Raiz e imagens
 if assets.root_dir not in sys.path:
     sys.path.append(assets.root_dir)
-    
-from dataNAlgoritm.algoritm import mainAlgoritm
-
 
 def CriarLayout(page: ft.page):
     

@@ -1,7 +1,7 @@
 import flet as ft
 import funcoes, assets
 
-def CriarLayoutTranscricao(page: ft.Page):
+def CriarLayoutTraducao(page: ft.Page):
      
     page.theme = ft.Theme(
     scrollbar_theme=ft.ScrollbarTheme(
