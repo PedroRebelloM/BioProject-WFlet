@@ -1,5 +1,5 @@
 import flet as ft
-import assets, layout, funcoes
+import assets, funcoes
 
 def CriarLayoutTranscricao(page: ft.Page):
      
