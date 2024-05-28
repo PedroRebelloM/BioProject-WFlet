@@ -256,5 +256,6 @@ def CriarLayout(page: ft.page):
             expand=True,
 
             )
+    
         
     return layoutAll
