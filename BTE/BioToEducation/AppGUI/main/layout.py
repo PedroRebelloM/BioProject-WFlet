@@ -63,7 +63,7 @@ def CriarLayout(page: ft.page):
     ) 
     
     botaoRna = ft.ElevatedButton(
-        "Tradução", icon = "translate", icon_color = "black", on_click = None, bgcolor = "white", color = "black", 
+        "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Home(page), bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
