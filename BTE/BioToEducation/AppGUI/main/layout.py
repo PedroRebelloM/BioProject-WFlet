@@ -1,16 +1,13 @@
 import flet as ft
+import assets
 import os
 import sys
 import funcoes 
 import fix
 
 # Pasta Raiz e imagens
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-
-logoBTE = os.path.join(root_dir, 'BioToEducation', 'AppGUI', 'assets', 'Logo.png')
-
-if root_dir not in sys.path:
-    sys.path.append(root_dir)
+if assets.root_dir not in sys.path:
+    sys.path.append(assets.root_dir)
     
 from dataNAlgoritm.algoritm import mainAlgoritm
 
@@ -39,7 +36,7 @@ def CriarLayout(page: ft.page):
     
     #Logo BTE
     img = ft.Image(
-        src = logoBTE,
+        src = assets.logoBTE,
         width= 200,
         height= 200,
         fit = ft.ImageFit.CONTAIN,

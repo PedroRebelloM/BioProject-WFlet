@@ -1,5 +1,5 @@
-import flet as flt
+import flet as ft
 import layout
 
-def botaoTranscricao():
-    
+def botaoTranscricao(containerDoisGenes, containerMeusGenes, containerTextoSequenciamento, containerSequenciamento):
+    containerDoisGenes.content
