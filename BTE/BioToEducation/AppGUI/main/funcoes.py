@@ -1,7 +1,7 @@
 import flet as ft
 import os 
 import sys 
-import layout, transcricao
+import layout, traducao
 from flet import Page, Text
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
@@ -35,7 +35,7 @@ def Home(page: ft.Page):
     
 def Traducao(page: ft.Page):
     page.controls.clear()
-    page.add(transcricao.CriarLayoutTranscricao(page))
+    page.add(traducao.CriarLayoutTranscricao(page))
     page.update()
 
 

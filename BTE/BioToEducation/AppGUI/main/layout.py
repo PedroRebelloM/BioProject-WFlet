@@ -1,6 +1,5 @@
 import flet as ft
-import transcricao
-import assets
+import assets, traducao
 import os
 import sys
 import funcoes 
