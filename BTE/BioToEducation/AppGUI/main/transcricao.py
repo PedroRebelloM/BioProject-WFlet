@@ -42,7 +42,7 @@ def CriarLayoutTranscricao(page: ft.Page):
         ), adaptive = True, width = 160, 
     )
     
-    botaoDna = ft.ElevatedButton(
+    botaoRna = ft.ElevatedButton(
         "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
@@ -53,7 +53,7 @@ def CriarLayoutTranscricao(page: ft.Page):
 
     ) 
     
-    botaoRna = ft.ElevatedButton(
+    botaoDna = ft.ElevatedButton(
         "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Transcricao(page), bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {

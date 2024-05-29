@@ -1,5 +1,5 @@
 import flet as ft
-import assets, traducao
+import assets, traducao, transcricao, comparacao
 import os
 import sys
 import funcoes 
@@ -51,8 +51,8 @@ def CriarLayout(page: ft.page):
         ), adaptive = True, width = 160, 
     )
     
-    botaoDna = ft.ElevatedButton(
-        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black",
+    botaoRna = ft.ElevatedButton(
+        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Transcricao(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -62,8 +62,8 @@ def CriarLayout(page: ft.page):
 
     ) 
     
-    botaoRna = ft.ElevatedButton(
-        "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Transcricao(page), bgcolor = "white", color = "black", 
+    botaoDna = ft.ElevatedButton(
+        "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 

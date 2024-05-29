@@ -2,7 +2,6 @@ import flet as ft
 import os 
 import sys 
 import layout, traducao, transcricao, comparacao
-from flet import Page, Text
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
 
