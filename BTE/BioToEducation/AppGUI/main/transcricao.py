@@ -43,7 +43,7 @@ def CriarLayoutTranscricao(page: ft.Page):
     )
     
     botaoRna = ft.ElevatedButton(
-        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black",
+        "Transcrição", icon = "CELL_TOWER", icon_color = "black", on_click = lambda _: funcoes.Transcricao(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -54,7 +54,7 @@ def CriarLayoutTranscricao(page: ft.Page):
     ) 
     
     botaoDna = ft.ElevatedButton(
-        "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Transcricao(page), bgcolor = "white", color = "black", 
+        "Tradução", icon = "translate", icon_color = "black", on_click = lambda _: funcoes.Traducao(page), bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
@@ -165,7 +165,7 @@ def CriarLayoutTranscricao(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            
+                            containerMeusGenes
                         ]
                     )
                 ),
