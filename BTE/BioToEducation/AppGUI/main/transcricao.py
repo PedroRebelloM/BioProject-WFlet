@@ -94,6 +94,50 @@ def CriarLayoutTranscricao(page: ft.Page):
         spacing = 20,
     )
     
+    containerDoisGenes = ft.Container(
+        content=ft.Column(
+        [
+            ft.Text("Transcrição", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
+            ft.Row(
+                [
+                    ft.Column(
+                        [
+                            # botaoA, botaoB
+                            ],
+                        alignment=ft.MainAxisAlignment.START,
+                        horizontal_alignment=ft.CrossAxisAlignment.START,
+                        spacing=10,
+                    ),
+                    ft.Container(
+                        #content= BotaoAtualizar,
+                        alignment=ft.alignment.center,
+                    ),
+                ],
+                alignment=ft.MainAxisAlignment.START,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+        ],
+        alignment=ft.MainAxisAlignment.START,
+        horizontal_alignment=ft.CrossAxisAlignment.START,
+    ),
+            
+    )
+    
+    containerMeusGenes = ft.Container(
+        bgcolor = "#59C9E995",
+        width = 1200,
+        height = 150,
+        padding = ft.padding.only(left = 20),
+        border = ft.border.only(bottom=ft.border.BorderSide(1, "black")),
+        border_radius = ft.border_radius.BorderRadius(0, 0, 0, 0),
+        content = ft.Column(
+            [
+                containerDoisGenes,
+            ], alignment= ft.MainAxisAlignment.CENTER,
+                horizontal_alignment = ft.CrossAxisAlignment.START, 
+        )
+    )
+    
     layoutAll = ft.Row(
             [
                 ft.VerticalDivider(),
