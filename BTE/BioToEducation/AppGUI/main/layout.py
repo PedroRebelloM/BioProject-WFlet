@@ -121,7 +121,7 @@ def CriarLayout(page: ft.page):
     # Container abaixo do texto Sequenciamento
     containerSequenciamento = ft.Container(
         width = 1000,
-        height = 380, 
+        height = 420, 
         bgcolor = "#B5E995",
         border = ft.border.all(1, "black"), 
         border_radius = ft.border_radius.all(20),
@@ -141,7 +141,7 @@ def CriarLayout(page: ft.page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoA(linha), 
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoA(linha) 
     )
     
     #Botao B
@@ -152,7 +152,7 @@ def CriarLayout(page: ft.page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoB(linha), 
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoB(linha)
     )
         
     
@@ -180,9 +180,9 @@ def CriarLayout(page: ft.page):
                         [
                             botaoA, botaoB
                             ],
-                        alignment=ft.MainAxisAlignment.START,
-                        horizontal_alignment=ft.CrossAxisAlignment.START,
-                        spacing=10,
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=5,
                     ),
                     ft.Container(
                         content= BotaoAtualizar,
@@ -203,9 +203,9 @@ def CriarLayout(page: ft.page):
     containerMeusGenes = ft.Container(
         bgcolor = "#59C9E995",
         width = 1200,
-        height = 200,
-        padding = 50,
-        border = ft.border.only(bottom=ft.border.BorderSide(1, "black")),
+        height = 150,
+        border = ft.border.only(bottom = ft.border.BorderSide(1, "black")),
+        padding = ft.padding.only(left = 20),
         border_radius = ft.border_radius.BorderRadius(0, 0, 0, 0),
         content = ft.Column(
             [
@@ -221,8 +221,8 @@ def CriarLayout(page: ft.page):
                 ft.VerticalDivider(),
                 ft.Container(
                     bgcolor= "#A1FF0A",
-                    expand=False,
-                    width=180,
+                    expand= False,
+                    width= 180,
                     border = ft.border.all(0.5, ft.colors.BLACK),
                     border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
                     content = ft.Column(
