@@ -94,7 +94,7 @@ def CriarLayoutTraducao(page: ft.Page):
         spacing = 20,
     )
     
-    texto = ft.Text("Sequenciamento Traduzido", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    texto = ft.Text("Proteínas:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
     containerTextoSequenciamento = ft.Container(
         content = texto, 
@@ -160,7 +160,7 @@ def CriarLayoutTraducao(page: ft.Page):
     
     BotaoCopiar = ft.Container(
         ft.ElevatedButton(
-            "Copiar Sequenciamento", on_click = None, bgcolor = "white", color = "black",
+            "Copiar Proteínas", on_click = None, bgcolor = "white", color = "black",
             adaptive = True, width = 250, height = 30,
             style = ft.ButtonStyle(
                 side = {

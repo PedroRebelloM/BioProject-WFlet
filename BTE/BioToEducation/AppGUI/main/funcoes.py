@@ -2,6 +2,8 @@ import flet as ft
 import os 
 import sys 
 import layout, traducao, transcricao, comparacao
+import clipboard as cp
+
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
 
@@ -44,3 +46,6 @@ def Transcricao(page: ft.Page):
 def Comparacao(page: ft.Page):
     page.controls.clear()
     page.add(comparacao.CriarLayoutComparação(page))
+    
+def Copiar(linha: ft.Column):
+    cp.copy(linha)

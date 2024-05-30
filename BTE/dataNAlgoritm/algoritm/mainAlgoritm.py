@@ -3,7 +3,7 @@ from Bio import SeqIO
 #setando caminho do arquivo
 
 caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\gene.fna'
-caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\gene2.fna'
+caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\gene.fna'
 
 #realizando leitura do arquivo fna
 nucleotideo = []
@@ -18,10 +18,22 @@ with open(caminhoSegundoArquivo, 'r') as dna2:
     for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
         nucleotideoDois.append(str(sequenciaDois.seq))
         seQ2 = str(sequenciaDois.seq)
+ 
+        
+# def lerSequencia(caminho):
+#     nuc = []
+#     with open(caminho, 'r') as dnA:
+#         for seque in SeqIO.parse(dnA, 'fasta'):
+#             nuc.append(str(seque.seq))
+#     return nuc
+
+# a = lerSequencia(caminhoDoArquivo)
+# b = lerSequencia(caminhoSegundoArquivo)
+         
          
 # Método responsável pela transcrição
-def transcricao(nucleotideo):
-    genomaTraduzido = []
+def transcricao(sequencia):
+    genomaTranscrito = []
     transcricaoSeq = []
     for seq in sequencia: # Inteirando sobre o arquivo fasta
         for nucleotideo in seq:# Inteirando no método transcrição # n²
@@ -33,12 +45,10 @@ def transcricao(nucleotideo):
                 transcricaoSeq.append('C')
             elif nucleotideo == 'C':
                 transcricaoSeq.append('G')
-    genomaTraduzido.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
-    
-    return genomaTraduzido
-    
-rnaMensageiro = transcricao(nucleotideo) 
-
+    genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
+    genoma = ''.join(genomaTranscrito)
+    print(genoma)
+    return genomaTranscrito, genoma
 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
@@ -139,6 +149,5 @@ def returnSequencia():
 def returnSequencia2():
     return seQ2
         
-                    
-
-#transcricao(nucleotideo)
+def returnRna():
+    return 
