@@ -94,10 +94,10 @@ def CriarLayoutTraducao(page: ft.Page):
         spacing = 20,
     )
     
-    texto = ft.Text("Proteínas:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    textoSeq = ft.Text("Proteínas:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
     containerTextoSequenciamento = ft.Container(
-        content = texto, 
+        content = textoSeq, 
         margin = ft.margin.only(left = 25)
     )
     

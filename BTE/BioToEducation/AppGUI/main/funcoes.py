@@ -49,3 +49,6 @@ def Comparacao(page: ft.Page):
     
 def Copiar(linha: ft.Column):
     cp.copy(linha)
+    
+def BotaoATranscriçao(linha: ft.Column):
+    
