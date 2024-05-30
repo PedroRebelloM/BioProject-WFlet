@@ -194,18 +194,17 @@ def CriarLayoutTranscricao(page: ft.Page):
                         alignment=ft.alignment.center,
                     ),
                 ],
-                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                width = 800
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                    width = 800
             
-            ),
-        ],
-        alignment=ft.MainAxisAlignment.START,
-        horizontal_alignment=ft.CrossAxisAlignment.START,
-    ),
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            horizontal_alignment=ft.CrossAxisAlignment.START,
+        ),
             
     )
-            
     
     containerMeusGenes = ft.Container(
         bgcolor = "#59C9E995",

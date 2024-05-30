@@ -261,7 +261,7 @@ def CriarLayout(page: ft.page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMeusGenes,  containerTextoSequenciamento, containerSequenciamento
+                            containerMeusGenes, containerTextoSequenciamento, containerSequenciamento
                         ]
                     )
                 ),
