@@ -104,10 +104,10 @@ def CriarLayout(page: ft.page):
     )
         
     # Texto Sequenciamento 
-    sequenciamento = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    texto = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
     containerTextoSequenciamento = ft.Container(
-        content = sequenciamento, 
+        content = texto, 
         margin = ft.margin.only(left = 25)
     )
     
