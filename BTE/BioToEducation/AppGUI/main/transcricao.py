@@ -1,5 +1,5 @@
 import flet as ft
-import assets, funcoes
+import assets, funcoes, fix
 
 def CriarLayoutTranscricao(page: ft.Page):
      
@@ -92,6 +92,43 @@ def CriarLayoutTranscricao(page: ft.Page):
         horizontal_alignment = ft.CrossAxisAlignment.CENTER,
         expand = True,
         spacing = 20,
+    )
+    
+    #Botao do Gene A
+    botaoA = ft.ElevatedButton(
+        text = fix.nomeGene1,  bgcolor = "white", color = "black", 
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                    
+            }
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoA(linha) 
+    )
+    
+    #Botao do Gene B
+    botaoB = ft.ElevatedButton(
+        text = fix.nomeGene2,  bgcolor = "white", color = "black", 
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                    
+            }
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoB(linha)
+    )
+        
+    
+    # Botão para atualizar os genes
+    BotaoAtualizar = ft.Container(
+        ft.ElevatedButton(
+            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
+            adaptive = True, width = 200, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),           
+            
     )
     
     containerDoisGenes = ft.Container(

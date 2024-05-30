@@ -133,7 +133,7 @@ def CriarLayout(page: ft.page):
         
     )
     
-    #Botao A
+    #Botao do Gene A
     botaoA = ft.ElevatedButton(
         text = fix.nomeGene1,  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
@@ -144,7 +144,7 @@ def CriarLayout(page: ft.page):
         ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.botaoA(linha) 
     )
     
-    #Botao B
+    #Botao do Gene B
     botaoB = ft.ElevatedButton(
         text = fix.nomeGene2,  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
@@ -156,7 +156,7 @@ def CriarLayout(page: ft.page):
     )
         
     
-    
+    # Botão para atualizar os genes
     BotaoAtualizar = ft.Container(
         ft.ElevatedButton(
             "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
