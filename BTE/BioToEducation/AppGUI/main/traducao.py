@@ -64,7 +64,7 @@ def CriarLayoutTraducao(page: ft.Page):
     )
     
     botaoComparacao = ft.ElevatedButton(
-        "Comparação", icon = "percent", icon_color = "black", on_click = lambda _: funcoes.Comparacao, bgcolor = "white", color = "black",
+        "Comparação", icon = "percent", icon_color = "black", on_click = lambda _: funcoes.Comparacao(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
