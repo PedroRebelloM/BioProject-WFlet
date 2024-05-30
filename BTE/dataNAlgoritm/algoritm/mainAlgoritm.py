@@ -50,6 +50,9 @@ def transcricao(sequencia):
     print(genoma)
     return genomaTranscrito, genoma
 
+rnaMensageiro = transcricao(nucleotideo)
+rnaMensageiro2 = transcricao(nucleotideoDois)
+
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
     sinteseProteica = []
@@ -149,5 +152,8 @@ def returnSequencia():
 def returnSequencia2():
     return seQ2
         
-def returnRna():
-    return 
+def returnRna1():
+    return rnaMensageiro
+
+def returnRna2():
+    return rnaMensageiro2
