@@ -129,7 +129,7 @@ def CriarLayoutTranscricao(page: ft.Page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click = None
+        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoATranscricao(linha)
     )
     
     #Botao do Gene B
@@ -140,7 +140,7 @@ def CriarLayoutTranscricao(page: ft.Page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click = None
+        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoBTranscricao(linha)
     )
         
     
