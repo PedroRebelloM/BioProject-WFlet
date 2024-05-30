@@ -131,28 +131,46 @@ def CriarLayoutTranscricao(page: ft.Page):
             
     )
     
+    BotaoCopiar = ft.Container(
+        ft.ElevatedButton(
+            "Copiar Sequenciamento", on_click = None, bgcolor = "white", color = "black",
+            adaptive = True, width = 250, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),           
+            
+    ) 
     
     containerDoisGenes = ft.Container(
         content=ft.Column(
         [
-            ft.Text("Transcrição", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
+            ft.Text("Meus Genes", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
             ft.Row(
                 [
                     ft.Column(
                         [
-                            # botaoA, botaoB
+                            botaoA, botaoB
                             ],
-                        alignment=ft.MainAxisAlignment.START,
-                        horizontal_alignment=ft.CrossAxisAlignment.START,
-                        spacing=10,
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=5,
                     ),
                     ft.Container(
-                        #content= BotaoAtualizar,
+                        content = ft.Column(
+                            [
+                               BotaoAtualizar, BotaoCopiar
+                            ],
+                        ),
                         alignment=ft.alignment.center,
                     ),
                 ],
-                alignment=ft.MainAxisAlignment.START,
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                width = 800
+            
             ),
         ],
         alignment=ft.MainAxisAlignment.START,
@@ -160,6 +178,7 @@ def CriarLayoutTranscricao(page: ft.Page):
     ),
             
     )
+            
     
     containerMeusGenes = ft.Container(
         bgcolor = "#59C9E995",
