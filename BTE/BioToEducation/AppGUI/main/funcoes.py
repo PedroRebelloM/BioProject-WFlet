@@ -14,17 +14,17 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 
 linhasPQ = []
 def botaoA(linha: ft.Column):
+    linha.controls.clear()
     texto = mainAlgoritm.returnSequencia()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal")
-    linha.controls.clear()
     linha.controls.append(novoTexto)
     linha.update()
     return linha
     
 def botaoB(linha: ft.Column):
+    linha.controls.clear()
     texto = mainAlgoritm.returnSequencia2()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
-    linha.controls.clear()
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -49,6 +49,4 @@ def Comparacao(page: ft.Page):
     
 def Copiar(linha: ft.Column):
     cp.copy(linha)
-    
-def BotaoATranscriçao(linha: ft.Column):
     

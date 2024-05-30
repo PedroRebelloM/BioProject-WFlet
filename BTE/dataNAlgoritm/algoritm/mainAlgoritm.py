@@ -47,7 +47,6 @@ def transcricao(sequencia):
                 transcricaoSeq.append('G')
     genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     genoma = ''.join(genomaTranscrito)
-    print(genoma)
     return genomaTranscrito, genoma
 
 rnaMensageiro = transcricao(nucleotideo)
