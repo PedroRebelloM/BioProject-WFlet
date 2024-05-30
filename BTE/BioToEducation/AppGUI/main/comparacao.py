@@ -85,7 +85,7 @@ def CriarLayoutComparação(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoDna, botaoRna, botaoComparacao, 
+            botaoHome, botaoRna, botaoDna, botaoComparacao, 
     
         ],
         alignment= ft.MainAxisAlignment.START,
