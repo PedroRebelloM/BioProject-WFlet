@@ -94,6 +94,33 @@ def CriarLayoutTranscricao(page: ft.Page):
         spacing = 20,
     )
     
+    sequenciamento = ft.Text("Sequenciamento Transcrito", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    
+    containerTextoSequenciamento = ft.Container(
+        content = sequenciamento, 
+        margin = ft.margin.only(left = 25)
+    )
+    
+    linha = ft.Column(
+        [
+            ft.Text("", color = 'black', width= 900)
+        ], scroll = ft.ScrollMode.ALWAYS,
+    ) 
+    
+    containerSequenciamento = ft.Container(
+        width = 1000,
+        height = 420, 
+        bgcolor = "#B5E995",
+        border = ft.border.all(1, "black"), 
+        border_radius = ft.border_radius.all(20),
+        margin = ft.margin.only(left = 20),
+        alignment=ft.alignment.top_left, 
+        content = linha,
+        data = '',
+        padding = 25,
+        
+    )
+    
     #Botao do Gene A
     botaoA = ft.ElevatedButton(
         text = fix.nomeGene1,  bgcolor = "white", color = "black", 
@@ -222,7 +249,7 @@ def CriarLayoutTranscricao(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMeusGenes
+                            containerMeusGenes, containerTextoSequenciamento, containerSequenciamento
                         ]
                     )
                 ),
