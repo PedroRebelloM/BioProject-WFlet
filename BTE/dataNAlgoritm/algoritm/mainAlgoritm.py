@@ -47,10 +47,10 @@ def transcricao(sequencia):
                 transcricaoSeq.append('G')
     genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     genoma = ''.join(genomaTranscrito)
-    return genomaTranscrito, genoma
+    return transcricaoSeq, genoma
 
-rnaMensageiro = transcricao(nucleotideo)
-rnaMensageiro2 = transcricao(nucleotideoDois)
+rnaMensageiro, rnaMensageiroString = transcricao(nucleotideo)
+rnaMensageiro2, rnaMensageiroString2 = transcricao(nucleotideoDois)
 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
@@ -152,8 +152,8 @@ def returnSequencia2():
     return seQ2
         
 def returnRna1():
-    return rnaMensageiro
+    return rnaMensageiroString
 
 def returnRna2():
-    return rnaMensageiro2
+    return rnaMensageiroString2
 
