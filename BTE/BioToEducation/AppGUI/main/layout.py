@@ -1,6 +1,5 @@
 import flet as ft
 import assets, traducao, transcricao, comparacao
-import os
 import sys
 import funcoes 
 import fix
@@ -105,7 +104,7 @@ def CriarLayout(page: ft.page):
     )
         
     # Texto Sequenciamento 
-    sequenciamento = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black", )
+    sequenciamento = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
     containerTextoSequenciamento = ft.Container(
         content = sequenciamento, 
@@ -170,6 +169,19 @@ def CriarLayout(page: ft.page):
             
     )
     
+    BotaoCopiar = ft.Container(
+        ft.ElevatedButton(
+            "Copiar Sequenciamento", on_click = None, bgcolor = "white", color = "black",
+            adaptive = True, width = 250, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),           
+            
+    )
+    
     containerDoisGenes = ft.Container(
         content=ft.Column(
         [
@@ -185,12 +197,18 @@ def CriarLayout(page: ft.page):
                         spacing=5,
                     ),
                     ft.Container(
-                        content= BotaoAtualizar,
+                        content = ft.Column(
+                            [
+                               BotaoAtualizar, BotaoCopiar
+                            ],
+                        ),
                         alignment=ft.alignment.center,
                     ),
                 ],
-                alignment=ft.MainAxisAlignment.START,
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                width = 800
+            
             ),
         ],
         alignment=ft.MainAxisAlignment.START,

@@ -131,6 +131,7 @@ def CriarLayoutTranscricao(page: ft.Page):
             
     )
     
+    
     containerDoisGenes = ft.Container(
         content=ft.Column(
         [
