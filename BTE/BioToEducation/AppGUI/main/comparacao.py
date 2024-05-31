@@ -1,5 +1,5 @@
 import flet as ft
-import assets, funcoes
+import assets, funcoes, fix
 
 def CriarLayoutComparação(page: ft.Page):
      
@@ -94,32 +94,119 @@ def CriarLayoutComparação(page: ft.Page):
         spacing = 20,
     )
     
+    textoSeq = ft.Text("Dados:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    
+    containerTextoSequenciamento = ft.Container(
+        content = textoSeq, 
+        margin = ft.margin.only(left = 25)
+    )
+    
+    linha = ft.Column(
+        [
+            ft.Text("", color = 'black', width= 900)
+        ], scroll = ft.ScrollMode.ALWAYS,
+    ) 
+    
+    containerSequenciamento = ft.Container(
+        width = 1000,
+        height = 420, 
+        bgcolor = "#B5E995",
+        border = ft.border.all(1, "black"), 
+        border_radius = ft.border_radius.all(20),
+        margin = ft.margin.only(left = 20),
+        alignment=ft.alignment.top_left, 
+        content = ft.Column(
+            [
+                linha,
+            ]
+        ),
+        data = '',
+        padding = 25,
+        
+    )
+    
+    #Botao do Gene A
+    botaoA = ft.ElevatedButton(
+        text = fix.nomeGene1,  bgcolor = "white", color = "black", 
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                    
+            }
+        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoATraducao(linha)
+    )
+    
+    #Botao do Gene B
+    botaoB = ft.ElevatedButton(
+        text = fix.nomeGene2,  bgcolor = "white", color = "black", 
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                    
+            }
+        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoBTraducao(linha)
+    )
+        
+    
+    # Botão para atualizar os genes
+    BotaoAtualizar = ft.Container(
+        ft.ElevatedButton(
+            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
+            adaptive = True, width = 200, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),           
+            
+    )
+    
+    BotaoCopiar = ft.Container(
+        ft.ElevatedButton(
+            "Copiar Proteínas", on_click = None, bgcolor = "white", color = "black",
+            adaptive = True, width = 250, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),           
+            
+    ) 
+    
     containerDoisGenes = ft.Container(
         content=ft.Column(
         [
-            ft.Text("Comparação", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
+            ft.Text("Meus Genes", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
             ft.Row(
                 [
                     ft.Column(
                         [
-                            # botaoA, botaoB
+                            botaoA, botaoB
                             ],
-                        alignment=ft.MainAxisAlignment.START,
-                        horizontal_alignment=ft.CrossAxisAlignment.START,
-                        spacing=10,
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=5,
                     ),
                     ft.Container(
-                        #content= BotaoAtualizar,
+                        content = ft.Column(
+                            [
+                               BotaoAtualizar
+                            ],
+                        ),
                         alignment=ft.alignment.center,
                     ),
                 ],
-                alignment=ft.MainAxisAlignment.START,
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-            ),
-        ],
-        alignment=ft.MainAxisAlignment.START,
-        horizontal_alignment=ft.CrossAxisAlignment.START,
-    ),
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                    width = 800
+            
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            horizontal_alignment=ft.CrossAxisAlignment.START,
+        ),
             
     )
     
@@ -165,7 +252,7 @@ def CriarLayoutComparação(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMeusGenes
+                            containerMeusGenes, containerTextoSequenciamento, containerSequenciamento
                         ]
                     )
                 ),
