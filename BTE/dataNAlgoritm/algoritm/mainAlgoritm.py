@@ -49,57 +49,98 @@ def transcricao(sequencia):
     genoma = ''.join(genomaTranscrito)
     return transcricaoSeq, genoma
 
-rnaMensageiro, rnaMensageiroString = transcricao(nucleotideo)
-rnaMensageiro2, rnaMensageiroString2 = transcricao(nucleotideoDois)
+rnaMensageiro, rnaMensageiroString = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
+rnaMensageiro2, rnaMensageiroString2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
 
 #Método responsável pela tradução
+
+rnaMensageiroTraducao = transcricao(nucleotideo)
+rnaMensageiroTraducao2 = transcricao(nucleotideoDois)
+
 def traducao(rnaMensageiro):
     sinteseProteica = []
-    for codon in rnaMensageiro:  # iterador para cada base nitrogenada
-        for x in range(3, (len(codon) + 3), 3): # iterador para dividir as bases de 3 em 3, formando os códons
-            if codon[x -3: x] == 'AUG': # condição para formação das proteínas
-                sinteseProteica.append('Met')
-            elif codon[x -3: x] == 'AUC' or codon[x -3: x] == 'AUU' or codon[x -3: x] == 'AUA':
-                sinteseProteica.append('Ile') # Verifica qual é a sequencia do codon e adiciona a proteina de acordo.
-            elif codon[x -3: x] == 'UCG' or codon[x -3: x] == 'UCA' or codon[x -3: x] == 'UCC' or codon[x -3: x] == 'UCU' or codon[x -3: x] == 'AGU' or codon[x -3: x] == 'AGC':
-                sinteseProteica.append('Ser')
-            elif codon[x -3: x] ==  'UUU' or  codon[x -3: x] == 'UUC':
-                sinteseProteica.append('Phe')
-            elif codon[x -3: x] == 'UUA' or codon[x -3: x] == 'UUG':
-                sinteseProteica.append('Leu')
-            elif codon[x -3: x] == 'GUU' or codon[x -3: x] == 'GUC' or codon[x -3: x] == 'GUA' or codon[x -3: x] == 'GUG':
-                sinteseProteica.append('Val')
-            elif codon[x -3: x] == 'CUU' or codon[x -3: x] == 'CCC' or codon[x -3: x] == 'CCA' or codon[x -3: x] == 'CCG':
-                sinteseProteica.append('Pro')
-            elif codon[x -3: x] == 'ACU' or codon[x -3: x] == 'ACC' or codon[x -3: x] == 'ACA' or codon[x -3: x] == 'ACG':
-                sinteseProteica.append('Thr')
-            elif codon[x -3: x] == 'GCU' or codon[x -3: x] == 'GCC' or codon[x -3: x] == 'GCA' or codon[x -3: x] == 'GCG':
-                sinteseProteica.append('Ala')
-            elif codon[x -3: x] == 'UAU' or codon[x -3: x] == 'UAC':
-                sinteseProteica.append('Tyr') 
-            elif codon[x -3: x] == 'CAU' or codon[x -3: x] == 'CAC':
-                sinteseProteica.append('His')
-            elif codon[x -3: x] == 'CAA' or codon[x -3: x] == 'CAG':
-                sinteseProteica.append('Gln')
-            elif codon[x -3: x] == 'AUU' or codon[x -3: x] == 'AAC':
-                sinteseProteica.append('Asn')
-            elif codon[x -3: x] == 'AAA' or codon[x -3: x] == 'AAG':
-                sinteseProteica.append('Lys')
-            elif codon[x -3: x] == 'GAU' or codon[x -3: x] == 'GAC':
-                sinteseProteica.append('Asp')
-            elif codon[x -3: x] == 'GAA' or codon[x -3: x] == 'GAG':
-                sinteseProteica.append('Glu')
-            elif codon[x -3: x] == 'UGU' or codon[x -3: x] == 'UGC':
-                sinteseProteica.append('Cys')
-            elif codon[x -3: x] == 'UGG':
-                sinteseProteica.append('Trp')
-            elif codon[x -3: x] == 'CGU' or codon[x -3: x] == 'GCC' or codon[x -3: x] == 'CGA' or codon[x -3: x] == 'CGG' or codon[x -3: x] == 'AGA' or codon[x -3: x] == 'AGG':
-                sinteseProteica.append('Arg')
-            elif codon[x -3: x] == 'GGU' or codon[x -3: x] == 'GGC' or codon[x -3: x] == 'GGA' or codon[x -3: x] == 'GGG':
-                sinteseProteica.append('Gly')
-            elif codon[x -3: x] == 'UAA' or codon[x -3: x] == 'UAG' or codon[x -3: x] == 'UGA':
-                sinteseProteica.append('Parada')
-    print(sinteseProteica)
+    proteinasConcatenadas = []
+    cont = 0
+    
+    for x in range(0, len(rnaMensageiro), 3):  # Iterador para dividir as bases de 3 em 3, formando os códons
+        codon = rnaMensageiro[x:x + 3]  # Pega o códon formado
+        if codon == 'AUG':  # condição para formação das proteínas
+            sinteseProteica.append('Met')
+            cont += 1
+        elif codon in ['AUC', 'AUU', 'AUA']:
+            sinteseProteica.append('Ile')  # Verifica qual é a sequencia do codon e adiciona a proteina de acordo.
+            cont += 1
+        elif codon in ['UCG', 'UCA', 'UCC', 'UCU', 'AGU', 'AGC']:
+            sinteseProteica.append('Ser')
+            cont += 1
+        elif codon in ['UUU', 'UUC']:
+            sinteseProteica.append('Phe')
+            cont += 1
+        elif codon in ['UUA', 'UUG']:
+            sinteseProteica.append('Leu')
+            cont += 1
+        elif codon in ['GUU', 'GUC', 'GUA', 'GUG']:
+            sinteseProteica.append('Val')
+            cont += 1
+        elif codon in ['CUU', 'CUC', 'CUA', 'CUG']:
+            cont += 1
+            sinteseProteica.append('Leu')
+        elif codon in ['CCU', 'CCC', 'CCA', 'CCG']:
+            cont += 1
+            sinteseProteica.append('Pro')
+        elif codon in ['ACU', 'ACC', 'ACA', 'ACG']:
+            cont += 1
+            sinteseProteica.append('Thr')
+        elif codon in ['GCU', 'GCC', 'GCA', 'GCG']:
+            cont += 1
+            sinteseProteica.append('Ala')
+        elif codon in ['UAU', 'UAC']:
+            cont += 1
+            sinteseProteica.append('Tyr') 
+        elif codon in ['CAU', 'CAC']:
+            cont += 1
+            sinteseProteica.append('His')
+        elif codon in ['CAA', 'CAG']:
+            cont += 1
+            sinteseProteica.append('Gln')
+        elif codon in ['AAU', 'AAC']:
+            cont += 1
+            sinteseProteica.append('Asn')
+        elif codon in ['AAA', 'AAG']:
+            cont += 1
+            sinteseProteica.append('Lys')
+        elif codon in ['GAU', 'GAC']:
+            cont += 1
+            sinteseProteica.append('Asp')
+        elif codon in ['GAA', 'GAG']:
+            cont += 1
+            sinteseProteica.append('Glu')
+        elif codon in ['UGU', 'UGC']:
+            cont += 1
+            sinteseProteica.append('Cys')
+        elif codon == 'UGG':
+            cont += 1
+            sinteseProteica.append('Trp')
+        elif codon in ['CGU', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG']:
+            cont += 1
+            sinteseProteica.append('Arg')
+        elif codon in ['GGU', 'GGC', 'GGA', 'GGG']:
+            cont += 1
+            sinteseProteica.append('Gly')
+        elif codon in ['UAA', 'UAG', 'UGA']:
+            cont += 1
+            sinteseProteica.append('Parada')
+        proteinasConcatenadas.append(', '.join(sinteseProteica))
+        sinteseProteica = []
+        contador = cont
+
+    proteinas = ', '.join(proteinasConcatenadas)
+    return proteinas, contador
+
+
+
+a, nmr = traducao(rnaMensageiroString2)
+print(nmr)
 
 #Método responsável pela comparação
 def comparador(nucleotideo, nucleotideoDois):
