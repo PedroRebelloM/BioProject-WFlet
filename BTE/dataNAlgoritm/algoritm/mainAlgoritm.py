@@ -35,22 +35,27 @@ with open(caminhoSegundoArquivo, 'r') as dna2:
 def transcricao(sequencia):
     genomaTranscrito = []
     transcricaoSeq = []
+    contador = 0
     for seq in sequencia: # Inteirando sobre o arquivo fasta
         for nucleotideo in seq:# Inteirando no método transcrição # n²
             if nucleotideo == 'T':
                 transcricaoSeq.append('A')
+                contador += 1
             elif nucleotideo == 'A':
                 transcricaoSeq.append('U')
+                contador += 1
             elif nucleotideo == 'G':
                 transcricaoSeq.append('C')
+                contador += 1
             elif nucleotideo == 'C':
                 transcricaoSeq.append('G')
+                contador += 1
     genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     genoma = ''.join(genomaTranscrito)
-    return transcricaoSeq, genoma
+    return genoma #, contador
 
-rnaMensageiro, rnaMensageiroString = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
-rnaMensageiro2, rnaMensageiroString2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
+rnaMensageiroString = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
+rrnaMensageiroString2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
 
 #Método responsável pela tradução
 
@@ -135,12 +140,7 @@ def traducao(rnaMensageiro):
         contador = cont
 
     proteinas = ', '.join(proteinasConcatenadas)
-    return proteinas, contador
-
-
-
-a, nmr = traducao(rnaMensageiroString2)
-print(nmr)
+    return proteinas
 
 #Método responsável pela comparação
 def comparador(nucleotideo, nucleotideoDois):
