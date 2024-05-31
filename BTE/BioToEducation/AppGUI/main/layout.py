@@ -171,7 +171,7 @@ def CriarLayout(page: ft.page):
     
     BotaoCopiar = ft.Container(
         ft.ElevatedButton(
-            "Copiar Sequenciamento", on_click = None, bgcolor = "white", color = "black",
+            "Copiar Sequenciamento:", on_click = None, bgcolor = "white", color = "black",
             adaptive = True, width = 250, height = 30, 
             style = ft.ButtonStyle(
                 side = {

@@ -52,16 +52,12 @@ def transcricao(sequencia):
                 contador += 1
     genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     genoma = ''.join(genomaTranscrito)
-    return genoma #, contador
+    return genoma, contador
 
-rnaMensageiroString = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
-rrnaMensageiroString2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
+rnaMensageiroString, nmr1 = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
+rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
 
 #Método responsável pela tradução
-
-rnaMensageiroTraducao = transcricao(nucleotideo)
-rnaMensageiroTraducao2 = transcricao(nucleotideoDois)
-
 def traducao(rnaMensageiro):
     sinteseProteica = []
     proteinasConcatenadas = []
@@ -135,12 +131,25 @@ def traducao(rnaMensageiro):
         elif codon in ['UAA', 'UAG', 'UGA']:
             cont += 1
             sinteseProteica.append('Parada')
-        proteinasConcatenadas.append(', '.join(sinteseProteica))
+            
+        proteinasConcatenadas.append(''.join(sinteseProteica))
         sinteseProteica = []
         contador = cont
+        
+    sobra = len(rnaMensageiro) % 3 # Verifica se sobram bases nitrogenadas
+    if sobra == 1:
+        sobra1 = rnaMensageiro[-1]
+        proteinasConcatenadas.append(sobra1)
+    elif sobra == 2:
+        sobra2 = rnaMensageiro[-2:]
+        proteinasConcatenadas.append(''.join(sobra2))
 
-    proteinas = ', '.join(proteinasConcatenadas)
+    proteinas = ' - '.join(proteinasConcatenadas)
+    
     return proteinas
+
+proteinasA = traducao(rnaMensageiroString)
+proteinasB = traducao(rnaMensageiroString2)
 
 #Método responsável pela comparação
 def comparador(nucleotideo, nucleotideoDois):
@@ -198,3 +207,10 @@ def returnRna1():
 def returnRna2():
     return rnaMensageiroString2
 
+def returnProteinasA():
+    return proteinasA
+
+def returnProteinasB():
+    return proteinasB
+
+print(proteinasA)

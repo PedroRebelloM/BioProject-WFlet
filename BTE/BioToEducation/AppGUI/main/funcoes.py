@@ -65,3 +65,19 @@ def BotaoBTranscricao(linha: ft.Column):
     linha.controls.append(novoTexto)
     linha.update()
     return linha
+
+def BotaoATraducao(linha: ft.Column):
+    linha.controls.clear()
+    texto = mainAlgoritm.returnProteinasA()
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    linha.controls.append(novoTexto)
+    linha.update()
+    return linha
+
+def BotaoBTraducao(linha: ft.Column):
+    linha.controls.clear()
+    texto = mainAlgoritm.returnProteinasB()
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    linha.controls.append(novoTexto)
+    linha.update()
+    return linha
