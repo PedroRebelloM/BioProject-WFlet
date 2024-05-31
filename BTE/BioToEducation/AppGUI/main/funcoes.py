@@ -16,7 +16,7 @@ linhasPQ = []
 def botaoA(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnSequencia()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal")
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -24,7 +24,7 @@ def botaoA(linha: ft.Column):
 def botaoB(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnSequencia2()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -53,7 +53,7 @@ def Copiar(linha: ft.Column):
 def BotaoATranscricao(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnRna1()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -61,7 +61,7 @@ def BotaoATranscricao(linha: ft.Column):
 def BotaoBTranscricao(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnRna2()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -69,7 +69,7 @@ def BotaoBTranscricao(linha: ft.Column):
 def BotaoATraducao(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnProteinasA()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha
@@ -77,7 +77,7 @@ def BotaoATraducao(linha: ft.Column):
 def BotaoBTraducao(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnProteinasB()
-    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = "normal", text_align= ft.TextAlign.JUSTIFY)
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     linha.update()
     return linha

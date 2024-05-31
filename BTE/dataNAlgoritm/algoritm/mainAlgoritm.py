@@ -212,5 +212,3 @@ def returnProteinasA():
 
 def returnProteinasB():
     return proteinasB
-
-print(proteinasA)
