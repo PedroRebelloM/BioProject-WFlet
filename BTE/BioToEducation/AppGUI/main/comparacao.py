@@ -103,9 +103,11 @@ def CriarLayoutComparação(page: ft.Page):
     
     linha = ft.Column(
         [
-            ft.Text("", color = 'black', width= 900)
-        ], scroll = ft.ScrollMode.ALWAYS,
-    ) 
+            ft.Text("", color='black', selectable=True, no_wrap=False, weight = "bold")
+        ],
+        scroll=ft.ScrollMode.ALWAYS,
+        expand=True,
+    )
    
     containerSequenciamento = ft.Container(
         width = 640,
@@ -127,10 +129,12 @@ def CriarLayoutComparação(page: ft.Page):
     
     textoComparador = ft.Column(
         [
-            ft.Text("", color = 'black', width= 900)
-        ], scroll = ft.ScrollMode.ALWAYS,
+            ft.Text("", color='black', selectable=True, no_wrap=False)
+        ],
+        scroll=ft.ScrollMode.ALWAYS,
+        expand=True,
     ) 
-       
+    
     containerComparador = ft.Container(
         width = 320,
         height = 420, 

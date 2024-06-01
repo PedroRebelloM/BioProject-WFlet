@@ -191,8 +191,7 @@ def comparador(nucleotideo, nucleotideoDois):
     print(f'{porcentagem:.2f}')
                 
     
-# Funções para o layout.py
-
+# Funções para o layout
 def returnSequencia():
     return seQ
 
