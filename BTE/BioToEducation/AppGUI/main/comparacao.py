@@ -284,7 +284,7 @@ def CriarLayoutComparação(page: ft.Page):
                 [
                     containerMeusGenes,
                     containerTextoSequenciamento,
-                    containerSequenciamentoComparador,  # Add the Row containing the two containers here
+                    containerSequenciamentoComparador,
                 ]
             )
         ),
