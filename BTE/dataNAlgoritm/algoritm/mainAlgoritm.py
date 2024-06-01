@@ -18,7 +18,6 @@ with open(caminhoSegundoArquivo, 'r') as dna2:
     for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
         nucleotideoDois.append(str(sequenciaDois.seq))
         seQ2 = str(sequenciaDois.seq)
- 
         
 # def lerSequencia(caminho):
 #     nuc = []

@@ -130,7 +130,7 @@ def CriarLayoutComparação(page: ft.Page):
             ft.Text("", color = 'black', width= 900)
         ], scroll = ft.ScrollMode.ALWAYS,
     ) 
-    
+       
     containerComparador = ft.Container(
         width = 320,
         height = 420, 
@@ -141,7 +141,7 @@ def CriarLayoutComparação(page: ft.Page):
         alignment=ft.alignment.top_left, 
         content = ft.Column(
             [
-                textoComparador
+                textoComparador,
             ]
         ),
         data = '',
