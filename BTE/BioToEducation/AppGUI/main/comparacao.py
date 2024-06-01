@@ -106,9 +106,9 @@ def CriarLayoutComparação(page: ft.Page):
             ft.Text("", color = 'black', width= 900)
         ], scroll = ft.ScrollMode.ALWAYS,
     ) 
-    
+   
     containerSequenciamento = ft.Container(
-        width = 1000,
+        width = 640,
         height = 420, 
         bgcolor = "#B5E995",
         border = ft.border.all(1, "black"), 
@@ -124,6 +124,39 @@ def CriarLayoutComparação(page: ft.Page):
         padding = 25,
         
     )
+    
+    textoComparador = ft.Column(
+        [
+            ft.Text("", color = 'black', width= 900)
+        ], scroll = ft.ScrollMode.ALWAYS,
+    ) 
+    
+    containerComparador = ft.Container(
+        width = 320,
+        height = 420, 
+        bgcolor = "#B5E995",
+        border = ft.border.all(1, "black"), 
+        border_radius = ft.border_radius.all(20),
+        margin = ft.margin.only(left = 20),
+        alignment=ft.alignment.top_left, 
+        content = ft.Column(
+            [
+                textoComparador
+            ]
+        ),
+        data = '',
+        padding = 25,
+        
+    )
+    
+    containerSequenciamentoComparador = ft.Row(
+    [
+        containerSequenciamento,
+        containerComparador
+    ],
+    alignment=ft.MainAxisAlignment.START,
+    vertical_alignment=ft.CrossAxisAlignment.START,
+)
     
     #Botao do Gene A
     botaoA = ft.ElevatedButton(
@@ -226,42 +259,39 @@ def CriarLayoutComparação(page: ft.Page):
     )
     
     layoutAll = ft.Row(
-            [
-                ft.VerticalDivider(),
-                ft.Container(
-                    bgcolor= "#A1FF0A",
-                    expand=False,
-                    width=180,
-                    border = ft.border.all(0.5, ft.colors.BLACK),
-                    border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
-                    content = ft.Column(
-                        [
-                            colunaSuperior, colunaDoMeio, 
-                        ],
-                        horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
-                        
-                        
-                    )
-                )                 
-                ,
-                ft.Container(
-                    bgcolor= "#FFFFFF",
-                    alignment=ft.alignment.center,
-                    expand=True,
-                    border = ft.border.all(0.5, ft.colors.BLACK),
-                    border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
-                    content = ft.Column(
-                        [
-                            containerMeusGenes, containerTextoSequenciamento, containerSequenciamento
-                        ]
-                    )
-                ),
-                
-            ],
-            spacing=0,
-            expand=True,
-
+    [
+        ft.VerticalDivider(),
+        ft.Container(
+            bgcolor="#A1FF0A",
+            expand=False,
+            width=180,
+            border=ft.border.all(0.5, ft.colors.BLACK),
+            border_radius=ft.border_radius.BorderRadius(20, 0, 20, 0),
+            content=ft.Column(
+                [
+                    colunaSuperior, colunaDoMeio,
+                ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             )
+        ),
+        ft.Container(
+            bgcolor="#FFFFFF",
+            alignment=ft.alignment.center,
+            expand=True,
+            border=ft.border.all(0.5, ft.colors.BLACK),
+            border_radius=ft.border_radius.BorderRadius(0, 20, 0, 20),
+            content=ft.Column(
+                [
+                    containerMeusGenes,
+                    containerTextoSequenciamento,
+                    containerSequenciamentoComparador,  # Add the Row containing the two containers here
+                ]
+            )
+        ),
+    ],
+    spacing=0,
+    expand=True,
+)
     
     page.add(layoutAll)
     page.update()

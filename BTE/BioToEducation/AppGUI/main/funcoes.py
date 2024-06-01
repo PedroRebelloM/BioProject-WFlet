@@ -81,3 +81,19 @@ def BotaoBTraducao(linha: ft.Column):
     linha.controls.append(novoTexto)
     linha.update()
     return linha
+
+def openDialogo(dialogo: ft.AlertDialog, page: ft.Page):
+        page.dialog = dialogo
+        dialogo.open = True
+        page.update()
+        
+def closeDialogo(dialogo: ft.AlertDialog, page: ft.Page):
+        page.dialog = dialogo
+        dialogo.open = False
+        dialogo.update()
+    
+def closeDialogo2(dialogo: ft.AlertDialog, page: ft.Page):
+        page.dialog = dialogo
+        dialogo.open = False
+        dialogo.update()
+        

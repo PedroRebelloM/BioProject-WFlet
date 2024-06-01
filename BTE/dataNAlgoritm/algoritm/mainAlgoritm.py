@@ -171,7 +171,6 @@ def comparador(nucleotideo, nucleotideoDois):
             if i == x:
                 contador = contador + 1
                 memoria.append((i, x)) 
-                
     
     # Comparador em relação oa maior ou menor dna
     if len(nucleotideoUmSep) >= len(nucleotideoDoisSep):

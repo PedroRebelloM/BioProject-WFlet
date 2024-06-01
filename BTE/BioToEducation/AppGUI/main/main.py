@@ -18,7 +18,7 @@ def main(page: ft.Page) -> None:
         layout = CriarLayout(page)
         page.add(layout)
         page.window_min_width = 300
-        page.window_max_width = 1200
+        page.window_max_width = 900
 
       
 if __name__ == "__main__":  
