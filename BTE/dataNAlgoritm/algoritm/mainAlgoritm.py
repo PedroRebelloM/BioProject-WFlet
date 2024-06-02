@@ -130,7 +130,8 @@ def traducao(rnaMensageiro):
         elif codon in ['UAA', 'UAG', 'UGA']:
             cont += 1
             sinteseProteica.append('Parada')
-            
+        
+        #Concatena as strings retornadas pela sinteseProteica  
         proteinasConcatenadas.append(''.join(sinteseProteica))
         sinteseProteica = []
         contador = cont
@@ -147,6 +148,7 @@ def traducao(rnaMensageiro):
     
     return proteinas
 
+#Assume o valor retornado pela função de tradução
 proteinasA = traducao(rnaMensageiroString)
 proteinasB = traducao(rnaMensageiroString2)
 
@@ -178,17 +180,24 @@ def comparador(nucleotideo, nucleotideoDois):
     else:
         maiorDna = len(nucleotideoDoisSep)
         menorDna = len(nucleotideoUmSep)
+        
+        
+    #Define as porcentagem com parâmetros dos genes comparados           
+    porcentagemMaior = contador * 100 / maiorDna
+    porcentagemMenor = contador * 100 / menorDna
     
-    escolha = 0
-    escolha = int(input('-' * 20 + ' Comparador ' + '-' * 20 + 
-                        '\nComaparação com o maior DNA - 1' + 
-                        '\nComparação com o menor DNA - 2\n'))
-    if escolha == 1:
-        porcentagem = contador * 100 / maiorDna
-    elif escolha == 2: 
-        porcentagem = contador * 100 / menorDna
+    #Arredonda os números para duas casas
+    porcentagemMaiorDna = round(porcentagemMaior, 2)
+    porcentagemMenorDna = round(porcentagemMenor, 2)
     
-    print(f'{porcentagem:.2f}')
+    return maiorDna, menorDna, porcentagemMaiorDna, porcentagemMenorDna
+
+maior, menor, dnaMaiorComparado, dnaMenorComparado = comparador(nucleotideo, nucleotideoDois)
+
+print(maior)
+print(menor)
+print(dnaMaiorComparado)
+print(dnaMenorComparado)
                 
     
 # Funções para o layout

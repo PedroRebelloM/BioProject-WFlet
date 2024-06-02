@@ -229,7 +229,7 @@ def CriarLayoutComparação(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                               BotaoAtualizar
+                               BotaoAtualizar, BotaoCopiar
                             ],
                         ),
                         alignment=ft.alignment.center,
