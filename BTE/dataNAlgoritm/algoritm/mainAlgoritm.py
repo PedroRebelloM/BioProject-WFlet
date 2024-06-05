@@ -212,7 +212,8 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
         
         return a, b
     
-resultadoDna = CompararDna
+resultadoAlinhamentoDna, resultadoPorcentagemDna = compararDna(nucleotideo, nucleotideoDois)
+resultadoAlinhamentoRna, resultadoPorcentagemRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
     
         
 # Funções para o layout
@@ -234,3 +235,14 @@ def returnProteinasA():
 def returnProteinasB():
     return proteinasB
 
+def returnAlinhamentoDna():
+    return resultadoAlinhamentoDna
+
+def returnAlinhamentoRna():
+    return resultadoAlinhamentoRna
+
+def returnPorcentagemDna():
+    return resultadoPorcentagemDna
+
+def returnPorcentagemRna():
+    return resultadoPorcentagemRna
