@@ -1,4 +1,6 @@
 from Bio import SeqIO
+from Bio.Align import PairwiseAligner
+from Bio.pairwise2 import format_alignment
 
 #setando caminho do arquivo
 
@@ -170,7 +172,7 @@ def comparador(nucleotideo, nucleotideoDois):
     # indexSalvo = []
     for i, x in zip(nucleotideoUmSep, nucleotideoDoisSep):# Verifica se os valores são iguais em formato de tupla
             if i == x:
-                contador = contador + 1
+                contador += 1
                 memoria.append((i, x)) 
     
     # Comparador em relação oa maior ou menor dna
@@ -193,12 +195,7 @@ def comparador(nucleotideo, nucleotideoDois):
     return maiorDna, menorDna, porcentagemMaiorDna, porcentagemMenorDna
 
 maior, menor, dnaMaiorComparado, dnaMenorComparado = comparador(nucleotideo, nucleotideoDois)
-
-print(maior)
-print(menor)
-print(dnaMaiorComparado)
-print(dnaMenorComparado)
-                
+ 
     
 # Funções para o layout
 def returnSequencia():

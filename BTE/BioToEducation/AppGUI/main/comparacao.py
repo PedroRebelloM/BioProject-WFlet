@@ -163,27 +163,36 @@ def CriarLayoutComparação(page: ft.Page):
 )
     
     #Botao do Gene A
-    botaoA = ft.ElevatedButton(
-        text = fix.nomeGene1,  bgcolor = "white", color = "black", 
+    botaoDnaComparacao = ft.ElevatedButton(
+        text = "DNA",  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoATraducao(linha)
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoATraducao(linha)
     )
     
     #Botao do Gene B
-    botaoB = ft.ElevatedButton(
-        text = fix.nomeGene2,  bgcolor = "white", color = "black", 
+    botaoRnaComparacao = ft.ElevatedButton(
+        text = "RNA",  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click = lambda _: funcoes.BotaoBTraducao(linha)
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoBTraducao(linha)
     )
-        
+    
+    botaoProteinasComparacao = ft.ElevatedButton(
+        text = "Proteínas",  bgcolor = "white", color = "black", 
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
+                    
+            }
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoBTraducao(linha)
+    )    
     
     # Botão para atualizar os genes
     BotaoAtualizar = ft.Container(
@@ -220,7 +229,7 @@ def CriarLayoutComparação(page: ft.Page):
                 [
                     ft.Column(
                         [
-                            botaoA, botaoB
+                            botaoDnaComparacao, botaoRnaComparacao, botaoProteinasComparacao
                             ],
                         alignment=ft.MainAxisAlignment.CENTER,
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
