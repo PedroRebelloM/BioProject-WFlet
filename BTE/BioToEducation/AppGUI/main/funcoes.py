@@ -13,7 +13,7 @@ if root_dir not in sys.path:
 from dataNAlgoritm.algoritm import mainAlgoritm
 
 linhasPQ = []
-def botaoA(linha: ft.Column):
+def BotaoA(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnSequencia()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
@@ -21,7 +21,7 @@ def botaoA(linha: ft.Column):
     linha.update()
     return linha
     
-def botaoB(linha: ft.Column):
+def BotaoB(linha: ft.Column):
     linha.controls.clear()
     texto = mainAlgoritm.returnSequencia2()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
@@ -82,18 +82,6 @@ def BotaoBTraducao(linha: ft.Column):
     linha.update()
     return linha
 
-def openDialogo(dialogo: ft.AlertDialog, page: ft.Page):
-        page.dialog = dialogo
-        dialogo.open = True
-        page.update()
-        
-def closeDialogo(dialogo: ft.AlertDialog, page: ft.Page):
-        page.dialog = dialogo
-        dialogo.open = False
-        dialogo.update()
-    
-def closeDialogo2(dialogo: ft.AlertDialog, page: ft.Page):
-        page.dialog = dialogo
-        dialogo.open = False
-        dialogo.update()
-        
+def botaoDnaComparacao(linha: ft.Column):
+    linha.controls.clear()
+    texto =        

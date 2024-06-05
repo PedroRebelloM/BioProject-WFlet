@@ -1,6 +1,4 @@
 from Bio import SeqIO
-from Bio.Align import PairwiseAligner
-from Bio.pairwise2 import format_alignment
 
 #setando caminho do arquivo
 
@@ -142,7 +140,7 @@ def traducao(rnaMensageiro):
 proteinasA = traducao(rnaMensageiroString)
 proteinasB = traducao(rnaMensageiroString2)
  
-def CompararDna(nucleotideo, nucleotideoDois):
+def compararDna(nucleotideo, nucleotideoDois):
     
     # Determina a maior sequência e sua correspondente
     if len(nucleotideo) >= len(nucleotideoDois):
@@ -173,9 +171,12 @@ def CompararDna(nucleotideo, nucleotideoDois):
         porcentagemMaiorDna = round(contador * 100 / tamanhoMaior, 2)
         porcentagemMenorDna = round(contador * 100 / tamanhoMenor, 2)
         
-        return resultadoAlinhadoDna, porcentagemMaiorDna, porcentagemMenorDna  
+        a = print(f"Resultado do alinhamento: {resultadoAlinhadoDna}")
+        b = print(f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}")
+        
+        return a, b
     
-def CompararRna(rnaMensageiroString, rnaMensageiroString2):
+def compararRna(rnaMensageiroString, rnaMensageiroString2):
     
     # Determina a maior sequência e sua correspondente
     if len(rnaMensageiroString) >= len(rnaMensageiroString2):
@@ -206,7 +207,12 @@ def CompararRna(rnaMensageiroString, rnaMensageiroString2):
         porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2)
         porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2)
         
-        return resultadoAlinhadoRna, porcentagemMaiorRna, porcentagemMenorRna
+        a = print(f"Resultado do alinhamento: {resultadoAlinhadoRna}")
+        b = print(f"Porcentagem em relação ao maior DNA: {porcentagemMaiorRna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorRna}")
+        
+        return a, b
+    
+resultadoDna = CompararDna
     
         
 # Funções para o layout
@@ -227,3 +233,4 @@ def returnProteinasA():
 
 def returnProteinasB():
     return proteinasB
+
