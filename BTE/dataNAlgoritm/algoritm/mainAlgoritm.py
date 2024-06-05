@@ -175,7 +175,40 @@ def CompararDna(nucleotideo, nucleotideoDois):
         
         return resultadoAlinhado, porcentagemMaior, porcentagemMenor   
     
+def CompararRna(rnaMensageiroString, rnaMensageiroString2):
     
+    # Determina a maior sequência e sua correspondente
+    if len(rnaMensageiroString) >= len(rnaMensageiroString2):
+        maiorRna = rnaMensageiroString
+        menorRna = rnaMensageiroString2
+    else:
+        maiorRna = rnaMensageiroString2
+        menorRna = rnaMensageiroString
+
+    # Inicializa uma string para armazenar o resultado do alinhamento
+    resultadoAlinhado = ''
+    contador = 0
+    # Percorre cada posição na sequência mais longa
+    for i in range(len(maiorRna)):
+        # Verifica se a posição está dentro do comprimento da outra sequência
+        if i < len(menorRna):
+            # Verifica se os nucleotídeos correspondentes são iguais
+            if maiorRna[i] == menorRna[i]:
+                resultadoAlinhado += maiorRna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+                contador += 1
+            else:
+                resultadoAlinhado += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
+        else:
+            resultadoAlinhado += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
+            
+        tamanhoMaior = len(maiorRna)
+        tamanhoMenor = len(menorRna)
+        porcentagemMaior = round(contador * 100 / tamanhoMaior, 2)
+        porcentagemMenor = round(contador * 100 / tamanhoMenor, 2)
+        
+        return resultadoAlinhado, porcentagemMaior, porcentagemMenor
+    
+        
 # Funções para o layout
 def returnSequencia():
     return seQ
