@@ -142,6 +142,39 @@ def traducao(rnaMensageiro):
 proteinasA = traducao(rnaMensageiroString)
 proteinasB = traducao(rnaMensageiroString2)
  
+def CompararDna(nucleotideo, nucleotideoDois):
+    
+    # Determina a maior sequência e sua correspondente
+    if len(nucleotideo) >= len(nucleotideoDois):
+        maiorDna = nucleotideo
+        menorDna = nucleotideoDois
+    else:
+        maiorDna = nucleotideo
+        menorDna = nucleotideoDois
+
+    # Inicializa uma string para armazenar o resultado do alinhamento
+    resultadoAlinhado = ''
+    contador = 0
+    # Percorre cada posição na sequência mais longa
+    for i in range(len(maiorDna)):
+        # Verifica se a posição está dentro do comprimento da outra sequência
+        if i < len(menorDna):
+            # Verifica se os nucleotídeos correspondentes são iguais
+            if maiorDna[i] == menorDna[i]:
+                resultadoAlinhado += maiorDna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+                contador += 1
+            else:
+                resultadoAlinhado += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
+        else:
+            resultadoAlinhado += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
+            
+        tamanhoMaior = len(maiorDna)
+        tamanhoMenor = len(menorDna)
+        porcentagemMaior = round(contador * 100 / tamanhoMaior, 2)
+        porcentagemMenor = round(contador * 100 / tamanhoMenor, 2)
+        
+        return resultadoAlinhado, porcentagemMaior, porcentagemMenor   
+    
     
 # Funções para o layout
 def returnSequencia():
