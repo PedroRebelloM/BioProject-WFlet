@@ -84,4 +84,16 @@ def BotaoBTraducao(linha: ft.Column):
 
 def botaoDnaComparacao(linha: ft.Column):
     linha.controls.clear()
-    texto =        
+    texto = mainAlgoritm.returnAlinhamentoDna()
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
+    linha.controls.append(novoTexto)
+    linha.update()
+    return linha
+
+def botaoRnaComparacao(linha: ft.Column):
+    linha.controls.clear()
+    texto = mainAlgoritm.returnAlinhamentoRna()
+    novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
+    linha.controls.append(novoTexto)
+    linha.update()
+    return linha
