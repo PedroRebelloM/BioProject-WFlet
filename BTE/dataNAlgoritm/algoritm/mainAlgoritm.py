@@ -153,7 +153,7 @@ def CompararDna(nucleotideo, nucleotideoDois):
         menorDna = nucleotideoDois
 
     # Inicializa uma string para armazenar o resultado do alinhamento
-    resultadoAlinhado = ''
+    resultadoAlinhadoDna = ''
     contador = 0
     # Percorre cada posição na sequência mais longa
     for i in range(len(maiorDna)):
@@ -161,19 +161,19 @@ def CompararDna(nucleotideo, nucleotideoDois):
         if i < len(menorDna):
             # Verifica se os nucleotídeos correspondentes são iguais
             if maiorDna[i] == menorDna[i]:
-                resultadoAlinhado += maiorDna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+                resultadoAlinhadoDna += maiorDna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
                 contador += 1
             else:
-                resultadoAlinhado += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
+                resultadoAlinhadoDna += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
         else:
-            resultadoAlinhado += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
+            resultadoAlinhadoDna += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
             
         tamanhoMaior = len(maiorDna)
         tamanhoMenor = len(menorDna)
-        porcentagemMaior = round(contador * 100 / tamanhoMaior, 2)
-        porcentagemMenor = round(contador * 100 / tamanhoMenor, 2)
+        porcentagemMaiorDna = round(contador * 100 / tamanhoMaior, 2)
+        porcentagemMenorDna = round(contador * 100 / tamanhoMenor, 2)
         
-        return resultadoAlinhado, porcentagemMaior, porcentagemMenor   
+        return resultadoAlinhadoDna, porcentagemMaiorDna, porcentagemMenorDna  
     
 def CompararRna(rnaMensageiroString, rnaMensageiroString2):
     
@@ -186,7 +186,7 @@ def CompararRna(rnaMensageiroString, rnaMensageiroString2):
         menorRna = rnaMensageiroString
 
     # Inicializa uma string para armazenar o resultado do alinhamento
-    resultadoAlinhado = ''
+    resultadoAlinhadoRna = ''
     contador = 0
     # Percorre cada posição na sequência mais longa
     for i in range(len(maiorRna)):
@@ -194,19 +194,19 @@ def CompararRna(rnaMensageiroString, rnaMensageiroString2):
         if i < len(menorRna):
             # Verifica se os nucleotídeos correspondentes são iguais
             if maiorRna[i] == menorRna[i]:
-                resultadoAlinhado += maiorRna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+                resultadoAlinhadoRna += maiorRna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
                 contador += 1
             else:
-                resultadoAlinhado += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
+                resultadoAlinhadoRna += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
         else:
-            resultadoAlinhado += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
+            resultadoAlinhadoRna += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
             
         tamanhoMaior = len(maiorRna)
         tamanhoMenor = len(menorRna)
-        porcentagemMaior = round(contador * 100 / tamanhoMaior, 2)
-        porcentagemMenor = round(contador * 100 / tamanhoMenor, 2)
+        porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2)
+        porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2)
         
-        return resultadoAlinhado, porcentagemMaior, porcentagemMenor
+        return resultadoAlinhadoRna, porcentagemMaiorRna, porcentagemMenorRna
     
         
 # Funções para o layout
