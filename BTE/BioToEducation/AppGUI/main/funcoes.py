@@ -82,18 +82,26 @@ def BotaoBTraducao(linha: ft.Column):
     linha.update()
     return linha
 
-def botaoDnaComparacao(linha: ft.Column):
+def botaoDnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.controls.clear()
+    textoComparador.controls.clear()
+    textoComp = mainAlgoritm.returnPorcentagemDna
     texto = mainAlgoritm.returnAlinhamentoDna()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
+    novoTextoComp = ft.Text(value=textoComp, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)       
     linha.controls.append(novoTexto)
+    textoComparador.controls.append(novoTextoComp)
     linha.update()
-    return linha
+    return linha, textoComparador
 
-def botaoRnaComparacao(linha: ft.Column):
+def botaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.controls.clear()
+    textoComparador.controls.clear()
+    textoComp = mainAlgoritm.returnPorcentagemRna
     texto = mainAlgoritm.returnAlinhamentoRna()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
+    novoTextoComp = ft.Text(value=textoComp, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)       
     linha.controls.append(novoTexto)
+    textoComparador.controls.append(novoTextoComp)
     linha.update()
-    return linha
+    return linha, textoComparador
