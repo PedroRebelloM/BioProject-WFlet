@@ -41,8 +41,8 @@ def transcricao(sequencia):
     genoma = ''.join(genomaTranscrito)
     return genoma, contador
 
-rnaMensageiroString, nmr1 = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável
-rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois) # atribuida para as bases nitrogenadas concatenadas
+rnaMensageiroString, nmr1 = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável  atribuida para as bases nitrogenadas concatenadas
+rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois) 
 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
@@ -171,10 +171,9 @@ def compararDna(nucleotideo, nucleotideoDois):
         porcentagemMaiorDna = round(contador * 100 / tamanhoMaior, 2)
         porcentagemMenorDna = round(contador * 100 / tamanhoMenor, 2)
         
-        a = print(f"Resultado do alinhamento: {resultadoAlinhadoDna}")
-        b = print(f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}")
-        
-        return a, b
+    resultado = f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}" 
+    
+    return resultadoAlinhadoDna, resultado
     
 def compararRna(rnaMensageiroString, rnaMensageiroString2):
     
@@ -204,16 +203,16 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
             
         tamanhoMaior = len(maiorRna)
         tamanhoMenor = len(menorRna)
-        porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2)
-        porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2)
+        porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2) # Arredonda o valor e realiza a porcentagem de
+        porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2) # similaridade
         
-        a = print(f"Resultado do alinhamento: {resultadoAlinhadoRna}")
-        b = print(f"Porcentagem em relação ao maior DNA: {porcentagemMaiorRna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorRna}")
-        
-        return a, b
+    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}"
     
-resultadoAlinhamentoDna, resultadoPorcentagemDna = compararDna(nucleotideo, nucleotideoDois)
-resultadoAlinhamentoRna, resultadoPorcentagemRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
+    return resultadoAlinhadoRna, resultado
+    
+resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2) # Define o primeiro como a string de resultado e o segundo a string das porcentagens 
+
+resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
     
         
 # Funções para o layout
@@ -242,7 +241,10 @@ def returnAlinhamentoRna():
     return resultadoAlinhamentoRna
 
 def returnPorcentagemDna():
-    return resultadoPorcentagemDna
+    return comparacaoRna
 
 def returnPorcentagemRna():
-    return resultadoPorcentagemRna
+    return comparacaoDna
+
+
+print(comparacaoRna)

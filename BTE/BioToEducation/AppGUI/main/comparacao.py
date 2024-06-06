@@ -170,7 +170,7 @@ def CriarLayoutComparação(page: ft.Page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoATraducao(linha)
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoDnaComparacao(linha, textoComparador)
     )
     
     #Botao do Gene B
@@ -181,7 +181,7 @@ def CriarLayoutComparação(page: ft.Page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoBTraducao(linha)
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoRnaComparacao(linha, textoComparador)
     )
     
     botaoProteinasComparacao = ft.ElevatedButton(
