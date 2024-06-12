@@ -129,7 +129,7 @@ def CriarLayoutComparação(page: ft.Page):
     
     textoComparador = ft.Column(
         [
-            ft.Text("", color='black', selectable=True, no_wrap=False)
+            ft.Text("", color='black', selectable=True, no_wrap=False, weight = "bold")
         ],
         scroll=ft.ScrollMode.ALWAYS,
         expand=True,
@@ -181,7 +181,7 @@ def CriarLayoutComparação(page: ft.Page):
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoRnaComparacao(linha, textoComparador)
+        ), adaptive = True, width = 200, height = 25, on_click = lambda _: funcoes.BotaoRnaComparacao(linha, textoComparador),
     )
     
     botaoProteinasComparacao = ft.ElevatedButton(

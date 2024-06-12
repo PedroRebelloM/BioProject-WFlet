@@ -147,8 +147,8 @@ def compararDna(nucleotideo, nucleotideoDois):
         maiorDna = nucleotideo
         menorDna = nucleotideoDois
     else:
-        maiorDna = nucleotideo
-        menorDna = nucleotideoDois
+        maiorDna = nucleotideoDois
+        menorDna = nucleotideo
 
     # Inicializa uma string para armazenar o resultado do alinhamento
     resultadoAlinhadoDna = ''
@@ -158,8 +158,11 @@ def compararDna(nucleotideo, nucleotideoDois):
         # Verifica se a posição está dentro do comprimento da outra sequência
         if i < len(menorDna):
             # Verifica se os nucleotídeos correspondentes são iguais
-            if maiorDna[i] == menorDna[i]:
-                resultadoAlinhadoDna += maiorDna[i]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+            if maiorDna[i:i + 3] == ' - ':
+                continue
+
+            if maiorDna[i:i + 3] == menorDna[i:i + 3]:
+                resultadoAlinhadoDna += maiorDna[i:i + 3]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
                 contador += 1
             else:
                 resultadoAlinhadoDna += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
@@ -171,8 +174,8 @@ def compararDna(nucleotideo, nucleotideoDois):
         porcentagemMaiorDna = round(contador * 100 / tamanhoMaior, 2)
         porcentagemMenorDna = round(contador * 100 / tamanhoMenor, 2)
         
-    resultado = f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}" 
     
+    resultado = f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}%\n\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}%" 
     return resultadoAlinhadoDna, resultado
     
 def compararRna(rnaMensageiroString, rnaMensageiroString2):
@@ -206,15 +209,47 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
         porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2) # Arredonda o valor e realiza a porcentagem de
         porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2) # similaridade
         
-    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}"
+    
+    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}%"
     
     return resultadoAlinhadoRna, resultado
     
 resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2) # Define o primeiro como a string de resultado e o segundo a string das porcentagens 
 
 resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
-    
+
+def compararProteína(proteinasA, proteinasB):
+    if len(proteinasA) >= len(proteinasB):
+        maior = proteinasA
+        menor = proteinasB
+    else: 
+        maior = proteinasB
+        menor = proteinasA
         
+    resultadoAlinhadoProteinas = ''
+    contador = 0
+    for i in range(len(maior)):
+        if i < len(menor):
+            if maior[i] == menor[i]:
+                resultadoAlinhadoProteinas += maior[i] 
+                contador += 1
+            else:
+                resultadoAlinhadoProteinas += '-' 
+        else:
+            resultadoAlinhadoProteinas += '-' 
+            
+        tamanhoMaior = len(maior)
+        tamanhoMenor = len(menor)
+        porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2) # Arredonda o valor e realiza a porcentagem de
+        porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2) # similaridade
+        
+    
+    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}%"
+    
+    return resultadoAlinhadoProteinas, resultado
+    
+resultadoProt, c = compararProteína(proteinasA, proteinasB)    
+  
 # Funções para o layout
 def returnSequencia():
     return seQ
@@ -240,11 +275,11 @@ def returnAlinhamentoDna():
 def returnAlinhamentoRna():
     return resultadoAlinhamentoRna
 
-def returnPorcentagemDna():
+def returnPorcentagemRna():
     return comparacaoRna
 
-def returnPorcentagemRna():
+def returnPorcentagemDna():
     return comparacaoDna
 
 
-print(comparacaoRna)
+print(resultadoProt)

@@ -88,10 +88,11 @@ def BotaoDnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     textoComp = mainAlgoritm.returnPorcentagemDna()
     texto = mainAlgoritm.returnAlinhamentoDna()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
-    novoTextoComp = ft.Text(value=textoComp, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)       
+    novoTextoComp = ft.Text(value=textoComp, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
     textoComparador.controls.append(novoTextoComp)
-    linha.update()
+    linha.update(),
+    textoComparador.update()
     return linha, textoComparador
 
 def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
@@ -104,4 +105,5 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.controls.append(novoTexto)
     textoComparador.controls.append(novoTextoComp)
     linha.update()
+    textoComparador.update()
     return linha, textoComparador
