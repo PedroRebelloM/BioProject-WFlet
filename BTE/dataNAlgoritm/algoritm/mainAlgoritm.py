@@ -217,38 +217,6 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
 resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2) # Define o primeiro como a string de resultado e o segundo a string das porcentagens 
 
 resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
-
-def compararProteína(proteinasA, proteinasB):
-    if len(proteinasA) >= len(proteinasB):
-        maior = proteinasA
-        menor = proteinasB
-    else: 
-        maior = proteinasB
-        menor = proteinasA
-        
-    resultadoAlinhadoProteinas = ''
-    contador = 0
-    for i in range(len(maior)):
-        if i < len(menor):
-            if maior[i] == menor[i]:
-                resultadoAlinhadoProteinas += maior[i] 
-                contador += 1
-            else:
-                resultadoAlinhadoProteinas += '-' 
-        else:
-            resultadoAlinhadoProteinas += '-' 
-            
-        tamanhoMaior = len(maior)
-        tamanhoMenor = len(menor)
-        porcentagemMaiorRna = round(contador * 100 / tamanhoMaior, 2) # Arredonda o valor e realiza a porcentagem de
-        porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2) # similaridade
-        
-    
-    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}%"
-    
-    return resultadoAlinhadoProteinas, resultado
-    
-resultadoProt, c = compararProteína(proteinasA, proteinasB)    
   
 # Funções para o layout
 def returnSequencia():
@@ -280,6 +248,3 @@ def returnPorcentagemRna():
 
 def returnPorcentagemDna():
     return comparacaoDna
-
-
-print(resultadoProt)
