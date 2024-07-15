@@ -8,14 +8,16 @@ def CriarLayoutLogin(page: ft.Page):
     campoSenha = ft.TextField(label="Insira sua senha", password=True, can_reveal_password=True)
     area = ft.Text()
 
-    botaoEnviar = ft.ElevatedButton(text="Enviar", on_click=lambda e: funcoes.click(campoUsuario, campoSenha, area, page))
+    botaoEntrar = ft.ElevatedButton(text="Entrar", on_click=lambda e: funcoes.Entrar(campoUsuario, campoSenha, area, page))
+    
+    botaoRegistrar = ft.ElevatedButton(text="Registrar")
 
     layout = ft.Container(
         content=ft.Column(
             [
                 campoUsuario,
                 campoSenha,
-                botaoEnviar,
+                botaoEntrar,
                 area
             ]
         )

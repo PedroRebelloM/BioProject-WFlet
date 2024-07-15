@@ -109,7 +109,9 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     return linha, textoComparador
 
  
-def click(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
-        area.value = f"email{campoUsuario.value} e {campoSenha.value}"
-        page.update()
+def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
+    email = campoUsuario
+    senha = campoSenha
+    area.value = f"email{campoUsuario.value} e {campoSenha.value}"
+    page.update()
                 
