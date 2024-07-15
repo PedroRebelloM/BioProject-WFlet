@@ -8,7 +8,7 @@ import fix
 if assets.root_dir not in sys.path:
     sys.path.append(assets.root_dir)
 
-def CriarLayout(page: ft.page):
+def CriarLayout(page: ft.Page):
     
     #Tema aplicativo 
     page.theme = ft.Theme(

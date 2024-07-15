@@ -1,7 +1,7 @@
 import flet as ft
 import os 
 import sys 
-import layout, traducao, transcricao, comparacao
+import layout, traducao, transcricao, comparacao, login
 import clipboard as cp
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
@@ -107,3 +107,9 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.update()
     textoComparador.update()
     return linha, textoComparador
+
+ 
+def click(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
+        area.value = f"email{campoUsuario.value} e {campoSenha.value}"
+        page.update()
+                
