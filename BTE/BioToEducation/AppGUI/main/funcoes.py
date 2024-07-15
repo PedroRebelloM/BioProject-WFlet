@@ -3,7 +3,15 @@ import os
 import sys 
 import layout, traducao, transcricao, comparacao, login
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+main_dir = os.path.abspath(os.path.join(current_dir, 'database'))
+sys.path.append(main_dir)
+
+from database.operations import authUsuario, addUsuario
+
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+
 
 if root_dir not in sys.path:
     sys.path.append(root_dir)
@@ -44,9 +52,6 @@ def Transcricao(page: ft.Page):
 def Comparacao(page: ft.Page):
     page.controls.clear()
     page.add(comparacao.CriarLayoutComparação(page))
-    
-def Copiar(linha: ft.Column):
-    cp.copy(linha)
     
 def BotaoATranscricao(linha: ft.Column):
     linha.controls.clear()
@@ -108,8 +113,16 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
 
  
 def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
-    email = campoUsuario
-    senha = campoSenha
-    area.value = f"email{campoUsuario.value} e {campoSenha.value}"
+    email = campoUsuario.value
+    senha = campoSenha.value
+    
+    
+    user = authUsuario(email, senha)
+    if user: 
+        area.value = 'Login Bem-Sucedido'
+    else: 
+        addUsuario(email, senha)
+        area.value = "Usuário registrado com sucesso!"
+    
     page.update()
                 
