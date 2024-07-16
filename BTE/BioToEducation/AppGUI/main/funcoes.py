@@ -49,10 +49,23 @@ def Traducao(page: ft.Page):
 def Transcricao(page: ft.Page):
     page.controls.clear()
     page.add(transcricao.CriarLayoutTranscricao(page))
+    page.update()
     
 def Comparacao(page: ft.Page):
     page.controls.clear()
     page.add(comparacao.CriarLayoutComparação(page))
+    page.update()
+    
+def BotaoPgRegistrar(page: ft.Page):
+    page.controls.clear()
+    page.add(registrar.CriarLayoutRegistro(page))
+    page.update()
+    
+def Retornar(page: ft.Page):
+    page.controls.clear()
+    page.add(login.CriarLayoutLogin(page))
+    page.update()
+    print("Pg adicionada")  # Log temporário para depuração
     
 def BotaoATranscricao(linha: ft.Column):
     linha.controls.clear()
@@ -129,16 +142,7 @@ def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, 
     
     page.update()
     
-def BotaoPgRegistrar(page: ft.Page):
-    page.controls.clear()
-    page.add(registrar.CriarLayoutRegistro(page))
-    page.update()
-    
-def Retornar(page: ft.Page):
-    page.controls.clear()
-    page.add(login.CriarLayoutLogin(page))
-    page.update()
-
+     
 def Registrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, campoConfirmacao: ft.TextField, area: ft.Text, page: ft.Page):
     email = campoUsuario.value
     senha = campoSenha.value

@@ -7,8 +7,8 @@ def CriarLayoutRegistro(page: ft.Page):
     campoConfirmar = ft.TextField(label="Repita sua senha", password=True, can_reveal_password=True)
     area = ft.Text()
     
-    botaoRegistrar = ft.ElevatedButton(text="Registrar", on_click=lambda e: funcoes.Registrar(campoUsuario, campoSenha, campoConfirmar, area, page))
-    botaoRetornar = ft.ElevatedButton(text="Retornar ao Login", on_click=lambda e: funcoes.Retornar(page))
+    botaoRegistrar = ft.ElevatedButton(text="Registrar", on_click=lambda _: funcoes.Registrar(campoUsuario, campoSenha, campoConfirmar, area, page))
+    botaoRetornar = ft.ElevatedButton(text="Retornar ao Login", on_click=lambda _: funcoes.Retornar(page))
 
     layout = ft.Container(
         content=ft.Column(
