@@ -1,8 +1,7 @@
 import flet as ft
-import os 
-import sys 
-import re
+import os, sys, re, bcrypt
 import layout, traducao, transcricao, comparacao, login, registrar
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 main_dir = os.path.abspath(os.path.join(current_dir, 'database'))
@@ -143,16 +142,21 @@ def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, 
     page.update()
     
      
-def Registrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, campoConfirmacao: ft.TextField, area: ft.Text, page: ft.Page):
+def Registrar(campoNome: ft.TextField, campoInstituicao: ft.TextField, campoCargo: ft.TextField, campoUsuario: ft.TextField, campoSenha: ft.TextField, campoConfirmacao: ft.TextField, area: ft.Text, page: ft.Page):
+    
+    nome = campoNome.value
+    instituicao = campoInstituicao.value
+    cargo = campoCargo.value
     email = campoUsuario.value
     senha = campoSenha.value
     
-    if campoSenha.value != campoConfirmacao.value:
+    
+    if senha != campoConfirmacao.value:
         area.value = "As senhas não conferem"
     elif not verificarEmail(email):
         area.value = "Email inválido"
     else: 
-        addUsuario(email, senha)
+        addUsuario(nome, instituicao, cargo, email, senha)
         area.value = "Usuário criado!"
         
     page.update()

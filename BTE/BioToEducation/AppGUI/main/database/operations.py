@@ -1,8 +1,10 @@
 from connections import getConnection
+import bcrypt
 
-def addUsuario(email, password):
+def addUsuario(nome, instituicao, cargo, email, senha):
     db = getConnection()
-    db.users.insert_one({'email': email, 'password': password})
+    senhaHash = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()) # encriptando a senha
+    db.users.insert_one({'nome': nome, 'instituicao': instituicao, 'cargo': cargo, 'email': email, 'senha': senhaHash})
     
 def authUsuario(email, password):
     db = getConnection()
