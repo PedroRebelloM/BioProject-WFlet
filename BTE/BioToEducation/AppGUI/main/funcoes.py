@@ -1,7 +1,8 @@
 import flet as ft
 import os 
 import sys 
-import layout, traducao, transcricao, comparacao, login
+import re
+import layout, traducao, transcricao, comparacao, login, registrar
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 main_dir = os.path.abspath(os.path.join(current_dir, 'database'))
@@ -111,18 +112,46 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     textoComparador.update()
     return linha, textoComparador
 
+def verificarEmail(email: str) -> bool:
+    regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$' # verifica email com o modulo regex:
+    return re.match(regex, email) is not None # r'aceita lums e letras + @ com nums e letras + . com letras e nums'
+
  
 def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
     email = campoUsuario.value
     senha = campoSenha.value
     
-    
     user = authUsuario(email, senha)
     if user: 
-        area.value = 'Login Bem-Sucedido'
+        area.value = "Login Bem-Sucedido"
     else: 
-        addUsuario(email, senha)
-        area.value = "Usuário registrado com sucesso!"
+        area.value = "Você precisa se registrar"
     
     page.update()
-                
+    
+def BotaoPgRegistrar(page: ft.Page):
+    page.controls.clear()
+    page.add(registrar.CriarLayoutRegistro(page))
+    page.update()
+    
+def Retornar(page: ft.Page):
+    page.controls.clear()
+    page.add(login.CriarLayoutLogin(page))
+    page.update()
+
+def Registrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, campoConfirmacao: ft.TextField, area: ft.Text, page: ft.Page):
+    email = campoUsuario.value
+    senha = campoSenha.value
+    
+    if campoSenha.value != campoConfirmacao.value:
+        area.value = "As senhas não conferem"
+    elif not verificarEmail(email):
+        area.value = "Email inválido"
+    else: 
+        addUsuario(email, senha)
+        area.value = "Usuário criado!"
+        
+    page.update()
+    
+
+    

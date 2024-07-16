@@ -12,13 +12,11 @@ if root_dir not in sys.path:
 from dataNAlgoritm.algoritm import mainAlgoritm
     
 def main(page: ft.Page) -> None:
-        page.title = 'BTE - Biology To Education'
+    page.title = 'BTE - Biology To Education'
         
-        page.window_width = 800
-        page.window_height = 600
-        
-        layout = CriarLayoutLogin(page)
-        page.add(layout)
+    page.window.width = 800
+    page.window.height = 600
+    CriarLayoutLogin(page)
       
 if __name__ == "__main__":  
     ft.app(target=main, assets_dir="../assets")
