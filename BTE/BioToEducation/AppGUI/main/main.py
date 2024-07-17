@@ -17,6 +17,7 @@ def main(page: ft.Page) -> None:
     page.window.width = 800
     page.window.height = 600
     CriarLayoutLogin(page)
+    page.update()
       
 if __name__ == "__main__":  
     ft.app(target=main, assets_dir="../assets")

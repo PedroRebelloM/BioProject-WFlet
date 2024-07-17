@@ -21,6 +21,8 @@ def CriarLayoutLogin(page: ft.Page):
         )
     )
 
+    page.controls.clear()
     page.add(layout)
-    return layout
+    page.update()
+    
     

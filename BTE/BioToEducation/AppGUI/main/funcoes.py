@@ -127,7 +127,6 @@ def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
 def verificarEmail(email: str) -> bool:
     regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$' # verifica email com o modulo regex:
     return re.match(regex, email) is not None # r'aceita lums e letras + @ com nums e letras + . com letras e nums'
-
  
 def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, page: ft.Page):
     email = campoUsuario.value
