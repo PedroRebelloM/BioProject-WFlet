@@ -132,7 +132,7 @@ def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, 
     
     user = authUsuario(email, senha)
     if user: 
-        session.login(user)
+        session.Login(user)
         area.value = "Login Bem-Sucedido"
         page.update()
         Home(page)

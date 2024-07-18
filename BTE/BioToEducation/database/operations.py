@@ -13,5 +13,9 @@ def addUsuario(nome, instituicao, cargo, email, senha):
     
 def authUsuario(email, password):
     db = getConnection()
-    user = db.users.find_one({'email': email, 'password': password})
-    return user
+    user = db.users.find_one({'email': email})
+    if user:
+        senha_hash = user.get('senha', None)
+        if senha_hash and bcrypt.checkpw(password.encode('utf-8'), senha_hash):
+            return user
+    return None
