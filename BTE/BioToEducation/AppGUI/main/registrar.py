@@ -26,10 +26,11 @@ def CriarLayoutRegistro(page: ft.Page):
                 botaoRetornar,
                 area
             ]
-        )
-    )
+        ) 
+    ) 
 
     page.controls.clear()
     page.add(layout)
     page.update()
+
     

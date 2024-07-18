@@ -1,17 +1,15 @@
 import flet as ft
 import os, sys, re, bcrypt
 import layout, traducao, transcricao, comparacao, login, registrar
+from session import session
 
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-main_dir = os.path.abspath(os.path.join(current_dir, 'database'))
-sys.path.append(main_dir)
+dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if dirPai not in sys.path:
+    sys.path.append(dirPai)
 
 from database.operations import authUsuario, addUsuario
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-
-
 
 if root_dir not in sys.path:
     sys.path.append(root_dir)
@@ -134,13 +132,15 @@ def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, 
     
     user = authUsuario(email, senha)
     if user: 
+        session.login(user)
         area.value = "Login Bem-Sucedido"
+        page.update()
+        Home(page)
     else: 
         area.value = "Você precisa se registrar"
     
     page.update()
     
-     
 def Registrar(campoNome: ft.TextField, campoInstituicao: ft.TextField, campoCargo: ft.TextField, campoUsuario: ft.TextField, campoSenha: ft.TextField, campoConfirmacao: ft.TextField, area: ft.Text, page: ft.Page):
     
     nome = campoNome.value

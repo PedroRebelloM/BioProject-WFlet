@@ -1,5 +1,10 @@
-from connections import getConnection
-import bcrypt
+import bcrypt, os, sys
+from database.connections import getConnection
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+if root_dir not in sys.path:
+    sys.path.append(root_dir)
 
 def addUsuario(nome, instituicao, cargo, email, senha):
     db = getConnection()
