@@ -30,9 +30,7 @@ def CriarLayoutRegistro(page: ft.Page):
     ) 
 
     page.controls.clear()
-    rg = CriarLayoutRegistro(page)
-    page.add(rg)
+    page.add(layout)
     page.update()
-
 
     
