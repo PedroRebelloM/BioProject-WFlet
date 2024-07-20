@@ -195,7 +195,7 @@ def CriarLayoutComparação(page: ft.Page):
     )    
     
     # Botão para atualizar os genes
-    BotaoAtualizar = ft.Container(
+    botaoAtualizar = ft.Container(
         ft.ElevatedButton(
             "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
             adaptive = True, width = 200, height = 30,
@@ -208,7 +208,7 @@ def CriarLayoutComparação(page: ft.Page):
             
     )
     
-    BotaoCopiar = ft.Container(
+    botaoCopiar = ft.Container(
         ft.ElevatedButton(
             "Copiar Proteínas", on_click = None, bgcolor = "white", color = "black",
             adaptive = True, width = 250, height = 30,
@@ -238,7 +238,7 @@ def CriarLayoutComparação(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                               BotaoAtualizar, BotaoCopiar
+                               botaoAtualizar, botaoCopiar
                             ],
                         ),
                         alignment=ft.alignment.center,
