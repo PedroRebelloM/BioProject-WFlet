@@ -1,6 +1,6 @@
 import flet as ft
 import os, sys, re, bcrypt
-import layout, traducao, transcricao, comparacao, login, registrar
+import home, traducao, transcricao, comparacao, login, registrar
 from session import session
 
 dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -35,7 +35,7 @@ def BotaoB(linha: ft.Column):
 
 def Home(page: ft.Page):
     page.controls.clear()
-    page.add(layout.CriarLayout(page))
+    page.add(home.CriarLayout(page))
     page.update()
     
 def Traducao(page: ft.Page):
