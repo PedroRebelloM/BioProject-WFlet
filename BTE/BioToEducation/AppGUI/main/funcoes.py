@@ -137,7 +137,7 @@ def Entrar(campoUsuario: ft.TextField, campoSenha: ft.TextField, area: ft.Text, 
         page.update()
         Home(page)
     else: 
-        area.value = "Você precisa se registrar"
+        area.value = "Faça o seu registro ou verifique seu usuário e/ou senha!"
     
     page.update()
     

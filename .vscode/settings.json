@@ -1,6 +1,8 @@
 {
     "python.analysis.extraPaths": [
         "./BTE/BioToEducation",
-        "./BTE/BioToEducation/database"
+        "./BTE/BioToEducation/database",
+        "./BTE/BioToEducation/security",
+        "./BTE/BioToEducation/AppGUI/main"
     ]
 }
