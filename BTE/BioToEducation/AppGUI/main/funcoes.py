@@ -159,6 +159,10 @@ def Registrar(campoNome: ft.TextField, campoInstituicao: ft.TextField, campoCarg
         area.value = "Usuário criado!"
         
     page.update()
-    
+
+
+def Logout(page: ft.Page):
+    session.logout()
+    Retornar(page)
 
     

@@ -71,6 +71,14 @@ def CriarLayoutTranscricao(page: ft.Page):
             }
         ), adaptive = True, width = 160
     )
+    
+    botaoLogout = ft.ElevatedButton("Logout", icon = "logout", icon_color = "black", on_click = lambda _: funcoes.Retornar(page), bgcolor = "white", color = "black",
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK)
+            }
+        ), adaptive = True, width = 160
+    )
 
     # Divisao dos icones e logo
     colunaSuperior = ft.Column(
@@ -82,10 +90,10 @@ def CriarLayoutTranscricao(page: ft.Page):
 
         
     )
-    
+
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, 
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,
