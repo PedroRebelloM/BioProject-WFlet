@@ -165,4 +165,7 @@ def Logout(page: ft.Page):
     session.logout()
     Retornar(page)
 
+
+def Escolher(e):
+    e.page.dialog
     

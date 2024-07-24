@@ -80,6 +80,15 @@ def CriarLayout(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
+    botaoEscolhaArquivo = ft.ElevatedButton(
+        "Escolha os arquivos", icon = "arquivos", icon_color = "black", on_click = lambda _: funcoes.Comparacao(page), bgcolor = "white", color = "black",
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+            }
+        ), adaptive = True, width = 160
+    )
+    
     botaoLogout = ft.ElevatedButton("Logout", icon = "logout", icon_color = "black", on_click = lambda _: funcoes.Retornar(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
@@ -87,6 +96,7 @@ def CriarLayout(page: ft.Page):
             }
         ), adaptive = True, width = 160
     )
+    
 
     # Divisao dos icones e logo
     colunaSuperior = ft.Column(
@@ -101,7 +111,7 @@ def CriarLayout(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoLogout
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,
