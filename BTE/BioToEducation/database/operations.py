@@ -1,5 +1,6 @@
 import bcrypt, os, sys
 from database.connections import getConnection
+from uuid import uuid4
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 

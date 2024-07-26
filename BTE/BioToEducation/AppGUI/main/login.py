@@ -1,6 +1,5 @@
 import flet as ft
 import assets, funcoes
-from session import session
 
 def CriarLayoutLogin(page: ft.Page):
     campoUsuario = ft.TextField(label="Insira seu Email", keyboard_type=ft.KeyboardType.EMAIL)

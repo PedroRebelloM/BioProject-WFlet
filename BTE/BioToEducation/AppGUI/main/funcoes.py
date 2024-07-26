@@ -1,19 +1,21 @@
 import flet as ft
 import os, sys, re, bcrypt
-import home, traducao, transcricao, comparacao, login, registrar
-from session import session
+import home, traducao, transcricao, comparacao, login, registrar, arquivos, globalVar
 
 dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 if dirPai not in sys.path:
     sys.path.append(dirPai)
 
-from database.operations import authUsuario, addUsuario
+dirClasses = os.path.abspath(os.path.join(dirPai, 'classes'))
+if dirClasses not in sys.path:
+    sys.path.append(dirClasses)
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-
 if root_dir not in sys.path:
     sys.path.append(root_dir)
-    
+
+from database.operations import authUsuario, addUsuario
+from AppGUI.classes.session import session
 from dataNAlgoritm.algoritm import mainAlgoritm
 
 linhasPQ = []
@@ -165,7 +167,37 @@ def Logout(page: ft.Page):
     session.logout()
     Retornar(page)
 
-
-def Escolher(e):
-    e.page.dialog
+def PgArquivos(page: ft.Page):
+    page.controls.clear()
+    page.add(arquivos.CriarLayoutArquivos(page))
+    page.update()
     
+    
+def EscolherArquivo(e: ft.FilePickerResultEvent, qddArquivos, page: ft.Page):
+        print("Função chamada")
+        print(f"{qddArquivos}")
+        caminhos = []
+        
+        if e.files:
+            arquivos = e.files[0].path 
+            if qddArquivos == 1:
+                globalVar.setCaminhoArquivo(arquivos)
+                mensagem = f"Primeiro arquivo selecionado: {globalVar.getCaminhoArquivo()}"
+                print(globalVar.getCaminhoArquivo())
+            elif qddArquivos == 2:
+                globalVar.setCaminhoSegundoArquivo(arquivos)
+                mensagem = f"Segundo arquivo selecionado: {globalVar.getCaminhoSegundoArquivo()}"
+                print(globalVar.getCaminhoSegundoArquivo())
+            else:
+                print("Nenhum arquivo selecionado")   
+            
+            snack_bar = ft.SnackBar(
+                content= ft.Text(mensagem),
+                duration=2000
+            )
+            page.snack_bar = snack_bar
+            page.snack_bar.open = True
+            page.update()
+        else: 
+            print("Nnehum arquivo selecionado")
+            

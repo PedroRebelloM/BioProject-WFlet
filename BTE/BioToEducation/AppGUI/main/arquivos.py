@@ -1,14 +1,25 @@
 import flet as ft
-import assets, traducao, transcricao, comparacao
-import sys
-import funcoes 
+import assets, globalVar
+import sys, os
+import funcoes
 import fix
+
+dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if dirPai not in sys.path:
+    sys.path.append(dirPai)
+    
+from dataNAlgoritm.algoritm import mainAlgoritm
 
 # Pasta Raiz e imagens
 if assets.root_dir not in sys.path:
     sys.path.append(assets.root_dir)
 
-def CriarLayout(page: ft.Page):
+def CriarLayoutArquivos(page: ft.Page): 
+                
+    arquivo1 = ft.FilePicker(on_result = lambda e: funcoes.EscolherArquivo(e, 1, page))
+    arquivo2 = ft.FilePicker(on_result = lambda e: funcoes.EscolherArquivo(e, 2, page))
+    
+    page.overlay.extend([arquivo1, arquivo2])
     
     #Tema aplicativo 
     page.theme = ft.Theme(
@@ -80,7 +91,7 @@ def CriarLayout(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
-    botaoEscolhaArquivo = ft.ElevatedButton(
+    botaoPgArquivo = ft.ElevatedButton(
         "Arquivos", icon = "ATTACH_FILE", icon_color = "black", on_click = lambda _: funcoes.PgArquivos(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
@@ -111,7 +122,7 @@ def CriarLayout(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoLogout
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,
@@ -122,9 +133,9 @@ def CriarLayout(page: ft.Page):
     )
         
     # Texto Sequenciamento 
-    texto = ft.Text("Sequenciamento", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
-    containerTextoSequenciamento = ft.Container(
+    containerTextoBD = ft.Container(
         content = texto, 
         margin = ft.margin.only(left = 25)
     )
@@ -136,7 +147,7 @@ def CriarLayout(page: ft.Page):
     ) 
     
     # Container abaixo do texto Sequenciamento
-    containerSequenciamento = ft.Container(
+    containerBD = ft.Container(
         width = 1000,
         height = 420, 
         bgcolor = "#B5E995",
@@ -174,10 +185,10 @@ def CriarLayout(page: ft.Page):
         
     
     # Botão para atualizar os genes
-    botaoAtualizar = ft.Container(
+    botaoEscolherArquivo1 = ft.Container(
         ft.ElevatedButton(
-            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
-            adaptive = True, width = 200, height = 30,
+            "Escolher primeiro arquivo", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
+            adaptive = True, width = 300, height = 30,
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -187,10 +198,10 @@ def CriarLayout(page: ft.Page):
             
     )
     
-    botaoCopiar = ft.Container(
+    botaoEscolherArquivo2 = ft.Container(
         ft.ElevatedButton(
-            "Copiar Sequenciamento:", on_click = None, bgcolor = "white", color = "black",
-            adaptive = True, width = 250, height = 30, 
+            "Escolher segundo arquivo", on_click = lambda _: arquivo2.pick_files(), bgcolor = "white", color = "black",
+            adaptive = True, width = 300, height = 30, 
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -203,7 +214,7 @@ def CriarLayout(page: ft.Page):
     containerDoisGenes = ft.Container(
         content=ft.Column(
         [
-            ft.Text("Meus Genes", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
+            ft.Text("Informações", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
             ft.Row(
                 [
                     ft.Column(
@@ -217,7 +228,7 @@ def CriarLayout(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                               botaoAtualizar, botaoCopiar
+                               botaoEscolherArquivo1, botaoEscolherArquivo2, 
                             ],
                         ),
                         alignment=ft.alignment.center,
@@ -279,7 +290,7 @@ def CriarLayout(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMeusGenes, containerTextoSequenciamento, containerSequenciamento
+                            containerMeusGenes, containerTextoBD, containerBD
                         ]
                     )
                 ),
@@ -290,5 +301,5 @@ def CriarLayout(page: ft.Page):
 
             )
     
-        
+    page.update()   
     return layoutAll

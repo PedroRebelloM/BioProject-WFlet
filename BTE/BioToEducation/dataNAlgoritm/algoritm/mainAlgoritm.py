@@ -2,8 +2,8 @@ from Bio import SeqIO
 
 #setando caminho do arquivo
 
-caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\gene.fna'
-caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\gene.fna'
+caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\tumorNecrosis.fna'
+caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\tumorProtein.fna'
 
 #realizando leitura do arquivo fna
 nucleotideo = []

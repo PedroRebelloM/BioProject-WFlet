@@ -3,6 +3,7 @@
         "./BTE/BioToEducation",
         "./BTE/BioToEducation/database",
         "./BTE/BioToEducation/security",
-        "./BTE/BioToEducation/AppGUI/main"
+        "./BTE/BioToEducation/AppGUI/main",
+        "./BTE/BioToEducation/AppGUI/classes"
     ]
 }
