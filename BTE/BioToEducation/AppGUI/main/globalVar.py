@@ -1,8 +1,8 @@
 import sys, os
 import arquivos
 
-caminhoDoArquivo = ""
-caminhoSegundoArquivo = ""
+caminhoDoArquivo = r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\tumorNecrosis.fna"
+caminhoSegundoArquivo = r"C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\tumorProtein.fna"
 
 def setCaminhoArquivo(caminho):
     global caminhoDoArquivo
@@ -17,3 +17,4 @@ def getCaminhoArquivo():
 
 def getCaminhoSegundoArquivo():
     return caminhoSegundoArquivo
+

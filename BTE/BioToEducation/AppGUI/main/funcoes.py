@@ -21,6 +21,7 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 linhasPQ = []
 def BotaoA(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnSequencia()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -29,6 +30,7 @@ def BotaoA(linha: ft.Column):
     
 def BotaoB(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnSequencia2()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -68,6 +70,7 @@ def Retornar(page: ft.Page):
     
 def BotaoATranscricao(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnRna1()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -76,6 +79,7 @@ def BotaoATranscricao(linha: ft.Column):
 
 def BotaoBTranscricao(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnRna2()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -84,6 +88,7 @@ def BotaoBTranscricao(linha: ft.Column):
 
 def BotaoATraducao(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnProteinasA()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -92,6 +97,7 @@ def BotaoATraducao(linha: ft.Column):
 
 def BotaoBTraducao(linha: ft.Column):
     linha.controls.clear()
+    mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnProteinasB()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)
     linha.controls.append(novoTexto)
@@ -101,6 +107,7 @@ def BotaoBTraducao(linha: ft.Column):
 def BotaoDnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.controls.clear()
     textoComparador.controls.clear()
+    mainAlgoritm.atualizarResultados()
     textoComp = mainAlgoritm.returnPorcentagemDna()
     texto = mainAlgoritm.returnAlinhamentoDna()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        
@@ -114,6 +121,7 @@ def BotaoDnaComparacao(linha: ft.Column, textoComparador: ft.Column):
 def BotaoRnaComparacao(linha: ft.Column, textoComparador: ft.Column):
     linha.controls.clear()
     textoComparador.controls.clear()
+    mainAlgoritm.atualizarResultados()  
     textoComp = mainAlgoritm.returnPorcentagemRna()
     texto = mainAlgoritm.returnAlinhamentoRna()
     novoTexto = ft.Text(value=texto, color = "black", size = 12, weight = ft.FontWeight.BOLD, text_align= ft.TextAlign.JUSTIFY)        

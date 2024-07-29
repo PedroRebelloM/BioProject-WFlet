@@ -1,23 +1,16 @@
 from Bio import SeqIO
+import globalVar, fix
 
-#setando caminho do arquivo
+resultados = {}
 
-caminhoDoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorNecrosis\ncbi_dataset\data\tumorNecrosis.fna'
-caminhoSegundoArquivo = r'C:\Users\Pedro\Desktop\BioProject-WFlet\BTE\BioToEducation\dataNAlgoritm\data\tumorProtein\ncbi_dataset\data\tumorProtein.fna'
-
-#realizando leitura do arquivo fna
-nucleotideo = []
-with open(caminhoDoArquivo, 'r') as dna:
-    for sequencia in SeqIO.parse(dna, 'fasta'):
-        nucleotideo.append(str(sequencia.seq))
-        seQ = str(sequencia.seq)
-
-
-nucleotideoDois = []
-with open(caminhoSegundoArquivo, 'r') as dna2:
-    for sequenciaDois in SeqIO.parse(dna2, 'fasta'):
-        nucleotideoDois.append(str(sequenciaDois.seq))
-        seQ2 = str(sequenciaDois.seq)
+def leitura(caminhoDoArquivo):
+    #realizando leitura do arquivo fna
+    nucleotideo = []
+    with open(caminhoDoArquivo, 'r') as dna:
+        for sequencia in SeqIO.parse(dna, 'fasta'):
+            nucleotideo.append(str(sequencia.seq))
+            seQ = str(sequencia.seq)
+    return nucleotideo, seQ
         
 def transcricao(sequencia):
     genomaTranscrito = []
@@ -40,9 +33,6 @@ def transcricao(sequencia):
     genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
     genoma = ''.join(genomaTranscrito)
     return genoma, contador
-
-rnaMensageiroString, nmr1 = transcricao(nucleotideo) # Primeira  variável atribuida para cada base nitrogenada, e a segunda variável  atribuida para as bases nitrogenadas concatenadas
-rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois) 
 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
@@ -135,10 +125,6 @@ def traducao(rnaMensageiro):
     proteinas = ' - '.join(proteinasConcatenadas)
     
     return proteinas
-
-#Assume o valor retornado pela função de tradução
-proteinasA = traducao(rnaMensageiroString)
-proteinasB = traducao(rnaMensageiroString2)
  
 def compararDna(nucleotideo, nucleotideoDois):
     
@@ -213,38 +199,68 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
     resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}%"
     
     return resultadoAlinhadoRna, resultado
-    
-resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2) # Define o primeiro como a string de resultado e o segundo a string das porcentagens 
 
-resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
-  
-# Funções para o layout
+def mainAlgoritm():
+    caminhoDoArquivo = globalVar.getCaminhoArquivo()
+    caminhoSegundoArquivo = globalVar.getCaminhoSegundoArquivo()
+    
+    nucleotideo, seQ = leitura(caminhoDoArquivo)
+    nucleotideoDois, seQ2 = leitura(caminhoSegundoArquivo)
+    
+    rnaMensageiroString, nmr1 = transcricao(nucleotideo)
+    rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois)
+    
+    proteinasA = traducao(rnaMensageiroString)
+    proteinasB = traducao(rnaMensageiroString2)
+    
+    resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2)
+    resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
+    
+    return {
+        'sequencia1': seQ,
+        'sequencia2': seQ2,
+        'rna1': rnaMensageiroString,
+        'rna2': rnaMensageiroString2,
+        'proteinasA': proteinasA,
+        'proteinasB': proteinasB,
+        'alinhamentoDna': resultadoAlinhamentoDna,
+        'alinhamentoRna': resultadoAlinhamentoRna,
+        'porcentagemDna': comparacaoDna,
+        'porcentagemRna': comparacaoRna
+    }
+
+def atualizarResultados():
+    global resultados
+    resultados = mainAlgoritm()
+
 def returnSequencia():
-    return seQ
+    return resultados.get('sequencia1', 'Resultados não encontraodos')
 
 def returnSequencia2():
-    return seQ2
-        
+    return resultados.get('sequencia2', 'Resultados não encontraodos')
+
 def returnRna1():
-    return rnaMensageiroString
+    return resultados.get('rna1', 'Resultados não encontraodos')
 
 def returnRna2():
-    return rnaMensageiroString2
+    return resultados.get('rna2', 'Resultados não encontraodos')
 
 def returnProteinasA():
-    return proteinasA
+    return resultados.get('proteinasA', 'Resultados não encontraodos')
 
 def returnProteinasB():
-    return proteinasB
-
-def returnAlinhamentoDna():
-    return resultadoAlinhamentoDna
-
-def returnAlinhamentoRna():
-    return resultadoAlinhamentoRna
-
-def returnPorcentagemRna():
-    return comparacaoRna
+    return resultados.get('proteinasB', 'Resultados não encontraodos')
 
 def returnPorcentagemDna():
-    return comparacaoDna
+    return resultados.get('comparacaoRna', 'Resultados não encontraodos')
+
+def returnPorcentagemRna():
+    return resultados.get('comparacaoDna', 'Resultados não encontraodos')
+
+def returnAlinhamentoDna():
+    return resultados.get('alinhamentoDna', 'Resultados não encontraodos')
+
+def returnAlinhamentoRna():
+    return resultados.get('alinhamentoRna', 'Resultados não encontraodos')
+
+atualizarResultados()
