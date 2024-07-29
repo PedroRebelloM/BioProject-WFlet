@@ -20,3 +20,11 @@ def authUsuario(email, password):
         if senha_hash and bcrypt.checkpw(password.encode('utf-8'), senha_hash):
             return user
     return None
+
+def salvarArquivoNoBanco(user_id, file_path, file_data):
+    db = getConnection()
+    db.files.insert_one({
+        'user_id': user_id,
+        'file_path': file_path,
+        'file_data': file_data
+    })

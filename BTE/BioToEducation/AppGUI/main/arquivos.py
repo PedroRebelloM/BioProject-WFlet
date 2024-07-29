@@ -100,6 +100,15 @@ def CriarLayoutArquivos(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
+    botaoActionBd = ft.ElevatedButton(
+        "Arquivos", icon = "CLOUD_UPLOAD", icon_color = "black", on_click = lambda _: funcoes.BancoDeDados(page), bgcolor = "white", color = "black",
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+            }
+        ), adaptive = True, width = 160
+    )
+    
     botaoLogout = ft.ElevatedButton("Logout", icon = "logout", icon_color = "black", on_click = lambda _: funcoes.Retornar(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
@@ -122,7 +131,7 @@ def CriarLayoutArquivos(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoLogout
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoActionBd, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,
@@ -162,25 +171,25 @@ def CriarLayoutArquivos(page: ft.Page):
     )
     
     #Botao do Gene A
-    botaoA = ft.ElevatedButton(
+    botaoPrimeiroGene = ft.ElevatedButton(
         text = fix.nomeGene1,  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoA(linha) 
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoPrimeiroGene(linha) 
     )
     
     #Botao do Gene B
-    botaoB = ft.ElevatedButton(
+    botaoSegundoGene = ft.ElevatedButton(
         text = fix.nomeGene2,  bgcolor = "white", color = "black", 
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
                     
             }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoB(linha)
+        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoSegundoGene(linha)
     )
         
     
@@ -219,7 +228,7 @@ def CriarLayoutArquivos(page: ft.Page):
                 [
                     ft.Column(
                         [
-                            botaoA, botaoB
+                            botaoPrimeiroGene, botaoSegundoGene
                             ],
                         alignment=ft.MainAxisAlignment.CENTER,
                         horizontal_alignment=ft.CrossAxisAlignment.CENTER,

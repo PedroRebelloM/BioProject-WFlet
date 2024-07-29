@@ -1,6 +1,8 @@
 import flet as ft
 import os, sys, re, bcrypt
-import home, traducao, transcricao, comparacao, login, registrar, arquivos, globalVar
+import home, traducao, transcricao, comparacao, login, registrar, arquivos, bancoDeDados
+import globalVar
+from database import operations
 
 dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 if dirPai not in sys.path:
@@ -19,7 +21,7 @@ from AppGUI.classes.session import session
 from dataNAlgoritm.algoritm import mainAlgoritm
 
 linhasPQ = []
-def BotaoA(linha: ft.Column):
+def BotaoPrimeiroGene(linha: ft.Column):
     linha.controls.clear()
     mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnSequencia()
@@ -28,7 +30,7 @@ def BotaoA(linha: ft.Column):
     linha.update()
     return linha
     
-def BotaoB(linha: ft.Column):
+def BotaoSegundoGene(linha: ft.Column):
     linha.controls.clear()
     mainAlgoritm.atualizarResultados()
     texto = mainAlgoritm.returnSequencia2()
@@ -66,7 +68,12 @@ def Retornar(page: ft.Page):
     page.controls.clear()
     page.add(login.CriarLayoutLogin(page))
     page.update()
-    print("Pg adicionada")  # Log temporário para depuração
+    
+def BancoDeDados(page: ft.Page):
+    page.controls.clear()
+    page.add(bancoDeDados.CriarLayoutBancoDeDados(page))
+    page.update()
+    
     
 def BotaoATranscricao(linha: ft.Column):
     linha.controls.clear()
@@ -208,4 +215,39 @@ def EscolherArquivo(e: ft.FilePickerResultEvent, qddArquivos, page: ft.Page):
             page.update()
         else: 
             print("Nnehum arquivo selecionado")
+            
+def EscolherArquivoBancoDeDados(e: ft.FilePickerResultEvent, qddArquivos, page: ft.Page):
+    print("Função chamada")
+
+    if not session.isLogged():
+        mensagem = "Usuário não está logado!"
+        snack_bar = ft.SnackBar(content=ft.Text(mensagem), duration=2000)
+        page.snack_bar = snack_bar
+        page.snack_bar.open = True
+        page.update()
+        return
+
+    user = session.getUser()
+    if e.files:
+        arquivos = e.files[0].path  # 'file_path': Caminho do arquivo selecionado
+        globalVar.setCaminhoArquivo(arquivos)
+        mensagem = f"Arquivo selecionado: {globalVar.getCaminhoArquivo()}"
+        print(globalVar.getCaminhoArquivo())
+
+        # Ler o conteúdo do arquivo em modo binário
+        with open(arquivos, 'rb') as file:
+            file_data = file.read()  # 'file_data': Dados binários do arquivo
+        
+        # Salvar o arquivo no banco de dados
+        operations.salvarArquivoNoBanco(user['_id'], arquivos, file_data)
+        
+        snack_bar = ft.SnackBar(
+            content=ft.Text(mensagem),
+            duration=2000
+        )
+        page.snack_bar = snack_bar
+        page.snack_bar.open = True
+        page.update()
+    else:
+        print("Nenhum arquivo selecionado")
             
