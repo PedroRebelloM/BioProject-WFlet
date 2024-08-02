@@ -14,12 +14,11 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 if assets.root_dir not in sys.path:
     sys.path.append(assets.root_dir)
 
-def CriarLayoutArquivos(page: ft.Page): 
+def CriarLayoutPesquisar(page: ft.Page): 
                 
-    arquivo1 = ft.FilePicker(on_result = lambda e: funcoes.EscolherArquivo(e, 1, page))
-    arquivo2 = ft.FilePicker(on_result = lambda e: funcoes.EscolherArquivo(e, 2, page))
+    arquivo1 = ft.FilePicker(on_result = lambda e: funcoes.EscolherArquivoBancoDeDados(e, 1, page))
     
-    page.overlay.extend([arquivo1, arquivo2])
+    page.overlay.append(arquivo1)
     
     #Tema aplicativo 
     page.theme = ft.Theme(
@@ -91,7 +90,7 @@ def CriarLayoutArquivos(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
-    botaoEscolhaArquivo = ft.ElevatedButton(
+    botaoPgArquivo = ft.ElevatedButton(
         "Arquivos", icon = "ATTACH_FILE", icon_color = "black", on_click = lambda _: funcoes.PgArquivos(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
@@ -140,7 +139,7 @@ def CriarLayoutArquivos(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoActionBd, botaoPesquisar, botaoLogout#
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoActionBd, botaoPesquisar, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,
@@ -151,61 +150,80 @@ def CriarLayoutArquivos(page: ft.Page):
     )
         
     # Texto Sequenciamento 
-    texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    # texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
-    containerTextoBD = ft.Container(
-        content = texto, 
-        margin = ft.margin.only(left = 25)
-    )
+    # containerTextoBD = ft.Container(
+    #     content = texto, 
+    #     margin = ft.margin.only(left = 25)
+    # )
     
-    linha = ft.Column(
-        [
-            ft.Text("", color = 'black', width= 900)
-        ], scroll = ft.ScrollMode.ALWAYS,
-    ) 
+    # linha = ft.Column(
+    #     [
+    #         ft.Text("", color = 'black', width= 900)
+    #     ], scroll = ft.ScrollMode.ALWAYS,
+    # ) 
     
     # Container abaixo do texto Sequenciamento
-    containerBD = ft.Container(
-        width = 1000,
-        height = 420, 
-        bgcolor = "#B5E995",
-        border = ft.border.all(1, "black"), 
-        border_radius = ft.border_radius.all(20),
-        margin = ft.margin.only(left = 20),
-        alignment=ft.alignment.top_left, 
-        content = linha,
-        data = '',
-        padding = 25,
+    # containerBD = ft.Container(
+    #     width = 1000,
+    #     height = 420, 
+    #     bgcolor = "#B5E995",
+    #     border = ft.border.all(1, "black"), 
+    #     border_radius = ft.border_radius.all(20),
+    #     margin = ft.margin.only(left = 20),
+    #     alignment=ft.alignment.top_left, 
+    #     content = linha,
+    #     data = '',
+    #     padding = 25,
         
-    )
+    # )
     
-    #Botao do Gene A
-    botaoPrimeiroGene = ft.ElevatedButton(
-        text = fix.nomeGene1,  bgcolor = "white", color = "black", 
-        style = ft.ButtonStyle(
-            side = {
-                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
-                    
-            }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoPrimeiroGene(linha) 
-    )
+    #Botao do Gene A    
+    botaoSelected = ft.SegmentedButton(
+        on_change = None,
+        selected = {"1"},
+        allow_multiple_selection = True,
+        allow_empty_selection = True,
+        show_selected_icon = False,
+        width = 200,
+        style= ft.ButtonStyle(
+        bgcolor={
+            ft.MaterialState.SELECTED: ft.colors.LIGHT_GREEN_ACCENT,
+            ft.MaterialState.DEFAULT: ft.colors.WHITE,
+        },      
+            ),
+        segments = [
+            ft.Segment(
+                value = "1",
+                label = ft.Text("DNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+            ),
+            ft.Segment(
+                value = "2",
+                label = ft.Text("RNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+            ),
+            ft.Segment(
+                value = "3",
+                label = ft.Text("Nome", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+            )
+        ]
+    )   
     
-    #Botao do Gene B
-    botaoSegundoGene = ft.ElevatedButton(
-        text = fix.nomeGene2,  bgcolor = "white", color = "black", 
-        style = ft.ButtonStyle(
-            side = {
-                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
-                    
-            }
-        ), adaptive = True, width = 400, height = 30, on_click=lambda _: funcoes.BotaoSegundoGene(linha)
+    campoTexto = ft.TextField(
+        hint_text = "Pesquise por RNA, DNA ou Nome",
+        color = ft.colors.BLACK,
+        content_padding = 10,
+        focused_border_color = ft.colors.BLACK45,
+        hint_style=ft.TextStyle(
+            color=ft.colors.BLACK,
+            italic=True,
+        ),
+        width = 280,
     )
-        
     
     # Botão para atualizar os genes
     botaoEscolherArquivo1 = ft.Container(
         ft.ElevatedButton(
-            "Escolher primeiro arquivo", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
+            "Escolher arquivo para pesquisa", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
             adaptive = True, width = 300, height = 30,
             style = ft.ButtonStyle(
                 side = {
@@ -216,20 +234,7 @@ def CriarLayoutArquivos(page: ft.Page):
             
     )
     
-    botaoEscolherArquivo2 = ft.Container(
-        ft.ElevatedButton(
-            "Escolher segundo arquivo", on_click = lambda _: arquivo2.pick_files(), bgcolor = "white", color = "black",
-            adaptive = True, width = 300, height = 30, 
-            style = ft.ButtonStyle(
-                side = {
-                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
-                }
-            ),
-        ),           
-            
-    )
-    
-    containerDoisGenes = ft.Container(
+    containerPesquisa = ft.Container(
         content=ft.Column(
         [
             ft.Text("Informações", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
@@ -237,16 +242,17 @@ def CriarLayoutArquivos(page: ft.Page):
                 [
                     ft.Column(
                         [
-                            botaoPrimeiroGene, botaoSegundoGene
+                            botaoSelected,  campoTexto
                             ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=5,
+                        alignment = ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment = ft.CrossAxisAlignment.START,
+                        spacing = 5,
+    
                     ),
                     ft.Container(
                         content = ft.Column(
                             [
-                               botaoEscolherArquivo1, botaoEscolherArquivo2, 
+                               botaoEscolherArquivo1
                             ],
                         ),
                         alignment=ft.alignment.center,
@@ -261,20 +267,20 @@ def CriarLayoutArquivos(page: ft.Page):
         alignment=ft.MainAxisAlignment.START,
         horizontal_alignment=ft.CrossAxisAlignment.START,
     ),
-            
+            margin = ft.margin.only(top = 20) 
     )
     
     #Container dos Meus Genes
-    containerMeusGenes = ft.Container(
+    containerMor = ft.Container(
         bgcolor = "#59C9E995",
         width = 1200,
-        height = 150,
+        height = 180,
         border = ft.border.only(bottom = ft.border.BorderSide(1, "black")),
         padding = ft.padding.only(left = 20),
         border_radius = ft.border_radius.BorderRadius(0, 0, 0, 0),
         content = ft.Column(
             [
-                containerDoisGenes,
+                containerPesquisa,
             ], alignment= ft.MainAxisAlignment.CENTER,
                 horizontal_alignment = ft.CrossAxisAlignment.START, 
         )
@@ -308,7 +314,7 @@ def CriarLayoutArquivos(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMeusGenes, containerTextoBD, containerBD
+                            
                         ]
                     )
                 ),

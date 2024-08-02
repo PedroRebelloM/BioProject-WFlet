@@ -90,7 +90,7 @@ def CriarLayout(page: ft.Page):
     )
     
     botaoActionBd = ft.ElevatedButton(
-        "Arquivos", icon = "CLOUD_UPLOAD", icon_color = "black", on_click = lambda _: funcoes.BancoDeDados(page), bgcolor = "white", color = "black",
+        "Database", icon = "CLOUD_UPLOAD", icon_color = "black", on_click = lambda _: funcoes.BancoDeDados(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -98,6 +98,14 @@ def CriarLayout(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
+    botaoPesquisar = ft.ElevatedButton(
+        "Pesquisar", icon = "SCREEN_SEARCH_DESKTOP_OUTLINED", icon_color = "black", on_click = lambda _: funcoes.Pesquisar(page), bgcolor = "white", color = "black",
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+            }
+        ), adaptive = True, width = 160
+    )
     
     botaoLogout = ft.ElevatedButton("Logout", icon = "logout", icon_color = "black", on_click = lambda _: funcoes.Retornar(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
@@ -106,7 +114,6 @@ def CriarLayout(page: ft.Page):
             }
         ), adaptive = True, width = 160
     )
-    
 
     # Divisao dos icones e logo
     colunaSuperior = ft.Column(
@@ -121,7 +128,7 @@ def CriarLayout(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoActionBd, botaoLogout
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoActionBd, botaoPesquisar, botaoLogout
     
         ],
         alignment= ft.MainAxisAlignment.START,

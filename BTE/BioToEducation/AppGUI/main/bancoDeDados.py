@@ -13,6 +13,8 @@ from dataNAlgoritm.algoritm import mainAlgoritm
 # Pasta Raiz e imagens
 if assets.root_dir not in sys.path:
     sys.path.append(assets.root_dir)
+    
+from AppGUI.classes.session import session
 
 def CriarLayoutBancoDeDados(page: ft.Page): 
                 
@@ -90,8 +92,8 @@ def CriarLayoutBancoDeDados(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
-    botaoActionBd = ft.ElevatedButton(
-        "Arquivos", icon = "CLOUD_UPLOAD", icon_color = "black", on_click = lambda _: funcoes.BancoDeDados(page), bgcolor = "white", color = "black",
+    botaoEscolhaArquivo = ft.ElevatedButton(
+        "Arquivos", icon = "ATTACH_FILE", icon_color = "black", on_click = lambda _: funcoes.PgArquivos(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -99,8 +101,17 @@ def CriarLayoutBancoDeDados(page: ft.Page):
         ), adaptive = True, width = 160
     )
     
-    botaoPgArquivo = ft.ElevatedButton(
-        "Arquivos", icon = "ATTACH_FILE", icon_color = "black", on_click = lambda _: funcoes.PgArquivos(page), bgcolor = "white", color = "black",
+    botaoActionBd = ft.ElevatedButton(
+        "Database", icon = "CLOUD_UPLOAD", icon_color = "black", on_click = lambda _: funcoes.BancoDeDados(page), bgcolor = "white", color = "black",
+        style = ft.ButtonStyle(
+            side = {
+                ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+            }
+        ), adaptive = True, width = 160
+    )
+    
+    botaoPesquisar = ft.ElevatedButton(
+        "Pesquisar", icon = "SCREEN_SEARCH_DESKTOP_OUTLINED", icon_color = "black", on_click = lambda _: funcoes.Pesquisar(page), bgcolor = "white", color = "black",
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -130,8 +141,7 @@ def CriarLayoutBancoDeDados(page: ft.Page):
     
     colunaDoMeio = ft.Column(
         [
-            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoActionBd, botaoLogout
-    
+            botaoHome, botaoRna, botaoDna, botaoComparacao, botaoEscolhaArquivo, botaoActionBd, botaoPesquisar, botaoLogout
         ],
         alignment= ft.MainAxisAlignment.START,
         horizontal_alignment = ft.CrossAxisAlignment.CENTER,
@@ -141,7 +151,7 @@ def CriarLayoutBancoDeDados(page: ft.Page):
     )
         
     # Texto Sequenciamento 
-    texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    texto = ft.Text("Envios para o banco de dados:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
     containerTextoBD = ft.Container(
         content = texto, 
@@ -158,9 +168,9 @@ def CriarLayoutBancoDeDados(page: ft.Page):
     containerBD = ft.Container(
         width = 1000,
         height = 420, 
-        bgcolor = "white",
+        bgcolor = "#B5E995",
         border = ft.border.all(1, "black"), 
-        border_radius = ft.border_radius.all(20),
+        border_radius = ft.border_radius.all(10),
         margin = ft.margin.only(left = 20),
         alignment=ft.alignment.top_left, 
         content = linha,
@@ -168,6 +178,19 @@ def CriarLayoutBancoDeDados(page: ft.Page):
         padding = 25,
         
     )
+    
+    botaoAtualizar = ft.ElevatedButton(
+        text = "Atualizar Lista",
+        on_click = lambda _: funcoes.atualizarListaArquivos(linha, session.getUser()['_id']),
+        bgcolor = "white",
+        color = "black",
+        width = 300,
+        height = 30,
+        style = ft.ButtonStyle(
+           side =  {ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK)}
+        )
+    )
+
     
     #Botao do Gene A
     botaoPrimeiroGene = ft.ElevatedButton(
@@ -223,7 +246,7 @@ def CriarLayoutBancoDeDados(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                               botaoEscolherArquivo1 
+                               botaoEscolherArquivo1, botaoAtualizar
                             ],
                         ),
                         alignment=ft.alignment.center,
@@ -266,7 +289,7 @@ def CriarLayoutBancoDeDados(page: ft.Page):
                     expand= False,
                     width= 180,
                     border = ft.border.all(0.5, ft.colors.BLACK),
-                    border_radius = ft.border_radius.BorderRadius(20, 0, 20, 0),
+                    border_radius = ft.border_radius.BorderRadius(20    , 0, 20, 0),
                     content = ft.Column(
                         [
                             colunaSuperior, colunaDoMeio,
