@@ -124,7 +124,6 @@ def CriarLayoutPesquisar(page: ft.Page):
             }
         ), adaptive = True, width = 160
     )
-    
 
     # Divisao dos icones e logo
     colunaSuperior = ft.Column(
@@ -150,7 +149,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     )
         
     #Texto Sequenciamento 
-    texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    texto = ft.Text("Retorno do Banco de Dados:", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black")
     
     containerTextoBD = ft.Container(
         content = texto, 
@@ -166,10 +165,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     #Container abaixo do texto Resultados
     containerBD = ft.Container(
         width = 1000,
-        height = 420, 
-        bgcolor = "#B5E995",
-        border = ft.border.all(1, "black"), 
-        border_radius = ft.border_radius.all(20),
+        height = 500, 
         margin = ft.margin.only(left = 20),
         alignment=ft.alignment.top_left, 
         content = linha,
@@ -197,15 +193,15 @@ def CriarLayoutPesquisar(page: ft.Page):
         segments = [
             ft.Segment(
                 value = "1",
-                label = ft.Text("DNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+                label = ft.Text("DNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             ),
             ft.Segment(
                 value = "2",
-                label = ft.Text("RNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+                label = ft.Text("NOME", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             ),
             ft.Segment(
                 value = "3",
-                label = ft.Text("Nome", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+                label = ft.Text("RNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             )
         ]
     )   
@@ -221,7 +217,7 @@ def CriarLayoutPesquisar(page: ft.Page):
         ),
         bgcolor = ft.colors.WHITE,
         text_size = 12,
-        width = 280,
+        width = 200,
     )
     
     # Botão para atualizar os genes
@@ -234,8 +230,7 @@ def CriarLayoutPesquisar(page: ft.Page):
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
                 }
             ),
-        ),           
-            
+        ),                      
     )
     
     botaoEscolherArquivoNCBI = ft.Container(
@@ -334,7 +329,7 @@ def CriarLayoutPesquisar(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMor
+                            containerMor, containerTextoBD
                         ]
                     )
                 ),
