@@ -39,7 +39,6 @@ def traducao(rnaMensageiro):
     sinteseProteica = []
     proteinasConcatenadas = []
     cont = 0
-    
     for x in range(0, len(rnaMensageiro), 3):  # Iterador para dividir as bases de 3 em 3, formando os códons
         codon = rnaMensageiro[x:x + 3]  # Pega o códon formado
         if codon == 'AUG':  # condição para formação das proteínas
@@ -252,10 +251,10 @@ def returnProteinasB():
     return resultados.get('proteinasB', 'Resultados não encontraodos')
 
 def returnPorcentagemDna():
-    return resultados.get('comparacaoRna', 'Resultados não encontraodos')
+    return resultados.get('porcentagemDna', 'Resultados não encontraodos')
 
 def returnPorcentagemRna():
-    return resultados.get('comparacaoDna', 'Resultados não encontraodos')
+    return resultados.get('porcentagemRna', 'Resultados não encontraodos')
 
 def returnAlinhamentoDna():
     return resultados.get('alinhamentoDna', 'Resultados não encontraodos')

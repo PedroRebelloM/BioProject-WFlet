@@ -149,34 +149,34 @@ def CriarLayoutPesquisar(page: ft.Page):
     
     )
         
-    # Texto Sequenciamento 
-    # texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
+    #Texto Sequenciamento 
+    texto = ft.Text("Banco de Dados", size = 20, weight = ft.FontWeight.W_600, italic = True, color = "black",  )
     
-    # containerTextoBD = ft.Container(
-    #     content = texto, 
-    #     margin = ft.margin.only(left = 25)
-    # )
+    containerTextoBD = ft.Container(
+        content = texto, 
+        margin = ft.margin.only(left = 25)
+    )
     
-    # linha = ft.Column(
-    #     [
-    #         ft.Text("", color = 'black', width= 900)
-    #     ], scroll = ft.ScrollMode.ALWAYS,
-    # ) 
+    linha = ft.Column(
+        [
+            ft.Text("", color = 'black', width= 900)
+        ], scroll = ft.ScrollMode.ALWAYS,
+    ) 
     
-    # Container abaixo do texto Sequenciamento
-    # containerBD = ft.Container(
-    #     width = 1000,
-    #     height = 420, 
-    #     bgcolor = "#B5E995",
-    #     border = ft.border.all(1, "black"), 
-    #     border_radius = ft.border_radius.all(20),
-    #     margin = ft.margin.only(left = 20),
-    #     alignment=ft.alignment.top_left, 
-    #     content = linha,
-    #     data = '',
-    #     padding = 25,
+    #Container abaixo do texto Resultados
+    containerBD = ft.Container(
+        width = 1000,
+        height = 420, 
+        bgcolor = "#B5E995",
+        border = ft.border.all(1, "black"), 
+        border_radius = ft.border_radius.all(20),
+        margin = ft.margin.only(left = 20),
+        alignment=ft.alignment.top_left, 
+        content = linha,
+        data = '',
+        padding = 25,
         
-    # )
+    )
     
     #Botao do Gene A    
     botaoSelected = ft.SegmentedButton(
@@ -187,23 +187,25 @@ def CriarLayoutPesquisar(page: ft.Page):
         show_selected_icon = False,
         width = 200,
         style= ft.ButtonStyle(
-        bgcolor={
-            ft.MaterialState.SELECTED: ft.colors.LIGHT_GREEN_ACCENT,
-            ft.MaterialState.DEFAULT: ft.colors.WHITE,
-        },      
-            ),
+            bgcolor={
+                ft.MaterialState.SELECTED: ft.colors.LIGHT_GREEN_ACCENT,
+                ft.MaterialState.DEFAULT: ft.colors.WHITE,
+            },      
+            side = {ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),},
+            elevation = {"pressed": 0, "": 1},
+        ),
         segments = [
             ft.Segment(
                 value = "1",
-                label = ft.Text("DNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+                label = ft.Text("DNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             ),
             ft.Segment(
                 value = "2",
-                label = ft.Text("RNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+                label = ft.Text("RNA", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             ),
             ft.Segment(
                 value = "3",
-                label = ft.Text("Nome", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER),
+                label = ft.Text("Nome", size = 10, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
             )
         ]
     )   
@@ -211,20 +213,22 @@ def CriarLayoutPesquisar(page: ft.Page):
     campoTexto = ft.TextField(
         hint_text = "Pesquise por RNA, DNA ou Nome",
         color = ft.colors.BLACK,
-        content_padding = 10,
-        focused_border_color = ft.colors.BLACK45,
+        content_padding = 5,
+        focused_border_color = ft.colors.BLACK26,
         hint_style=ft.TextStyle(
-            color=ft.colors.BLACK,
+            color=ft.colors.BLACK26,
             italic=True,
         ),
+        bgcolor = ft.colors.WHITE,
+        text_size = 12,
         width = 280,
     )
     
     # Botão para atualizar os genes
     botaoEscolherArquivo1 = ft.Container(
         ft.ElevatedButton(
-            "Escolher arquivo para pesquisa", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
-            adaptive = True, width = 300, height = 30,
+            "Escolher arquivo para busca interna", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
+            adaptive = True, width = 350, height = 30,
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -234,40 +238,56 @@ def CriarLayoutPesquisar(page: ft.Page):
             
     )
     
+    botaoEscolherArquivoNCBI = ft.Container(
+        ft.ElevatedButton(
+            "Escolher arquivo para busca no NCBI", on_click = lambda _: None, bgcolor = "white", color = "black", 
+            adaptive = True, width = 350, height = 30,
+            style = ft.ButtonStyle(
+                side = {
+                    ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
+                }
+            ),
+        ),   
+    )
+    
     containerPesquisa = ft.Container(
         content=ft.Column(
         [
             ft.Text("Informações", color="black", size=20, weight=ft.FontWeight.W_600, text_align="CENTER"),
             ft.Row(
                 [
-                    ft.Column(
-                        [
+                    ft.Container(
+                        content = ft.Column(
+                            [
                             botaoSelected,  campoTexto
-                            ],
-                        alignment = ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment = ft.CrossAxisAlignment.START,
-                        spacing = 5,
+                            ]
+                        ),
+                        alignment=ft.alignment.center,
+                        margin = ft.margin.only(left = 30),
+                        
     
                     ),
                     ft.Container(
                         content = ft.Column(
                             [
-                               botaoEscolherArquivo1
+                               botaoEscolherArquivo1, botaoEscolherArquivoNCBI
                             ],
                         ),
                         alignment=ft.alignment.center,
+                        margin = ft.margin.only(left = 30),
                     ),
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                width = 800
+                width = 800,
             
             ),
         ],
         alignment=ft.MainAxisAlignment.START,
         horizontal_alignment=ft.CrossAxisAlignment.START,
+        
     ),
-            margin = ft.margin.only(top = 20) 
+
     )
     
     #Container dos Meus Genes
@@ -314,7 +334,7 @@ def CriarLayoutPesquisar(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            
+                            containerMor
                         ]
                     )
                 ),
