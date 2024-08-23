@@ -1,8 +1,9 @@
 import flet as ft
-import os, sys, re, bcrypt
+import os, sys, re, bcrypt, requests, pyperclip
 import home, traducao, transcricao, comparacao, login, registrar, arquivos, bancoDeDados, pesquisar
 import globalVar
 from database import operations
+
 
 dirPai = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 if dirPai not in sys.path:
@@ -231,17 +232,17 @@ def EscolherArquivoBancoDeDados(e: ft.FilePickerResultEvent, qddArquivos, page: 
 
     user = session.getUser()
     if e.files:
-        arquivos = e.files[0].path  # 'file_path': Caminho do arquivo selecionado
+        arquivos = e.files[0].path  # 'caminhoArquivo': Caminho do arquivo selecionado
         globalVar.setCaminhoArquivo(arquivos)
         mensagem = f"Arquivo selecionado: {globalVar.getCaminhoArquivo()}"
         print(globalVar.getCaminhoArquivo())
 
         # Ler o conteúdo do arquivo em modo binário
         with open(arquivos, 'rb') as file:
-            file_data = file.read()  # 'file_data': Dados binários do arquivo
+            dadoArquivo = file.read()  # 'dadoArquivo': Dados binários do arquivo
         
         # Salvar o arquivo no banco de dados
-        operations.salvarArquivoNoBancoEPesquisar(user['_id'], arquivos, file_data)
+        operations.salvarArquivoNoBancoEPesquisar(user['_id'], arquivos, dadoArquivo)
         
         snack_bar = ft.SnackBar(
             content=ft.Text(mensagem),
@@ -263,11 +264,11 @@ def atualizarListaArquivos(linha: ft.Column, user_id):
     botoes = []
     
     for arquivo in arquivos:
-        file_path = arquivo["file_path"]
-        file_name = os.path.basename(file_path)  # Obter o nome do arquivo
+        caminhoArquivo = arquivo["caminhoArquivo"]
+        file_name = os.path.basename(caminhoArquivo)  # Obter o nome do arquivo
         botao = ft.ElevatedButton(
             text = f"Baixar {file_name}",
-            on_click = lambda e, p = file_path: downloadArquivo(p, linha),
+            on_click = lambda e, p = caminhoArquivo: downloadArquivo(p, linha),
             style = ft.ButtonStyle(
                 shape = {ft.ControlState.DEFAULT: ft.RoundedRectangleBorder(radius = 5)},
                 bgcolor = {ft.ControlState.DEFAULT: ft.colors.WHITE},
@@ -303,32 +304,32 @@ def atualizarListaArquivos(linha: ft.Column, user_id):
     linha.controls.extend(linhasDeBotoes) # Adicionando as linhas ao controle de linha (extend por ser mais de um objeto)
     linha.page.update() # Atualizar a página para refletir as alterações
 
-def downloadArquivo(file_path, container: ft.Container):
+def downloadArquivo(caminhoArquivo, container: ft.Container):
     db = operations.getConnection()
-    arquivo = db.files.find_one({"file_path": file_path})
+    arquivo = db.files.find_one({"caminhoArquivo": caminhoArquivo})
     
     if arquivo:
-        file_data = arquivo.get("file_data", None)
+        dadoArquivo = arquivo.get("dadoArquivo", None)
         
-        if file_data is None:
-            print(f"Erro: Dados do arquivo para {file_path} estão ausentes.")
+        if dadoArquivo is None:
+            print(f"Erro: Dados do arquivo para {caminhoArquivo} estão ausentes.")
             return
         
         # Definir o caminho de salvamento
-        savePath = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(file_path))
+        caminhoSalvo = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(caminhoArquivo))
         
         try:
-            with open(savePath, 'wb') as file:
-                file.write(file_data)
-            print(f"Arquivo {savePath} baixado com sucesso.")
+            with open(caminhoSalvo, 'wb') as file:
+                file.write(dadoArquivo)
+            print(f"Arquivo {caminhoSalvo} baixado com sucesso.")
             snack_bar = ft.SnackBar(
-                content=ft.Text(f"Arquivo baixado com sucesso no local: {savePath}"),
+                content=ft.Text(f"Arquivo baixado com sucesso no local: {caminhoSalvo}"),
                 duration=2000
             )
         except Exception as e:
-            print(f"Erro ao salvar o arquivo {savePath}: {e}")
+            print(f"Erro ao salvar o arquivo {caminhoSalvo}: {e}")
             snack_bar = ft.SnackBar(
-                content = ft.Text(f"Erro ao baixar {file_path}: {e}"),
+                content = ft.Text(f"Erro ao baixar {caminhoArquivo}: {e}"),
                 duration=2000
             )
         
@@ -337,12 +338,209 @@ def downloadArquivo(file_path, container: ft.Container):
             container.page.snack_bar.open = True
             container.page.update()
     else:
-        print(f"Arquivo {file_path} não encontrado no banco de dados.")
+        print(f"Arquivo {caminhoArquivo} não encontrado no banco de dados.")
         snack_bar = ft.SnackBar(
-            content = ft.Text(f"Arquivo {file_path} não encontrado no banco de dados."),
+            content = ft.Text(f"Arquivo {caminhoArquivo} não encontrado no banco de dados."),
             duration = 2000
         )
         if container.page:
             container.page.snack_bar = snack_bar
             container.page.snack_bar.open = True
             container.page.update()
+            
+def buscarNoNCBI(page: ft.Page, bancoSelecionado, campoTexto, containerBD):
+    termo = campoTexto.value.strip()
+    
+    if not termo:
+        containerBD.content.controls.clear()
+        containerBD.content.controls.append(ft.Text(value="Por favor, insira um termo de pesquisa.", color='black', size=12, weight=ft.FontWeight.BOLD))
+        containerBD.content.update()
+        page.update()
+        return
+
+    # Seleção do banco de dados
+    bancos = {
+        "Genoma": "nucleotide",
+        "PubMed": "pubmed",
+        "Protein": "protein",
+        "Gene": "gene"
+    }
+
+    print(bancoSelecionado)
+    
+    banco = bancos.get(bancoSelecionado)
+
+    baseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+    urlPesquisa = f"{baseUrl}esearch.fcgi"
+    urlSumario = f"{baseUrl}esummary.fcgi"
+    
+    retmax = 50  # Limitar o número máximo de resultados
+
+    def buscarIds(termo, retstart=0):
+        parametrosPesquisa = {
+            'db': banco,
+            'term': termo,
+            'retmax': retmax,
+            'retstart': retstart,
+            'retmode': 'json'
+        }
+
+        try:
+            resposta = requests.get(urlPesquisa, params=parametrosPesquisa)
+            resposta.raise_for_status()
+            
+            if resposta.text.strip() == "":
+                raise ValueError("Resposta vazia do servidor (esearch)")
+
+            resultadoPesquisa = resposta.json()
+            print(f"Resultado da pesquisa: {resultadoPesquisa}")  # Debug
+
+            if 'esearchresult' in resultadoPesquisa and 'idlist' in resultadoPesquisa['esearchresult']:
+                count = int(resultadoPesquisa['esearchresult']['count'])  # Converte count para inteiro
+                return resultadoPesquisa['esearchresult']['idlist'], count
+            else:
+                return [], 0
+        except requests.RequestException as e:
+            containerBD.content.controls.clear()
+            containerBD.content.controls.append(ft.Text(value=f"Erro ao buscar resultados: {str(e)}", color='black', size=12, weight=ft.FontWeight.BOLD))
+            containerBD.content.update()
+            page.update()
+            return [], 0
+
+    ids, count = buscarIds(termo)
+
+    if count > retmax:
+        for start in range(retmax, count, retmax):
+            proximoId, _ = buscarIds(termo, retstart=start)
+            ids.extend(proximoId)
+            if len(ids) >= 50:
+                ids = ids[:50]
+                break
+
+    if not ids:
+        containerBD.content.controls.clear()
+        containerBD.content.controls.append(ft.Text(value="Nenhum resultado encontrado.", color='black', size=12, weight=ft.FontWeight.BOLD))
+        containerBD.content.update()
+        page.update()
+        return
+
+    ids = ",".join(ids)
+
+    parametroSumario = {
+        'db': banco,
+        'id': ids,
+        'retmode': 'json'
+    }
+
+    try:
+        resposta = requests.get(urlSumario, params=parametroSumario)
+        resposta.raise_for_status()
+        
+        if resposta.text.strip() == "":
+            raise ValueError("Resposta vazia do servidor (esummary)")
+
+        resultado = resposta.json()
+        print(f"Resultado: {resultado}")  # Debug
+    except requests.RequestException as e:
+        containerBD.content.controls.clear()
+        containerBD.content.controls.append(ft.Text(value=f"Erro ao buscar detalhes dos resultados: {str(e)}", color='black', size=12, weight=ft.FontWeight.BOLD))
+        containerBD.content.update()
+        page.update()
+        return
+    except ValueError as e:
+        containerBD.content.controls.clear()
+        containerBD.content.controls.append(ft.Text(value=f"Erro ao processar resultados: {str(e)}", color='black', size=12, weight=ft.FontWeight.BOLD))
+        containerBD.content.update()
+        page.update()
+        return
+
+    if 'result' not in resultado:
+        containerBD.content.controls.clear()
+        containerBD.content.controls.append(ft.Text(value="Erro ao buscar detalhes dos resultados.", color='black', size=12, weight=ft.FontWeight.BOLD))
+        containerBD.content.update()
+        page.update()
+        return
+
+    containerBD.content.controls.clear()
+
+    def copiarId(uid):
+        pyperclip.copy(uid)
+        page.snack_bar = ft.SnackBar(ft.Text("ID copiado para a área de transferência!"))
+        page.snack_bar.open = True
+        page.update()
+
+    def baixarArquivo(uid):
+        url = f"https://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?id={uid}&db={banco}&report=fasta&retmode=text"
+        resposta = requests.get(url)
+        resposta.raise_for_status()
+        pastaDownload = os.path.join(os.path.expanduser("~"), "Downloads", f"{uid}.fasta")
+        with open(pastaDownload, 'w') as file:
+            file.write(resposta.text)
+        page.snack_bar = ft.SnackBar(ft.Text(f"Arquivo baixado para {pastaDownload}!"))
+        page.snack_bar.open = True
+        page.update()
+
+    for uid in resultado['result']['uids']:
+        item = resultado['result'][uid]
+        if 'title' not in item:
+            continue  # Pula itens sem título
+        containerBD.content.controls.append(
+            ft.Container(
+                width=900,
+                content=ft.Column(
+                    [
+                        ft.Text(value=f"{item['title']}", color='black', size=14, weight=ft.FontWeight.BOLD),
+                        ft.Text(value=f"ID: {uid}", color='black', size=12),
+                        ft.Row(
+                            [
+                                ft.ElevatedButton(
+                                    text="Abrir no navegador",
+                                    on_click=lambda e, url=f"https://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?id={uid}&db={banco}&report=fasta&retmode=text": downloadUrl(url),
+                                    bgcolor=ft.colors.ORANGE,
+                                    color=ft.colors.WHITE,
+                                    width=180,
+                                    style=ft.ButtonStyle(
+                                        shape=ft.RoundedRectangleBorder(radius=5)
+                                    )
+                                ),
+                                ft.ElevatedButton(
+                                    text="Copiar ID",
+                                    on_click=lambda e, uid=uid: copiarId(uid),
+                                    bgcolor=ft.colors.BLUE,
+                                    color=ft.colors.WHITE,
+                                    width=140,
+                                    style=ft.ButtonStyle(
+                                        shape=ft.RoundedRectangleBorder(radius=5)
+                                    )
+                                ),
+                                ft.ElevatedButton(
+                                    text="Download",
+                                    on_click=lambda e, uid=uid: baixarArquivo(uid),
+                                    bgcolor=ft.colors.GREEN,
+                                    color=ft.colors.WHITE,
+                                    width=140,
+                                    style=ft.ButtonStyle(
+                                        shape=ft.RoundedRectangleBorder(radius=5)
+                                    )
+                                ),
+                            ],
+                            spacing=15,  # Espaçamento entre os botões
+                        )
+                    ],
+                    spacing=10,
+                    alignment=ft.MainAxisAlignment.START,
+                ),
+                border=ft.border.all(1, ft.colors.BLACK),
+                border_radius=ft.border_radius.all(5),
+                padding=20,  # Padding em volta dos botões e outros elementos
+                margin=ft.margin.only(bottom=15),
+                bgcolor= "#59C9E995"
+            )
+        )
+
+    containerBD.content.update()
+    page.update()
+    
+def downloadUrl(url):
+    import webbrowser
+    webbrowser.open(url)

@@ -36,7 +36,6 @@ def CriarLayoutPesquisar(page: ft.Page):
             },
             thickness=10,
             radius=5,
-            
         )
     )   
     
@@ -47,7 +46,6 @@ def CriarLayoutPesquisar(page: ft.Page):
         height= 200,
         fit = ft.ImageFit.CONTAIN,
         filter_quality="HIGH",
-            
     )
     
     # Sequencia dos ícones
@@ -65,10 +63,8 @@ def CriarLayoutPesquisar(page: ft.Page):
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
-                
             } 
         ), adaptive = True, width = 160, 
-
     ) 
     
     botaoDna = ft.ElevatedButton(
@@ -76,7 +72,6 @@ def CriarLayoutPesquisar(page: ft.Page):
         style = ft.ButtonStyle(
             side = {
                 ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK), 
-                    
             }
         ), adaptive = True, width = 160,
     )
@@ -132,20 +127,16 @@ def CriarLayoutPesquisar(page: ft.Page):
         ],
         alignment = ft.MainAxisAlignment.START,
         horizontal_alignment= ft.CrossAxisAlignment.START,
-
-        
     )
     
     colunaDoMeio = ft.Column(
         [
             botaoHome, botaoRna, botaoDna, botaoComparacao, botaoPgArquivo, botaoActionBd, botaoPesquisar, botaoLogout
-    
         ],
         alignment= ft.MainAxisAlignment.START,
         horizontal_alignment = ft.CrossAxisAlignment.CENTER,
         expand = True,
         spacing = 20,
-    
     )
         
     #Texto Sequenciamento 
@@ -163,6 +154,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     ) 
     
     #Container abaixo do texto Resultados
+    global containerBD  # Adicione uma referência global ao contêiner
     containerBD = ft.Container(
         width = 1000,
         height = 500, 
@@ -171,40 +163,57 @@ def CriarLayoutPesquisar(page: ft.Page):
         content = linha,
         data = '',
         padding = 25,
-        
     )
     
-    #Botao do Gene A    
-    botaoSelected = ft.SegmentedButton(
-        on_change = None,
-        selected = {"1"},
-        allow_multiple_selection = True,
-        allow_empty_selection = True,
-        show_selected_icon = False,
-        width = 200,
-        style= ft.ButtonStyle(
-            bgcolor={
-                ft.MaterialState.SELECTED: ft.colors.LIGHT_GREEN_ACCENT,
-                ft.MaterialState.DEFAULT: ft.colors.WHITE,
-            },      
-            side = {ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),},
-            elevation = {"pressed": 0, "": 1},
-        ),
-        segments = [
-            ft.Segment(
-                value = "1",
-                label = ft.Text("DNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
-            ),
-            ft.Segment(
-                value = "2",
-                label = ft.Text("NOME", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
-            ),
-            ft.Segment(
-                value = "3",
-                label = ft.Text("RNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
-            )
-        ]
-    )   
+    # Botao do Gene A    
+    # botaoSelected = ft.SegmentedButton(
+    #     on_change = None,
+    #     selected = {"1"},
+    #     allow_multiple_selection = True,
+    #     allow_empty_selection = True,
+    #     show_selected_icon = False,
+    #     width = 200,
+    #     style= ft.ButtonStyle(
+    #         bgcolor={
+    #             ft.MaterialState.SELECTED: ft.colors.LIGHT_GREEN_ACCENT,
+    #             ft.MaterialState.DEFAULT: ft.colors.WHITE,
+    #         },      
+    #         side = {ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),},
+    #         elevation = {"pressed": 0, "": 1},
+    #     ),
+    #     segments = [
+    #         ft.Segment(
+    #             value = "1",
+    #             label = ft.Text("DNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+    #         ),
+    #         ft.Segment(
+    #             value = "2",
+    #             label = ft.Text("NOME", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+    #         ),
+    #         ft.Segment(
+    #             value = "3",
+    #             label = ft.Text("RNA", size = 12, color = ft.colors.BLACK, text_align = ft.TextAlign.CENTER, weight = ft.FontWeight.BOLD),
+    #         )
+    #     ]
+    # )
+    
+    bancoSelected = ft.Dropdown(
+    options=[
+        ft.dropdown.Option("Genoma"),
+        ft.dropdown.Option("PubMed"),
+        ft.dropdown.Option("Protein"),
+        ft.dropdown.Option("Gene")
+    ],
+    value="Genoma",  # Valor padrão
+    width=160,
+    on_change=lambda e: print(f"Banco selecionado no dropdown: {bancoSelected.value}"),  # Adiciona um print para verificar
+    text_style = ft.TextStyle(
+        color = ft.colors.BLACK, 
+        size = 14,  
+        weight = ft.FontWeight.BOLD  
+    ),
+    
+)
     
     campoTexto = ft.TextField(
         hint_text = "Pesquise por RNA, DNA ou Nome",
@@ -223,7 +232,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     # Botão para atualizar os genes
     botaoEscolherArquivo1 = ft.Container(
         ft.ElevatedButton(
-            "Escolher arquivo para busca interna", on_click = lambda _: arquivo1.pick_files(), bgcolor = "white", color = "black", 
+            "Escolher arquivo para busca interna", on_click = lambda _: None, bgcolor = "white", color = "black", 
             adaptive = True, width = 350, height = 30,
             style = ft.ButtonStyle(
                 side = {
@@ -235,7 +244,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     
     botaoEscolherArquivoNCBI = ft.Container(
         ft.ElevatedButton(
-            "Escolher arquivo para busca no NCBI", on_click = lambda _: None, bgcolor = "white", color = "black", 
+            "Buscar no NCBI", on_click = lambda _: funcoes.buscarNoNCBI(page, bancoSelected.value, campoTexto, containerBD), bgcolor = "white", color = "black", 
             adaptive = True, width = 350, height = 30,
             style = ft.ButtonStyle(
                 side = {
@@ -254,13 +263,11 @@ def CriarLayoutPesquisar(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                            botaoSelected,  campoTexto
+                                campoTexto, bancoSelected
                             ]
                         ),
                         alignment=ft.alignment.center,
                         margin = ft.margin.only(left = 30),
-                        
-    
                     ),
                     ft.Container(
                         content = ft.Column(
@@ -275,14 +282,11 @@ def CriarLayoutPesquisar(page: ft.Page):
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 width = 800,
-            
             ),
         ],
         alignment=ft.MainAxisAlignment.START,
         horizontal_alignment=ft.CrossAxisAlignment.START,
-        
     ),
-
     )
     
     #Container dos Meus Genes
@@ -316,11 +320,8 @@ def CriarLayoutPesquisar(page: ft.Page):
                             colunaSuperior, colunaDoMeio,
                         ],
                         horizontal_alignment = ft.CrossAxisAlignment.CENTER, 
-                        
-                        
                     )
-                )                 
-                ,
+                ),
                 ft.Container(
                     bgcolor= "#FFFFFF",
                     alignment=ft.alignment.center,
@@ -329,16 +330,14 @@ def CriarLayoutPesquisar(page: ft.Page):
                     border_radius= ft.border_radius.BorderRadius(0, 20, 0, 20),
                     content = ft.Column(
                         [
-                            containerMor, containerTextoBD
+                            containerMor, containerTextoBD, containerBD
                         ]
                     )
                 ),
-                
             ],
             spacing=0,
             expand=True,
-
-            )
+    )
     
     page.update()   
     return layoutAll
