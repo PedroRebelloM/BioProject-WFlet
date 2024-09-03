@@ -176,6 +176,7 @@ def Registrar(campoNome: ft.TextField, campoInstituicao: ft.TextField, campoCarg
     cargo = campoCargo.value
     email = campoUsuario.value
     senha = campoSenha.value
+    senhaConfirmada = campoConfirmacao.value
     
     
     if senha != campoConfirmacao.value:
@@ -232,17 +233,17 @@ def EscolherArquivoBancoDeDados(e: ft.FilePickerResultEvent, qddArquivos, page: 
 
     user = session.getUser()
     if e.files:
-        arquivos = e.files[0].path  # 'caminhoArquivo': Caminho do arquivo selecionado
+        arquivos = e.files[0].path  # 'file_path': Caminho do arquivo selecionado
         globalVar.setCaminhoArquivo(arquivos)
         mensagem = f"Arquivo selecionado: {globalVar.getCaminhoArquivo()}"
         print(globalVar.getCaminhoArquivo())
 
         # Ler o conteúdo do arquivo em modo binário
         with open(arquivos, 'rb') as file:
-            dadoArquivo = file.read()  # 'dadoArquivo': Dados binários do arquivo
+            file_data = file.read()  # 'file_data': Dados binários do arquivo
         
         # Salvar o arquivo no banco de dados
-        operations.salvarArquivoNoBancoEPesquisar(user['_id'], arquivos, dadoArquivo)
+        operations.salvarArquivoNoBancoEPesquisar(user['_id'], arquivos, file_data)
         
         snack_bar = ft.SnackBar(
             content=ft.Text(mensagem),
@@ -264,11 +265,11 @@ def atualizarListaArquivos(linha: ft.Column, user_id):
     botoes = []
     
     for arquivo in arquivos:
-        caminhoArquivo = arquivo["caminhoArquivo"]
-        file_name = os.path.basename(caminhoArquivo)  # Obter o nome do arquivo
+        file_path = arquivo["file_path"]
+        file_name = os.path.basename(file_path)  # Obter o nome do arquivo
         botao = ft.ElevatedButton(
             text = f"Baixar {file_name}",
-            on_click = lambda e, p = caminhoArquivo: downloadArquivo(p, linha),
+            on_click = lambda e, p = file_path: downloadArquivo(p, linha),
             style = ft.ButtonStyle(
                 shape = {ft.ControlState.DEFAULT: ft.RoundedRectangleBorder(radius = 5)},
                 bgcolor = {ft.ControlState.DEFAULT: ft.colors.WHITE},
@@ -304,32 +305,32 @@ def atualizarListaArquivos(linha: ft.Column, user_id):
     linha.controls.extend(linhasDeBotoes) # Adicionando as linhas ao controle de linha (extend por ser mais de um objeto)
     linha.page.update() # Atualizar a página para refletir as alterações
 
-def downloadArquivo(caminhoArquivo, container: ft.Container):
+def downloadArquivo(file_path, container: ft.Container):
     db = operations.getConnection()
-    arquivo = db.files.find_one({"caminhoArquivo": caminhoArquivo})
+    arquivo = db.files.find_one({"file_path": file_path})
     
     if arquivo:
-        dadoArquivo = arquivo.get("dadoArquivo", None)
+        file_data = arquivo.get("file_data", None)
         
-        if dadoArquivo is None:
-            print(f"Erro: Dados do arquivo para {caminhoArquivo} estão ausentes.")
+        if file_data is None:
+            print(f"Erro: Dados do arquivo para {file_path} estão ausentes.")
             return
         
         # Definir o caminho de salvamento
-        caminhoSalvo = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(caminhoArquivo))
+        savePath = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(file_path))
         
         try:
-            with open(caminhoSalvo, 'wb') as file:
-                file.write(dadoArquivo)
-            print(f"Arquivo {caminhoSalvo} baixado com sucesso.")
+            with open(savePath, 'wb') as file:
+                file.write(file_data)
+            print(f"Arquivo {savePath} baixado com sucesso.")
             snack_bar = ft.SnackBar(
-                content=ft.Text(f"Arquivo baixado com sucesso no local: {caminhoSalvo}"),
+                content=ft.Text(f"Arquivo baixado com sucesso no local: {savePath}"),
                 duration=2000
             )
         except Exception as e:
-            print(f"Erro ao salvar o arquivo {caminhoSalvo}: {e}")
+            print(f"Erro ao salvar o arquivo {savePath}: {e}")
             snack_bar = ft.SnackBar(
-                content = ft.Text(f"Erro ao baixar {caminhoArquivo}: {e}"),
+                content = ft.Text(f"Erro ao baixar {file_path}: {e}"),
                 duration=2000
             )
         
@@ -338,16 +339,16 @@ def downloadArquivo(caminhoArquivo, container: ft.Container):
             container.page.snack_bar.open = True
             container.page.update()
     else:
-        print(f"Arquivo {caminhoArquivo} não encontrado no banco de dados.")
+        print(f"Arquivo {file_path} não encontrado no banco de dados.")
         snack_bar = ft.SnackBar(
-            content = ft.Text(f"Arquivo {caminhoArquivo} não encontrado no banco de dados."),
+            content = ft.Text(f"Arquivo {file_path} não encontrado no banco de dados."),
             duration = 2000
         )
         if container.page:
             container.page.snack_bar = snack_bar
             container.page.snack_bar.open = True
             container.page.update()
-            
+                        
 def buscarNoNCBI(page: ft.Page, bancoSelecionado, campoTexto, containerBD):
     termo = campoTexto.value.strip()
     

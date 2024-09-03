@@ -309,3 +309,4 @@ def CriarLayout(page: ft.Page):
     
         
     return layoutAll
+    page.update(layout)
