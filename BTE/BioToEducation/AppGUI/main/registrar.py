@@ -19,7 +19,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -40,7 +40,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -61,7 +61,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -82,7 +82,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -105,7 +105,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -128,7 +128,7 @@ def CriarLayoutRegistro(page: ft.Page):
         border_color=ft.colors.GREEN, 
         focused_border_color=ft.colors.GREEN, 
         width=250, 
-        height=40,
+        height=50,
         cursor_color=ft.colors.TRANSPARENT, 
         hint_style=ft.TextStyle(
             color="#2B2929",
@@ -154,7 +154,7 @@ def CriarLayoutRegistro(page: ft.Page):
                 ft.ControlState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
             }
         ),
-        height=40
+        height=50
     )
 
     botaoRetornar = ft.ElevatedButton(
@@ -167,7 +167,7 @@ def CriarLayoutRegistro(page: ft.Page):
                 ft.ControlState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
             }
         ),
-        height=40
+        height=50
     )
 
     coluna = ft.Container(

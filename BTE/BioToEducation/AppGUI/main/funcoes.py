@@ -1,6 +1,6 @@
 import flet as ft
 import os, sys, re, bcrypt, requests, pyperclip
-import home, traducao, transcricao, comparacao, login, registrar, arquivos, bancoDeDados, pesquisar
+import home, traducao, transcricao, comparacao, login, registrar, arquivos, bancoDeDados, pesquisar, fix
 import globalVar
 from database import operations
 
@@ -204,10 +204,12 @@ def EscolherArquivo(e: ft.FilePickerResultEvent, qddArquivos, page: ft.Page):
             if qddArquivos == 1:
                 globalVar.setCaminhoArquivo(arquivos)
                 mensagem = f"Primeiro arquivo selecionado: {globalVar.getCaminhoArquivo()}"
+                fix.nomeGene1 = os.path.basename(arquivos)
                 print(globalVar.getCaminhoArquivo())
             elif qddArquivos == 2:
                 globalVar.setCaminhoSegundoArquivo(arquivos)
                 mensagem = f"Segundo arquivo selecionado: {globalVar.getCaminhoSegundoArquivo()}"
+                fix.nomeGene2 = os.path.basename(arquivos)
                 print(globalVar.getCaminhoSegundoArquivo())
             else:
                 print("Nenhum arquivo selecionado")   
