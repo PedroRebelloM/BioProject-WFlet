@@ -188,10 +188,10 @@ def CriarLayoutTraducao(page: ft.Page):
         
     
     # Botão para atualizar os genes
-    botaoAtualizar = ft.Container(
+    botaoCopiarA = ft.Container(
         ft.ElevatedButton(
-            "Atualizar Genes", on_click = None, bgcolor = "white", color = "black",
-            adaptive = True, width = 200, height = 30,
+            f'Copiar proteína {fix.nomeGene1}', on_click = lambda _: funcoes.CopiarTraducaoA(linha, page), bgcolor = "white", color = "black",
+            adaptive = True, height = 30,
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -199,12 +199,12 @@ def CriarLayoutTraducao(page: ft.Page):
             ),
         ),           
             
-    )
+    ) 
     
-    botaoCopiar = ft.Container(
+    botaoCopiarB = ft.Container(
         ft.ElevatedButton(
-            "Copiar Proteínas", on_click = None, bgcolor = "white", color = "black",
-            adaptive = True, width = 250, height = 30,
+            f'Copiar proteína {fix.nomeGene2}', on_click = lambda _: funcoes.CopiarTraducaoB(linha, page), bgcolor = "white", color = "black",
+            adaptive = True, height = 30,
             style = ft.ButtonStyle(
                 side = {
                     ft.MaterialState.DEFAULT: ft.BorderSide(1, ft.colors.BLACK),
@@ -231,7 +231,7 @@ def CriarLayoutTraducao(page: ft.Page):
                     ft.Container(
                         content = ft.Column(
                             [
-                               botaoAtualizar, botaoCopiar
+                               botaoCopiarA, botaoCopiarB
                             ],
                         ),
                         alignment=ft.alignment.center,
@@ -251,7 +251,7 @@ def CriarLayoutTraducao(page: ft.Page):
     
     containerMeusGenes = ft.Container(
         bgcolor = "#59C9E995",
-        width = 1200,
+        width = 1400,
         height = 150,
         padding = ft.padding.only(left = 20),
         border = ft.border.only(bottom=ft.border.BorderSide(1, "black")),

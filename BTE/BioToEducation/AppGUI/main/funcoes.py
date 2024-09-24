@@ -113,6 +113,61 @@ def BotaoATraducao(linha: ft.Column):
     linha.update()
     return linha
 
+def CopiarTraducaoA(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnProteinasA())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()
+
+def CopiarTraducaoB(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnProteinasB())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()
+    
+def CopiarTranscricaoA(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnRna1())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()
+
+def CopiarTranscricaoB(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnRna2())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()
+    
+def CopiarGeneA(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnSequencia())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()
+    
+def CopiarGeneB(linha: ft.Column, page: ft.Page):
+    pyperclip.copy(mainAlgoritm.returnSequencia2())
+    snack_bar = ft.SnackBar(
+        content=ft.Text("Proteínas copiadas com sucesso!"),
+        duration=2000,
+    )
+    page.show_snack_bar(snack_bar)
+    page.update()    
+    
+
 def BotaoBTraducao(linha: ft.Column):
     linha.controls.clear()
     mainAlgoritm.atualizarResultados()

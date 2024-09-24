@@ -292,7 +292,7 @@ def CriarLayoutPesquisar(page: ft.Page):
     #Container dos Meus Genes
     containerMor = ft.Container(
         bgcolor = "#59C9E995",
-        width = 1200,
+        width = 1400,
         height = 180,
         border = ft.border.only(bottom = ft.border.BorderSide(1, "black")),
         padding = ft.padding.only(left = 20),
