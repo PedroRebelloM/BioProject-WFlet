@@ -1,6 +1,8 @@
 from Bio import SeqIO
-import globalVar, fix
+import globalVar
+from AppGUI.main.fix import nomeGene1, nomeGene2
 
+print(nomeGene1)
 resultados = {}
 
 def leitura(caminhoDoArquivo):
@@ -13,26 +15,23 @@ def leitura(caminhoDoArquivo):
     return nucleotideo, seQ
         
 def transcricao(sequencia):
-    genomaTranscrito = []
     transcricaoSeq = []
     contador = 0
-    for seq in sequencia: # Inteirando sobre o arquivo fasta
-        for nucleotideo in seq:# Inteirando no método transcrição # n²
-            if nucleotideo == 'T':
-                transcricaoSeq.append('A')
-                contador += 1
-            elif nucleotideo == 'A':
-                transcricaoSeq.append('U')
-                contador += 1
-            elif nucleotideo == 'G':
-                transcricaoSeq.append('C')
-                contador += 1
-            elif nucleotideo == 'C':
-                transcricaoSeq.append('G')
-                contador += 1
-    genomaTranscrito.append(''.join(transcricaoSeq)) # Cocatena os nucleotídeos em uma única string.
-    genoma = ''.join(genomaTranscrito)
+    
+    for nucleotideo in ''.join(sequencia):  # Unifica todas as sequências e itera diretamente sobre elas
+        if nucleotideo == 'T':
+            transcricaoSeq.append('A')
+        elif nucleotideo == 'A':
+            transcricaoSeq.append('U')
+        elif nucleotideo == 'G':
+            transcricaoSeq.append('C')
+        elif nucleotideo == 'C':
+            transcricaoSeq.append('G')
+        contador += 1  # Contador agora é incrementado aqui, não precisa ser incrementado em cada condição
+
+    genoma = ''.join(transcricaoSeq)  # Cocatena os nucleotídeos em uma única string.
     return genoma, contador
+
 
 #Método responsável pela tradução
 def traducao(rnaMensageiro):
@@ -128,12 +127,19 @@ def traducao(rnaMensageiro):
 def compararDna(nucleotideo, nucleotideoDois):
     
     # Determina a maior sequência e sua correspondente
-    if len(nucleotideo) >= len(nucleotideoDois):
+    if len(nucleotideo) > len(nucleotideoDois):
         maiorDna = nucleotideo
+        nomeMaiorDna = nomeGene1
         menorDna = nucleotideoDois
-    else:
+        nomeMenorDna = nomeGene2
+    elif len(nucleotideo) < len(nucleotideoDois):
         maiorDna = nucleotideoDois
+        nomeMaiorDna = nomeGene2
         menorDna = nucleotideo
+        nomeMenorDna = nomeGene1
+    else: 
+        nomeMaiorDna = "Possuem o mesmo tamanho"
+        nomeMenorDna = "Possuem o mesmo"
 
     # Inicializa uma string para armazenar o resultado do alinhamento
     resultadoAlinhadoDna = ''
@@ -157,19 +163,26 @@ def compararDna(nucleotideo, nucleotideoDois):
         porcentagemMenorDna = round(contador * 100 / tamanhoMenor, 2)
         
     
-    resultado = f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}%\n\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}%" 
+    resultado = f"Porcentagem de semelhança:\n\nMaior DNA: {nomeMaiorDna}\nMenor DNA: {nomeMenorDna}\n\nPorcentagem em relação ao {nomeMaiorDna}: {porcentagemMaiorDna}%\n\nPorcentagem em relação ao {nomeMenorDna}: {porcentagemMenorDna}%"
     return resultadoAlinhadoDna, resultado
 
     
 def compararRna(rnaMensageiroString, rnaMensageiroString2):
     
     # Determina a maior sequência e sua correspondente
-    if len(rnaMensageiroString) >= len(rnaMensageiroString2):
+    if len(rnaMensageiroString) > len(rnaMensageiroString2):
         maiorRna = rnaMensageiroString
+        nomeMaiorRna = nomeGene1
         menorRna = rnaMensageiroString2
-    else:
+        nomeMenorRna = nomeGene2
+    elif len(rnaMensageiroString) < len(rnaMensageiroString2):
         maiorRna = rnaMensageiroString2
+        nomeMaiorRna = nomeGene2
         menorRna = rnaMensageiroString
+        nomeMenorRna = nomeGene1
+    else: 
+        nomeMaiorRna = "Possuem o mesmo tamanho"
+        nomeMenorRna = "Possuem o mesmo tamanho"
 
     # Inicializa uma string para armazenar o resultado do alinhamento
     resultadoAlinhadoRna = ''
@@ -185,7 +198,8 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
             else:
                 resultadoAlinhadoRna += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
         else:
-            resultadoAlinhadoRna += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
+            resultadoAlinhadoRna += '-'
+            # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
             
         tamanhoMaior = len(maiorRna)
         tamanhoMenor = len(menorRna)
@@ -193,8 +207,8 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
         porcentagemMenorRna = round(contador * 100 / tamanhoMenor, 2) # similaridade
         
     
-    resultado = f"Porcentagem em relação ao maior RNA: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao menor RNA: {porcentagemMenorRna}%"
     
+    resultado = f"Porcentagem de semelhança:\n\nMaior RNA: {nomeMaiorRna}\nMenor RNA: {nomeMenorRna}\n\nPorcentagem em relação ao {nomeMaiorRna}: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao {nomeMenorRna}: {porcentagemMenorRna}%"
     return resultadoAlinhadoRna, resultado
 
 def mainAlgoritm():
@@ -204,12 +218,13 @@ def mainAlgoritm():
     nucleotideo, seQ = leitura(caminhoDoArquivo)
     nucleotideoDois, seQ2 = leitura(caminhoSegundoArquivo)
     
-    rnaMensageiroString, nmr1 = transcricao(nucleotideo)
-    rnaMensageiroString2, nmr2 = transcricao(nucleotideoDois)
+    rnaMensageiroString, nmr1 = transcricao(seQ)
+    rnaMensageiroString2, nmr2 = transcricao(seQ2)
     
     proteinasA = traducao(rnaMensageiroString)
     proteinasB = traducao(rnaMensageiroString2)
     
+   
     resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2)
     resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
     
