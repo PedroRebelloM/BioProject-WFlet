@@ -143,14 +143,11 @@ def compararDna(nucleotideo, nucleotideoDois):
         # Verifica se a posição está dentro do comprimento da outra sequência
         if i < len(menorDna):
             # Verifica se os nucleotídeos correspondentes são iguais
-            if maiorDna[i:i + 3] == ' - ':
-                continue
-
-            if maiorDna[i:i + 3] == menorDna[i:i + 3]:
-                resultadoAlinhadoDna += maiorDna[i:i + 3]  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
+            if maiorDna[i] == menorDna[i]:
+                resultadoAlinhadoDna += maiorDna[i]
                 contador += 1
             else:
-                resultadoAlinhadoDna += '-'  # Se são diferentes, adiciona um traço à sequência alinhada
+                resultadoAlinhadoDna += '-'  # Se são iguais, adiciona o nucleotídeo à sequência alinhada
         else:
             resultadoAlinhadoDna += '-'  # Adiciona um traço à sequência alinhada para as posições além do comprimento da outra sequência
             
@@ -162,6 +159,7 @@ def compararDna(nucleotideo, nucleotideoDois):
     
     resultado = f"Porcentagem em relação ao maior DNA: {porcentagemMaiorDna}%\n\nPorcentagem em relação ao menor DNA: {porcentagemMenorDna}%" 
     return resultadoAlinhadoDna, resultado
+
     
 def compararRna(rnaMensageiroString, rnaMensageiroString2):
     
