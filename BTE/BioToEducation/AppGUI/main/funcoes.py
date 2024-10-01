@@ -391,9 +391,9 @@ def EscolherArquivoBancoDeDados(
     user = session.getUser()
     if e.files:
         arquivos = e.files[0].path  # 'file_path': Caminho do arquivo selecionado
-        globalVar.setCaminhoArquivo(arquivos)
-        mensagem = f"Arquivo selecionado: {globalVar.getCaminhoArquivo()}"
-        print(globalVar.getCaminhoArquivo())
+        globalVar.setCaminhoBancoDeDados(arquivos)
+        mensagem = f"Arquivo selecionado: {globalVar.getCaminhoBancoDeDados()}"
+        print(globalVar.getCaminhoBancoDeDados())
 
         # Ler o conteúdo do arquivo em modo binário
         with open(arquivos, "rb") as file:

@@ -34,10 +34,15 @@ def setCaminhoSegundoArquivo(caminho):
     global caminhoSegundoArquivo
     caminhoSegundoArquivo = caminho
 
+def setCaminhoBancoDeDados(caminho):
+    global caminhoArquivoBancoDeDados
+    caminhoArquivoBancoDeDados = caminho
 
 def getCaminhoArquivo():
     return caminhoDoArquivo
 
-
 def getCaminhoSegundoArquivo():
     return caminhoSegundoArquivo
+
+def getCaminhoBancoDeDados():
+    return caminhoArquivoBancoDeDados

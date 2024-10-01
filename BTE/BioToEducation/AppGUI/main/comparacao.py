@@ -344,7 +344,7 @@ def CriarLayoutComparação(page: ft.Page):
                             [
                                 botaoDnaComparacao,
                                 botaoRnaComparacao,
-                                botaoProteinasComparacao,
+                                
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
