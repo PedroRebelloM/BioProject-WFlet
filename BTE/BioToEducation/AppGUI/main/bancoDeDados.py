@@ -236,6 +236,7 @@ def CriarLayoutBancoDeDados(page: ft.Page):
 
     botaoAtualizar = ft.ElevatedButton(
         text="Atualizar Lista",
+        icon = ft.icons.REFRESH_ROUNDED,
         on_click=lambda _: funcoes.atualizarListaArquivos(
             linha, session.getUser()["_id"]
         ),

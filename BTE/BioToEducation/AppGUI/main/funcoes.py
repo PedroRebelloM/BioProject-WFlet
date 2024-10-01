@@ -529,6 +529,9 @@ def buscarNoNCBI(page: ft.Page, bancoSelecionado, campoTexto, containerBD):
         "PubMed": "pubmed",
         "Protein": "protein",
         "Gene": "gene",
+        "PubMed Central": "pubcentral",
+        "SRA": "sra",
+        "GEO Profiles": "geoprofiles",
     }
 
     print(bancoSelecionado)

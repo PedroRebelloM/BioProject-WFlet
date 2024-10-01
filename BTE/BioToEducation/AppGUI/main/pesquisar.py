@@ -268,6 +268,9 @@ def CriarLayoutPesquisar(page: ft.Page):
             ft.dropdown.Option("PubMed"),
             ft.dropdown.Option("Protein"),
             ft.dropdown.Option("Gene"),
+            ft.dropdown.Option("GEO Profiles"),
+            ft.dropdown.Option("SRA"),
+            ft.dropdown.Option("PubMed Central"),
         ],
         value="Genoma",  # Valor padrão
         width=160,
