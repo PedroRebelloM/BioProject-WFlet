@@ -361,9 +361,7 @@ def EscolherArquivo(e: ft.FilePickerResultEvent, qddArquivos, page: ft.Page):
             print(globalVar.getCaminhoArquivo())
         elif qddArquivos == 2:
             globalVar.setCaminhoSegundoArquivo(arquivos)
-            mensagem = (
-                f"Segundo arquivo selecionado: {globalVar.getCaminhoSegundoArquivo()}"
-            )
+            mensagem = f"Segundo arquivo selecionado: {globalVar.getCaminhoSegundoArquivo()}"
             fix.nomeGene2 = os.path.basename(arquivos)
             print(globalVar.getCaminhoSegundoArquivo())
         else:

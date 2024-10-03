@@ -344,7 +344,6 @@ def CriarLayoutComparação(page: ft.Page):
                             [
                                 botaoDnaComparacao,
                                 botaoRnaComparacao,
-                                
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -352,7 +351,7 @@ def CriarLayoutComparação(page: ft.Page):
                         ),
                         ft.Container(
                             content=ft.Column(
-                                [botaoAtualizar, botaoCopiar],
+                                [],
                             ),
                             alignment=ft.alignment.center,
                         ),

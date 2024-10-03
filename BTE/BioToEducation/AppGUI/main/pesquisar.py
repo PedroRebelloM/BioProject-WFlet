@@ -352,7 +352,7 @@ def CriarLayoutPesquisar(page: ft.Page):
                         ),
                         ft.Container(
                             content=ft.Column(
-                                [botaoEscolherArquivo1, botaoEscolherArquivoNCBI],
+                                [botaoEscolherArquivoNCBI],
                             ),
                             alignment=ft.alignment.center,
                             margin=ft.margin.only(left=30),

@@ -33,96 +33,58 @@ def transcricao(sequencia):
     return genoma, contador
 
 
-#Método responsável pela tradução
+# Método responsável pela tradução
 def traducao(rnaMensageiro):
+    # Dicionário para mapear códons a aminoácidos
+    dicionarioDeCodon = {
+        'AUG': 'Met',
+        'AUC': 'Ile', 'AUU': 'Ile', 'AUA': 'Ile',
+        'UCG': 'Ser', 'UCA': 'Ser', 'UCC': 'Ser', 'UCU': 'Ser',
+        'AGU': 'Ser', 'AGC': 'Ser',
+        'UUU': 'Phe', 'UUC': 'Phe',
+        'UUA': 'Leu', 'UUG': 'Leu',
+        'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
+        'CUU': 'Leu', 'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu',
+        'CCU': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
+        'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
+        'GCU': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala',
+        'UAU': 'Tyr', 'UAC': 'Tyr',
+        'CAU': 'His', 'CAC': 'His',
+        'CAA': 'Gln', 'CAG': 'Gln',
+        'AAU': 'Asn', 'AAC': 'Asn',
+        'AAA': 'Lys', 'AAG': 'Lys',
+        'GAU': 'Asp', 'GAC': 'Asp',
+        'GAA': 'Glu', 'GAG': 'Glu',
+        'UGU': 'Cys', 'UGC': 'Cys',
+        'UGG': 'Trp',
+        'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg',
+        'AGA': 'Arg', 'AGG': 'Arg',
+        'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly',
+        'UAA': 'Parada', 'UAG': 'Parada', 'UGA': 'Parada'
+    }
+    
     sinteseProteica = []
     proteinasConcatenadas = []
-    cont = 0
+    
     for x in range(0, len(rnaMensageiro), 3):  # Iterador para dividir as bases de 3 em 3, formando os códons
         codon = rnaMensageiro[x:x + 3]  # Pega o códon formado
-        if codon == 'AUG':  # condição para formação das proteínas
-            sinteseProteica.append('Met')
-            cont += 1
-        elif codon in ['AUC', 'AUU', 'AUA']:
-            sinteseProteica.append('Ile')  # Verifica qual é a sequencia do codon e adiciona a proteina de acordo.
-            cont += 1
-        elif codon in ['UCG', 'UCA', 'UCC', 'UCU', 'AGU', 'AGC']:
-            sinteseProteica.append('Ser')
-            cont += 1
-        elif codon in ['UUU', 'UUC']:
-            sinteseProteica.append('Phe')
-            cont += 1
-        elif codon in ['UUA', 'UUG']:
-            sinteseProteica.append('Leu')
-            cont += 1
-        elif codon in ['GUU', 'GUC', 'GUA', 'GUG']:
-            sinteseProteica.append('Val')
-            cont += 1
-        elif codon in ['CUU', 'CUC', 'CUA', 'CUG']:
-            cont += 1
-            sinteseProteica.append('Leu')
-        elif codon in ['CCU', 'CCC', 'CCA', 'CCG']:
-            cont += 1
-            sinteseProteica.append('Pro')
-        elif codon in ['ACU', 'ACC', 'ACA', 'ACG']:
-            cont += 1
-            sinteseProteica.append('Thr')
-        elif codon in ['GCU', 'GCC', 'GCA', 'GCG']:
-            cont += 1
-            sinteseProteica.append('Ala')
-        elif codon in ['UAU', 'UAC']:
-            cont += 1
-            sinteseProteica.append('Tyr') 
-        elif codon in ['CAU', 'CAC']:
-            cont += 1
-            sinteseProteica.append('His')
-        elif codon in ['CAA', 'CAG']:
-            cont += 1
-            sinteseProteica.append('Gln')
-        elif codon in ['AAU', 'AAC']:
-            cont += 1
-            sinteseProteica.append('Asn')
-        elif codon in ['AAA', 'AAG']:
-            cont += 1
-            sinteseProteica.append('Lys')
-        elif codon in ['GAU', 'GAC']:
-            cont += 1
-            sinteseProteica.append('Asp')
-        elif codon in ['GAA', 'GAG']:
-            cont += 1
-            sinteseProteica.append('Glu')
-        elif codon in ['UGU', 'UGC']:
-            cont += 1
-            sinteseProteica.append('Cys')
-        elif codon == 'UGG':
-            cont += 1
-            sinteseProteica.append('Trp')
-        elif codon in ['CGU', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG']:
-            cont += 1
-            sinteseProteica.append('Arg')
-        elif codon in ['GGU', 'GGC', 'GGA', 'GGG']:
-            cont += 1
-            sinteseProteica.append('Gly')
-        elif codon in ['UAA', 'UAG', 'UGA']:
-            cont += 1
-            sinteseProteica.append('Parada')
+        if codon in dicionarioDeCodon:
+            sinteseProteica.append(dicionarioDeCodon[codon])
         
-        #Concatena as strings retornadas pela sinteseProteica  
-        proteinasConcatenadas.append(''.join(sinteseProteica))
+        # Concatena as strings retornadas pela sinteseProteica  
+        proteinasConcatenadas.append(' - '.join(sinteseProteica))
         sinteseProteica = []
-        contador = cont
-        
-    sobra = len(rnaMensageiro) % 3 # Verifica se sobram bases nitrogenadas
-    if sobra == 1:
-        sobra1 = rnaMensageiro[-1]
-        proteinasConcatenadas.append(sobra1)
-    elif sobra == 2:
-        sobra2 = rnaMensageiro[-2:]
-        proteinasConcatenadas.append(''.join(sobra2))
 
+    sobra = len(rnaMensageiro) % 3  # Verifica se sobram bases nitrogenadas
+    if sobra == 1:
+        proteinasConcatenadas.append(rnaMensageiro[-1])
+    elif sobra == 2:
+        proteinasConcatenadas.append(rnaMensageiro[-2:])
+    
     proteinas = ' - '.join(proteinasConcatenadas)
     
     return proteinas
+
  
 def compararDna(nucleotideo, nucleotideoDois):
     
@@ -211,6 +173,56 @@ def compararRna(rnaMensageiroString, rnaMensageiroString2):
     resultado = f"Porcentagem de semelhança:\n\nMaior RNA: {nomeMaiorRna}\nMenor RNA: {nomeMenorRna}\n\nPorcentagem em relação ao {nomeMaiorRna}: {porcentagemMaiorRna}%\n\nPorcentagem em relação ao {nomeMenorRna}: {porcentagemMenorRna}%"
     return resultadoAlinhadoRna, resultado
 
+def compararProteinas(cadeiaProteica, cadeiaProteica2):
+    # Determina a maior e menor cadeia de proteínas
+    if len(cadeiaProteica) > len(cadeiaProteica2):
+        maiorCadeiaProteica = cadeiaProteica
+        menorCadeia = cadeiaProteica2
+        nomeMaiorCadeia = nomeGene1
+        nomeMenorCadeia = nomeGene2
+    elif len(cadeiaProteica) < len(cadeiaProteica2):
+        maiorCadeiaProteica = cadeiaProteica2
+        menorCadeia = cadeiaProteica
+        nomeMaiorCadeia = nomeGene2
+        nomeMenorCadeia = nomeGene1
+    else:
+        return "As cadeias de proteínas possuem o mesmo tamanho."
+
+    resultadoAlinhadoProteinas = ''
+    contador = 0
+
+    # Criação do alinhamento
+    for i in range(len(maiorCadeiaProteica)):
+        if i < len(menorCadeia):
+            if maiorCadeiaProteica[i] == menorCadeia[i]:
+                resultadoAlinhadoProteinas += maiorCadeiaProteica[i]  # Aminoácido igual
+                contador += 1
+            else:
+                resultadoAlinhadoProteinas += '-'  # Aminoácidos diferentes
+        else:
+            resultadoAlinhadoProteinas += '-'  # Posições restantes da maior cadeia
+
+    # Criação do alinhamento da segunda cadeia
+    resultadoAlinhadoMenor = ''
+    for i in range(len(maiorCadeiaProteica)):
+        if i < len(menorCadeia):
+            if maiorCadeiaProteica[i] != menorCadeia[i]:
+                resultadoAlinhadoMenor += menorCadeia[i]  # Aminoácido da menor cadeia
+            else:
+                resultadoAlinhadoMenor += '-'  # Para manter o alinhamento
+
+    # Cálculo das porcentagens de semelhança
+    tamanhoMaior = len(maiorCadeiaProteica)
+    porcentagemMaiorCadeia = round(contador * 100 / tamanhoMaior, 2)
+
+    resultado = (f"Porcentagem de semelhança:\n\n"
+                 f"Maior proteína: {nomeMaiorCadeia}\n"
+                 f"Menor proteína: {nomeMenorCadeia}\n\n"
+                 f"Porcentagem em relação ao {nomeMaiorCadeia}: {porcentagemMaiorCadeia}%")
+
+    return resultadoAlinhadoProteinas, resultado
+    
+
 def mainAlgoritm():
     caminhoDoArquivo = globalVar.getCaminhoArquivo()
     caminhoSegundoArquivo = globalVar.getCaminhoSegundoArquivo()
@@ -224,9 +236,13 @@ def mainAlgoritm():
     proteinasA = traducao(rnaMensageiroString)
     proteinasB = traducao(rnaMensageiroString2)
     
+    cadeiaProteica = traducao(proteinasA)
+    cadeiaProteica2 = traducao(proteinasB)
    
     resultadoAlinhamentoDna, comparacaoDna = compararDna(seQ, seQ2)
     resultadoAlinhamentoRna, comparacaoRna = compararRna(rnaMensageiroString, rnaMensageiroString2)
+    
+    resultadoAlinhamentoProteinas, comparacaoProteina = compararProteinas(cadeiaProteica, cadeiaProteica2)
     
     return {
         'sequencia1': seQ,
@@ -237,8 +253,10 @@ def mainAlgoritm():
         'proteinasB': proteinasB,
         'alinhamentoDna': resultadoAlinhamentoDna,
         'alinhamentoRna': resultadoAlinhamentoRna,
+        'alinhamentoProteinas': resultadoAlinhamentoProteinas,   
         'porcentagemDna': comparacaoDna,
-        'porcentagemRna': comparacaoRna
+        'porcentagemRna': comparacaoRna,
+        'porcentagemProteinas': comparacaoProteina
     }
 
 def atualizarResultados():
@@ -269,10 +287,16 @@ def returnPorcentagemDna():
 def returnPorcentagemRna():
     return resultados.get('porcentagemRna', 'Resultados não encontraodos')
 
+def returnPorcentagemProteinas():
+    return resultados.get('porcentagemProteinas')
+
 def returnAlinhamentoDna():
     return resultados.get('alinhamentoDna', 'Resultados não encontraodos')
 
 def returnAlinhamentoRna():
     return resultados.get('alinhamentoRna', 'Resultados não encontraodos')
+
+def returnAlinhamentoProteinas():
+    return resultados.get('alinhamentoProteinas', 'Resultados não encontrados')
 
 atualizarResultados()
