@@ -33,6 +33,6 @@ If you have any solutions or suggestions to improve this application, or simply 
 
 ### Final considerations
 
-This project was a high school research project that focuses on the social impacts of the Fundação Osorio school and other schools around the world. Thank you for your attention. I hope to make more updates or to make a new, better, multiplatform version of this application.
+This project was a high school research project that focuses on the social impacts of the Fundação Osorio school and other schools around the world. Thank you for your attention. I hope to make more updates or to make a new, better and multiplatform version of this application.
 
   **_"A inclusão acontece quando se aprende com as diferenças e não com as igualdades"- [Paulo Freire - Brazilian Educator](https://pt.wikipedia.org/wiki/Paulo_Freire)_**
